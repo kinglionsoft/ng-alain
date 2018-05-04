@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { environment } from '@env/environment';
+import { ACLGuard } from '@delon/acl';
 // layout
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { LayoutFullScreenComponent } from '../layout/fullscreen/fullscreen.component';
@@ -21,10 +22,14 @@ import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 
+
 const routes: Routes = [
     {
         path: '',
         component: LayoutDefaultComponent,
+        canActivate: [ACLGuard],
+        canActivateChild: [ACLGuard],
+        data: { guard: '__user' },
         children: [
             { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
@@ -69,5 +74,5 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(routes, { useHash: environment.useHash })],
     exports: [RouterModule]
-  })
+})
 export class RouteRoutingModule { }

@@ -1,112 +1,28 @@
-[![Build Status](https://travis-ci.org/cipchk/ng-alain.svg?branch=master)](https://travis-ci.org/cipchk/ng-alain)
-[![Dependency Status](https://david-dm.org/cipchk/ng-alain/status.svg)](https://david-dm.org/cipchk/ng-alain)
-[![NPM version](https://img.shields.io/npm/v/ng-alain.svg)](https://www.npmjs.com/package/ng-alain)
-[![NPM version](https://img.shields.io/npm/v/ng-alain/next.svg)](https://www.npmjs.com/package/ng-alain)
+# abp-alain-zorro
 
-# ng-alain
+基于[ng-alain](https://github.com/cipchk/ng-alain)的ABP后端页面框架。
 
-[Ng-zorro-antd](https://github.com/NG-ZORRO/ng-zorro-antd) admin panel front-end framework.
+### ABP适配
 
-更多信息见[中文 README](README-zh_CN.md)
+#### 适配原则
 
-[DEMO](https://cipchk.github.io/ng-alain/)
+* 修改ABP以适配ng-alain的设计。原因有两个：一是ng-alain的前端设计比较好，并且在快速更新；二是ABP扩展性好，而我的前端弱。。。
+* 另外一个项目[abp-ng-Zorro](https://github.com/yixiangling/abp-ng-Zorro)的适配方式刚好相反，可以参考。
 
-## Quick start
+#### 目录
 
-There are two ways to install:
+* 不使用ABP设计：后台只提供API
 
-### Use the Command Line
+#### 权限
 
-Depend on `@delon/cli`, [How install?](http://ng-alain.com/docs/cli)
+#### HTTP拦截器
 
-```bash
-ng new -c=@delon/cli my-app
-```
+* JWTInterceptor
 
-### Clone the Git Repository
+#### 国际化
 
-```bash
-# --depth 1 removes all but one .git commit history
-$ git clone --depth=1 https://github.com/cipchk/ng-alain.git my-project
-
-# change directory
-cd my-project
-
-# install npm package
-npm install
-
-# start the serve
-npm start
-
-# use HMR
-npm run serve:hmr
-```
-
-> [vscode] recommended install [ng-zorro-vscode](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode) plugins, that includes `nz-alain-*` snippets.
-
-## Links
-
-+ [Document](http://ng-alain.com)
-+ [@delon](https://github.com/cipchk/delon)
-+ [DEMO](https://cipchk.github.io/ng-alain/)
-
-## Delon
-
-[delong](https://github.com/cipchk/delon) is a production-ready solution for admin business components packages, Built on the design principles developed by Ant Design.
-
-[![Build Status](https://travis-ci.org/cipchk/delon.svg?branch=master)](https://travis-ci.org/cipchk/delon)
-[![Dependency Status](https://david-dm.org/cipchk/delon/status.svg)](https://david-dm.org/cipchk/delon)
-[![DevDependency Status](https://david-dm.org/cipchk/delon/dev-status.svg)](https://david-dm.org/cipchk/delon?type=dev)
-
-[![npm](https://img.shields.io/npm/l/@delon/theme.svg)](https://www.npmjs.com/package/@delon/theme)
-[![npm](https://img.shields.io/npm/dm/@delon/theme.svg)](https://www.npmjs.com/package/@delon/theme)
-
-| package name | version | next version |
-| ------------ |:-----:|:----------:|
-| @delon/theme | [![NPM version](https://img.shields.io/npm/v/@delon/theme.svg)](https://www.npmjs.com/package/@delon/theme) | [![NPM version](https://img.shields.io/npm/v/@delon/theme/next.svg)](https://www.npmjs.com/package/@delon/theme) |
-| @delon/abc | [![NPM version](https://img.shields.io/npm/v/@delon/abc.svg)](https://www.npmjs.com/package/@delon/abc) | [![NPM version](https://img.shields.io/npm/v/@delon/abc/next.svg)](https://www.npmjs.com/package/@delon/abc) |
-| @delon/form | [![NPM version](https://img.shields.io/npm/v/@delon/form.svg)](https://www.npmjs.com/package/@delon/form) | [![NPM version](https://img.shields.io/npm/v/@delon/form/next.svg)](https://www.npmjs.com/package/@delon/form) |
-| @delon/acl | [![NPM version](https://img.shields.io/npm/v/@delon/acl.svg)](https://www.npmjs.com/package/@delon/acl) | [![NPM version](https://img.shields.io/npm/v/@delon/acl/next.svg)](https://www.npmjs.com/package/@delon/acl) |
-| @delon/auth | [![NPM version](https://img.shields.io/npm/v/@delon/auth.svg)](https://www.npmjs.com/package/@delon/auth) | [![NPM version](https://img.shields.io/npm/v/@delon/auth/next.svg)](https://www.npmjs.com/package/@delon/auth) |
-| @delon/mock | [![NPM version](https://img.shields.io/npm/v/@delon/mock.svg)](https://www.npmjs.com/package/@delon/mock) | [![NPM version](https://img.shields.io/npm/v/@delon/mock/next.svg)](https://www.npmjs.com/package/@delon/mock) |
-| @delon/cache | [![NPM version](https://img.shields.io/npm/v/@delon/cache.svg)](https://www.npmjs.com/package/@delon/cache) | [![NPM version](https://img.shields.io/npm/v/@delon/cache/next.svg)](https://www.npmjs.com/package/@delon/cache) |
-| @delon/cli | [![NPM version](https://img.shields.io/npm/v/@delon/cli.svg)](https://www.npmjs.com/package/@delon/cli) | [![NPM version](https://img.shields.io/npm/v/@delon/cli/next.svg)](https://www.npmjs.com/package/@delon/cli) |
-
-## Architecture
-
-![Architecture](https://github.com/cipchk/delon/blob/master/_screenshot/architecture.png)
-
-## Features
-
-+ `ng-zorro-antd` based
-+ Responsive Layout
-+ I18n
-+ ACL
-+ Lazy load Assets
-+ UI Router States
-+ Multiple color options
-+ Less preprocessor
-+ Well organized & commented code
-+ Simple upgrade
-+ Hot Module Replacement
-+ Support Docker deploy
-+ Support [Electron](http://ng-alain.com/docs/cli#electron) packager(just via @delon/cli)
-
-## App Shots
-
-![desktop](https://github.com/cipchk/delon/blob/master/_screenshot/desktop.png)
-![ipad](https://github.com/cipchk/delon/blob/master/_screenshot/ipad.png)
-![iphone](https://github.com/cipchk/delon/blob/master/_screenshot/iphone.png)
-
-## Troubleshooting
-
-Please follow this guidelines when reporting bugs and feature requests:
-
-1. Use [GitHub Issues](https://github.com/cipchk/ng-alain/issues) board to report bugs and feature requests (not our email address)
-2. Please **always** write steps to reproduce the error. That way we can focus on fixing the bug, not scratching our heads trying to reproduce it.
-
-Thanks for understanding!
+* 暂时没有这个需求
 
 ### License
 
-The MIT License (see the [LICENSE](https://github.com/cipchk/ng-alain/blob/master/LICENSE) file for the full text)
+The MIT License

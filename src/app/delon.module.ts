@@ -9,7 +9,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AlainThemeModule } from '@delon/theme';
 import { DelonABCModule } from '@delon/abc';
 import { DelonAuthModule } from '@delon/auth';
-import { DelonACLModule } from '@delon/acl';
+import { DelonACLModule, DelonACLConfig } from '@delon/acl';
 import { DelonCacheModule } from '@delon/cache';
 // mock
 import { DelonMockModule } from '@delon/mock';
@@ -28,6 +28,12 @@ import { DelonAuthConfig } from '@delon/auth';
 export function delonAuthConfig(): DelonAuthConfig {
     return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
         login_url: '/passport/login'
+    });
+}
+
+export function delonAclConfig(): DelonACLConfig {
+    return Object.assign(new DelonACLConfig(), <DelonACLConfig>{
+        guard_url: '/passport/login'
     });
 }
 
@@ -57,7 +63,8 @@ export class DelonModule {
                 // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
                 // { provide: SimpleTableConfig, useFactory: simpleTableConfig }
                 { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
-                { provide: DelonAuthConfig, useFactory: delonAuthConfig}
+                { provide: DelonAuthConfig, useFactory: delonAuthConfig},
+                { provide: DelonACLConfig, useFactory: delonAclConfig }
             ]
         };
     }
