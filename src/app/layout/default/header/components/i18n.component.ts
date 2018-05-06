@@ -8,7 +8,7 @@ import { I18NService } from '@core/i18n/i18n.service';
     <nz-dropdown>
         <div nz-dropdown>
             <i class="anticon anticon-edit"></i>
-            {{ 'language' | translate}}
+            {{ 'language' }}
             <i class="anticon anticon-down"></i>
         </div>
         <ul nz-menu>

@@ -57,14 +57,14 @@ const routes: Routes = [
         path: 'passport',
         component: LayoutPassportComponent,
         children: [
-            { path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: 'pro-login' } },
-            { path: 'register', component: UserRegisterComponent, data: { title: '注册', titleI18n: 'pro-register' } },
-            { path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果', titleI18n: 'pro-register-result' } }
+            { path: 'login', component: UserLoginComponent, data: { title: '登录' } },
+            // { path: 'register', component: UserRegisterComponent, data: { title: '注册', titleI18n: 'pro-register' } },
+            // { path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果', titleI18n: 'pro-register-result' } }
         ]
     },
     // 单页不包裹Layout
     { path: 'callback/:type', component: CallbackComponent },
-    { path: 'lock', component: UserLockComponent, data: { title: '锁屏', titleI18n: 'lock' } },
+    { path: 'lock', component: UserLockComponent, data: { title: '锁屏' } },
     { path: '403', component: Exception403Component },
     { path: '404', component: Exception404Component },
     { path: '500', component: Exception500Component },

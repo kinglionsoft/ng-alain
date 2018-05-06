@@ -18,7 +18,6 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpResponseBase, HttpErrorResponse } from '@angular/common/http';
 import { HttpObserve } from '@angular/common/http/src/client';
-import { AuthOptions, DA_OPTIONS_TOKEN } from '@delon/auth';
 
 export class AbpResult<T> {
     success: boolean;
@@ -32,7 +31,7 @@ export class AbpResult<T> {
 export class AccountClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -188,7 +187,6 @@ export class AccountClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -208,7 +206,6 @@ export class AccountClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -232,7 +229,6 @@ export class AccountClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -244,7 +240,7 @@ export class AccountClient {
 export class AuditLogClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -299,7 +295,6 @@ export class AuditLogClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -357,7 +352,6 @@ export class AuditLogClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -369,7 +363,7 @@ export class AuditLogClient {
 export class CachingClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -386,7 +380,6 @@ export class CachingClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -409,7 +402,6 @@ export class CachingClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -428,7 +420,6 @@ export class CachingClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -440,7 +431,7 @@ export class CachingClient {
 export class ChatClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -457,7 +448,6 @@ export class ChatClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -488,7 +478,6 @@ export class ChatClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -511,7 +500,6 @@ export class ChatClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -523,7 +511,7 @@ export class ChatClient {
 export class CommonLookupClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -545,7 +533,6 @@ export class CommonLookupClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -569,7 +556,6 @@ export class CommonLookupClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -589,7 +575,6 @@ export class CommonLookupClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -601,7 +586,7 @@ export class CommonLookupClient {
 export class ConfigurationClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -621,7 +606,6 @@ export class ConfigurationClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -633,7 +617,7 @@ export class ConfigurationClient {
 export class DemoUiComponentsClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -655,7 +639,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -680,7 +663,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -708,7 +690,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -733,7 +714,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -757,7 +737,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -782,7 +761,6 @@ export class DemoUiComponentsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -794,7 +772,7 @@ export class DemoUiComponentsClient {
 export class EditionClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -811,7 +789,6 @@ export class EditionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -836,7 +813,6 @@ export class EditionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -859,7 +835,6 @@ export class EditionClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -883,7 +858,6 @@ export class EditionClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -914,7 +888,6 @@ export class EditionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -926,7 +899,7 @@ export class EditionClient {
 export class FriendshipClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -947,7 +920,6 @@ export class FriendshipClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -971,7 +943,6 @@ export class FriendshipClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -994,7 +965,6 @@ export class FriendshipClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1017,7 +987,6 @@ export class FriendshipClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1040,7 +1009,6 @@ export class FriendshipClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1052,7 +1020,7 @@ export class FriendshipClient {
 export class HostDashboardClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1080,7 +1048,6 @@ export class HostDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1111,7 +1078,6 @@ export class HostDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1139,7 +1105,6 @@ export class HostDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1151,7 +1116,7 @@ export class HostDashboardClient {
 export class HostSettingsClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1168,7 +1133,6 @@ export class HostSettingsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1191,7 +1155,6 @@ export class HostSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1214,7 +1177,6 @@ export class HostSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1226,7 +1188,7 @@ export class HostSettingsClient {
 export class InstallClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1246,7 +1208,6 @@ export class InstallClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1266,7 +1227,6 @@ export class InstallClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1286,7 +1246,6 @@ export class InstallClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1298,7 +1257,7 @@ export class InstallClient {
 export class InvoiceClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1320,7 +1279,6 @@ export class InvoiceClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1343,7 +1301,6 @@ export class InvoiceClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1355,7 +1312,7 @@ export class InvoiceClient {
 export class LanguageClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1372,7 +1329,6 @@ export class LanguageClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1397,7 +1353,6 @@ export class LanguageClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1420,7 +1375,6 @@ export class LanguageClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1444,7 +1398,6 @@ export class LanguageClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1467,7 +1420,6 @@ export class LanguageClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1515,7 +1467,6 @@ export class LanguageClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1538,7 +1489,6 @@ export class LanguageClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1550,7 +1500,7 @@ export class LanguageClient {
 export class NotificationClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1578,7 +1528,6 @@ export class NotificationClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1597,7 +1546,6 @@ export class NotificationClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1620,7 +1568,6 @@ export class NotificationClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1640,7 +1587,6 @@ export class NotificationClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1663,7 +1609,6 @@ export class NotificationClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1675,7 +1620,7 @@ export class NotificationClient {
 export class OrganizationUnitClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1692,7 +1637,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1726,7 +1670,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1750,7 +1693,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1774,7 +1716,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1798,7 +1739,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1822,7 +1762,6 @@ export class OrganizationUnitClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1849,7 +1788,6 @@ export class OrganizationUnitClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1872,7 +1810,6 @@ export class OrganizationUnitClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1896,7 +1833,6 @@ export class OrganizationUnitClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1908,7 +1844,7 @@ export class OrganizationUnitClient {
 export class PaymentClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -1930,7 +1866,6 @@ export class PaymentClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1954,7 +1889,6 @@ export class PaymentClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -1978,7 +1912,6 @@ export class PaymentClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2009,7 +1942,6 @@ export class PaymentClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2021,7 +1953,7 @@ export class PaymentClient {
 export class PermissionClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2038,7 +1970,6 @@ export class PermissionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2050,7 +1981,7 @@ export class PermissionClient {
 export class ProductServiceClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2072,7 +2003,6 @@ export class ProductServiceClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2106,7 +2036,6 @@ export class ProductServiceClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2130,7 +2059,6 @@ export class ProductServiceClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2154,7 +2082,6 @@ export class ProductServiceClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2178,7 +2105,6 @@ export class ProductServiceClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2190,7 +2116,7 @@ export class ProductServiceClient {
 export class ProfileClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2207,7 +2133,6 @@ export class ProfileClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2226,7 +2151,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2249,7 +2173,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2272,7 +2195,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2295,7 +2217,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2318,7 +2239,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2338,7 +2258,6 @@ export class ProfileClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2358,7 +2277,6 @@ export class ProfileClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2389,7 +2307,6 @@ export class ProfileClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2414,7 +2331,6 @@ export class ProfileClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2437,7 +2353,6 @@ export class ProfileClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2449,7 +2364,7 @@ export class ProfileClient {
 export class RoleClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2470,7 +2385,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2494,7 +2408,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2518,7 +2431,6 @@ export class RoleClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2538,7 +2450,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2563,7 +2474,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2591,7 +2501,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2616,7 +2525,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2641,7 +2549,6 @@ export class RoleClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2664,7 +2571,6 @@ export class RoleClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2688,7 +2594,6 @@ export class RoleClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2700,7 +2605,7 @@ export class RoleClient {
 export class SessionClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2717,7 +2622,6 @@ export class SessionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2737,7 +2641,6 @@ export class SessionClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2749,7 +2652,7 @@ export class SessionClient {
 export class SubscriptionClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2770,7 +2673,6 @@ export class SubscriptionClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2782,7 +2684,7 @@ export class SubscriptionClient {
 export class TenantClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -2831,7 +2733,6 @@ export class TenantClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2854,7 +2755,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2879,7 +2779,6 @@ export class TenantClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2902,7 +2801,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2926,7 +2824,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2951,7 +2848,6 @@ export class TenantClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2974,7 +2870,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -2997,7 +2892,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3020,7 +2914,6 @@ export class TenantClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3032,7 +2925,7 @@ export class TenantClient {
 export class TenantDashboardClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3049,7 +2942,6 @@ export class TenantDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3074,7 +2966,6 @@ export class TenantDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3099,7 +2990,6 @@ export class TenantDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3124,7 +3014,6 @@ export class TenantDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3149,7 +3038,6 @@ export class TenantDashboardClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3161,7 +3049,7 @@ export class TenantDashboardClient {
 export class TenantRegistrationClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3182,7 +3070,6 @@ export class TenantRegistrationClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3202,7 +3089,6 @@ export class TenantRegistrationClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3227,7 +3113,6 @@ export class TenantRegistrationClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3239,7 +3124,7 @@ export class TenantRegistrationClient {
 export class TenantSettingsClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3256,7 +3141,6 @@ export class TenantSettingsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3279,7 +3163,6 @@ export class TenantSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3298,7 +3181,6 @@ export class TenantSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3317,7 +3199,6 @@ export class TenantSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3340,7 +3221,6 @@ export class TenantSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3352,7 +3232,7 @@ export class TenantSettingsClient {
 export class TimingClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3374,7 +3254,6 @@ export class TimingClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3399,7 +3278,6 @@ export class TimingClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3411,7 +3289,7 @@ export class TimingClient {
 export class TokenAuthClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3432,7 +3310,6 @@ export class TokenAuthClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3455,7 +3332,6 @@ export class TokenAuthClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3480,7 +3356,6 @@ export class TokenAuthClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3505,7 +3380,6 @@ export class TokenAuthClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3525,7 +3399,6 @@ export class TokenAuthClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3549,7 +3422,6 @@ export class TokenAuthClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3576,7 +3448,6 @@ export class TokenAuthClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3588,7 +3459,7 @@ export class TokenAuthClient {
 export class UiCustomizationSettingsClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3605,7 +3476,6 @@ export class UiCustomizationSettingsClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3628,7 +3498,6 @@ export class UiCustomizationSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3651,7 +3520,6 @@ export class UiCustomizationSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3670,7 +3538,6 @@ export class UiCustomizationSettingsClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3682,7 +3549,7 @@ export class UiCustomizationSettingsClient {
 export class UserClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -3703,7 +3570,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3727,7 +3593,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3751,7 +3616,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3771,7 +3635,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3794,7 +3657,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3819,7 +3681,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3847,7 +3708,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3887,7 +3747,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3907,7 +3766,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3932,7 +3790,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3957,7 +3814,6 @@ export class UserClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -3980,7 +3836,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4003,7 +3858,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4026,7 +3880,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4050,7 +3903,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4073,7 +3925,6 @@ export class UserClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4085,7 +3936,7 @@ export class UserClient {
 export class UserLinkClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -4105,7 +3956,6 @@ export class UserLinkClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4136,7 +3986,6 @@ export class UserLinkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4156,7 +4005,6 @@ export class UserLinkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4179,7 +4027,6 @@ export class UserLinkClient {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4191,7 +4038,7 @@ export class UserLinkClient {
 export class UserLoginClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -4208,7 +4055,6 @@ export class UserLoginClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4220,7 +4066,7 @@ export class UserLoginClient {
 export class WebLogClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -4237,7 +4083,6 @@ export class WebLogClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4257,7 +4102,6 @@ export class WebLogClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4269,7 +4113,7 @@ export class WebLogClient {
 export class WorkClient {
     private http: HttpClient;
 
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(DA_OPTIONS_TOKEN) private authOptions?: AuthOptions) {
+    constructor(@Inject(HttpClient) http: HttpClient) {
         this.http = http;
     }
 
@@ -4294,7 +4138,6 @@ export class WorkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4322,7 +4165,6 @@ export class WorkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4346,7 +4188,6 @@ export class WorkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4370,7 +4211,6 @@ export class WorkClient {
                 'Content-Type': 'application/json', 
                 'Accept': 'application/json'
             }),
-            params: new HttpParams().set(this.authOptions.allow_anonymous_key, '1'),
             reportProgress: false,
             withCredentials: false
         };
@@ -4378,17 +4218,8 @@ export class WorkClient {
     }
 }
 
-export class IsTenantAvailableInput implements IIsTenantAvailableInput {
+export class IsTenantAvailableInput {
     tenancyName: string;
-
-    constructor(data?: IIsTenantAvailableInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4408,32 +4239,12 @@ export class IsTenantAvailableInput implements IIsTenantAvailableInput {
         data["tenancyName"] = this.tenancyName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new IsTenantAvailableInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IIsTenantAvailableInput {
-    tenancyName: string;
-}
-
-export class IsTenantAvailableOutput implements IIsTenantAvailableOutput {
+export class IsTenantAvailableOutput {
     state?: IsTenantAvailableOutputState;
     tenantId?: number;
     serverRootAddress?: string;
-
-    constructor(data?: IIsTenantAvailableOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4457,37 +4268,15 @@ export class IsTenantAvailableOutput implements IIsTenantAvailableOutput {
         data["serverRootAddress"] = this.serverRootAddress;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new IsTenantAvailableOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IIsTenantAvailableOutput {
-    state?: IsTenantAvailableOutputState;
-    tenantId?: number;
-    serverRootAddress?: string;
-}
-
-export class RegisterInput implements IRegisterInput {
+export class RegisterInput {
     name: string;
     surname: string;
     userName: string;
     emailAddress: string;
     password: string;
     captchaResponse?: string;
-
-    constructor(data?: IRegisterInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4517,35 +4306,10 @@ export class RegisterInput implements IRegisterInput {
         data["captchaResponse"] = this.captchaResponse;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RegisterInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRegisterInput {
-    name: string;
-    surname: string;
-    userName: string;
-    emailAddress: string;
-    password: string;
-    captchaResponse?: string;
-}
-
-export class RegisterOutput implements IRegisterOutput {
+export class RegisterOutput {
     canLogin?: boolean;
-
-    constructor(data?: IRegisterOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4565,30 +4329,10 @@ export class RegisterOutput implements IRegisterOutput {
         data["canLogin"] = this.canLogin;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RegisterOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRegisterOutput {
-    canLogin?: boolean;
-}
-
-export class SendPasswordResetCodeInput implements ISendPasswordResetCodeInput {
+export class SendPasswordResetCodeInput {
     emailAddress: string;
-
-    constructor(data?: ISendPasswordResetCodeInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4608,34 +4352,14 @@ export class SendPasswordResetCodeInput implements ISendPasswordResetCodeInput {
         data["emailAddress"] = this.emailAddress;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SendPasswordResetCodeInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISendPasswordResetCodeInput {
-    emailAddress: string;
-}
-
-export class ResetPasswordInput implements IResetPasswordInput {
+export class ResetPasswordInput {
     userId?: number;
     resetCode: string;
     password: string;
     returnUrl?: string;
     singleSignIn?: string;
-
-    constructor(data?: IResetPasswordInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4663,35 +4387,11 @@ export class ResetPasswordInput implements IResetPasswordInput {
         data["singleSignIn"] = this.singleSignIn;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ResetPasswordInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IResetPasswordInput {
-    userId?: number;
-    resetCode: string;
-    password: string;
-    returnUrl?: string;
-    singleSignIn?: string;
-}
-
-export class ResetPasswordOutput implements IResetPasswordOutput {
+export class ResetPasswordOutput {
     canLogin?: boolean;
     userName?: string;
-
-    constructor(data?: IResetPasswordOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4713,31 +4413,10 @@ export class ResetPasswordOutput implements IResetPasswordOutput {
         data["userName"] = this.userName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ResetPasswordOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IResetPasswordOutput {
-    canLogin?: boolean;
-    userName?: string;
-}
-
-export class SendEmailActivationLinkInput implements ISendEmailActivationLinkInput {
+export class SendEmailActivationLinkInput {
     emailAddress: string;
-
-    constructor(data?: ISendEmailActivationLinkInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4757,31 +4436,11 @@ export class SendEmailActivationLinkInput implements ISendEmailActivationLinkInp
         data["emailAddress"] = this.emailAddress;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SendEmailActivationLinkInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISendEmailActivationLinkInput {
-    emailAddress: string;
-}
-
-export class ActivateEmailInput implements IActivateEmailInput {
+export class ActivateEmailInput {
     userId?: number;
     confirmationCode: string;
-
-    constructor(data?: IActivateEmailInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4803,32 +4462,11 @@ export class ActivateEmailInput implements IActivateEmailInput {
         data["confirmationCode"] = this.confirmationCode;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ActivateEmailInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IActivateEmailInput {
-    userId?: number;
-    confirmationCode: string;
-}
-
-export class ImpersonateInput implements IImpersonateInput {
+export class ImpersonateInput {
     tenantId?: number;
     userId?: number;
-
-    constructor(data?: IImpersonateInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4850,32 +4488,11 @@ export class ImpersonateInput implements IImpersonateInput {
         data["userId"] = this.userId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ImpersonateInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IImpersonateInput {
-    tenantId?: number;
-    userId?: number;
-}
-
-export class ImpersonateOutput implements IImpersonateOutput {
+export class ImpersonateOutput {
     impersonationToken?: string;
     tenancyName?: string;
-
-    constructor(data?: IImpersonateOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4897,32 +4514,11 @@ export class ImpersonateOutput implements IImpersonateOutput {
         data["tenancyName"] = this.tenancyName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ImpersonateOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IImpersonateOutput {
-    impersonationToken?: string;
-    tenancyName?: string;
-}
-
-export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
+export class SwitchToLinkedAccountInput {
     targetTenantId?: number;
     targetUserId?: number;
-
-    constructor(data?: ISwitchToLinkedAccountInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4944,32 +4540,11 @@ export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
         data["targetUserId"] = this.targetUserId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SwitchToLinkedAccountInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISwitchToLinkedAccountInput {
-    targetTenantId?: number;
-    targetUserId?: number;
-}
-
-export class SwitchToLinkedAccountOutput implements ISwitchToLinkedAccountOutput {
+export class SwitchToLinkedAccountOutput {
     switchAccountToken?: string;
     tenancyName?: string;
-
-    constructor(data?: ISwitchToLinkedAccountOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -4991,32 +4566,11 @@ export class SwitchToLinkedAccountOutput implements ISwitchToLinkedAccountOutput
         data["tenancyName"] = this.tenancyName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SwitchToLinkedAccountOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISwitchToLinkedAccountOutput {
-    switchAccountToken?: string;
-    tenancyName?: string;
-}
-
-export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLogListDto {
+export class PagedResultDtoOfAuditLogListDto {
     totalCount?: number;
     items?: AuditLogListDto[];
-
-    constructor(data?: IPagedResultDtoOfAuditLogListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5046,21 +4600,9 @@ export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLo
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfAuditLogListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfAuditLogListDto {
-    totalCount?: number;
-    items?: AuditLogListDto[];
-}
-
-export class AuditLogListDto implements IAuditLogListDto {
+export class AuditLogListDto {
     userId?: number;
     userName?: string;
     impersonatorTenantId?: number;
@@ -5076,15 +4618,6 @@ export class AuditLogListDto implements IAuditLogListDto {
     exception?: string;
     customData?: string;
     id?: number;
-
-    constructor(data?: IAuditLogListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5132,46 +4665,12 @@ export class AuditLogListDto implements IAuditLogListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AuditLogListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IAuditLogListDto {
-    userId?: number;
-    userName?: string;
-    impersonatorTenantId?: number;
-    impersonatorUserId?: number;
-    serviceName?: string;
-    methodName?: string;
-    parameters?: string;
-    executionTime?: Date;
-    executionDuration?: number;
-    clientIpAddress?: string;
-    clientName?: string;
-    browserInfo?: string;
-    exception?: string;
-    customData?: string;
-    id?: number;
-}
-
-export class FileDto implements IFileDto {
+export class FileDto {
     fileName: string;
     fileType: string;
     fileToken: string;
-
-    constructor(data?: IFileDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5195,32 +4694,10 @@ export class FileDto implements IFileDto {
         data["fileToken"] = this.fileToken;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FileDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFileDto {
-    fileName: string;
-    fileType: string;
-    fileToken: string;
-}
-
-export class ListResultDtoOfCacheDto implements IListResultDtoOfCacheDto {
+export class ListResultDtoOfCacheDto {
     items?: CacheDto[];
-
-    constructor(data?: IListResultDtoOfCacheDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5248,30 +4725,10 @@ export class ListResultDtoOfCacheDto implements IListResultDtoOfCacheDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfCacheDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfCacheDto {
-    items?: CacheDto[];
-}
-
-export class CacheDto implements ICacheDto {
+export class CacheDto {
     name?: string;
-
-    constructor(data?: ICacheDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5291,30 +4748,10 @@ export class CacheDto implements ICacheDto {
         data["name"] = this.name;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CacheDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICacheDto {
-    name?: string;
-}
-
-export class EntityDtoOfString implements IEntityDtoOfString {
+export class EntityDtoOfString {
     id?: string;
-
-    constructor(data?: IEntityDtoOfString) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5334,31 +4771,11 @@ export class EntityDtoOfString implements IEntityDtoOfString {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EntityDtoOfString();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEntityDtoOfString {
-    id?: string;
-}
-
-export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriendsWithSettingsOutput {
+export class GetUserChatFriendsWithSettingsOutput {
     serverTime?: Date;
     friends?: FriendDto[];
-
-    constructor(data?: IGetUserChatFriendsWithSettingsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5388,21 +4805,9 @@ export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriends
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetUserChatFriendsWithSettingsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetUserChatFriendsWithSettingsOutput {
-    serverTime?: Date;
-    friends?: FriendDto[];
-}
-
-export class FriendDto implements IFriendDto {
+export class FriendDto {
     friendUserId?: number;
     friendTenantId?: number;
     friendUserName?: string;
@@ -5411,15 +4816,6 @@ export class FriendDto implements IFriendDto {
     unreadMessageCount?: number;
     isOnline?: boolean;
     state?: FriendDtoState;
-
-    constructor(data?: IFriendDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5453,37 +4849,10 @@ export class FriendDto implements IFriendDto {
         data["state"] = this.state;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FriendDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFriendDto {
-    friendUserId?: number;
-    friendTenantId?: number;
-    friendUserName?: string;
-    friendTenancyName?: string;
-    friendProfilePictureId?: string;
-    unreadMessageCount?: number;
-    isOnline?: boolean;
-    state?: FriendDtoState;
-}
-
-export class ListResultDtoOfChatMessageDto implements IListResultDtoOfChatMessageDto {
+export class ListResultDtoOfChatMessageDto {
     items?: ChatMessageDto[];
-
-    constructor(data?: IListResultDtoOfChatMessageDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5511,20 +4880,9 @@ export class ListResultDtoOfChatMessageDto implements IListResultDtoOfChatMessag
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfChatMessageDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfChatMessageDto {
-    items?: ChatMessageDto[];
-}
-
-export class ChatMessageDto implements IChatMessageDto {
+export class ChatMessageDto {
     userId?: number;
     tenantId?: number;
     targetUserId?: number;
@@ -5536,15 +4894,6 @@ export class ChatMessageDto implements IChatMessageDto {
     creationTime?: Date;
     sharedMessageId?: string;
     id?: number;
-
-    constructor(data?: IChatMessageDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5584,41 +4933,11 @@ export class ChatMessageDto implements IChatMessageDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ChatMessageDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IChatMessageDto {
-    userId?: number;
-    tenantId?: number;
-    targetUserId?: number;
-    targetTenantId?: number;
-    side?: ChatMessageDtoSide;
-    readState?: ChatMessageDtoReadState;
-    receiverReadState?: ChatMessageDtoReceiverReadState;
-    message?: string;
-    creationTime?: Date;
-    sharedMessageId?: string;
-    id?: number;
-}
-
-export class MarkAllUnreadMessagesOfUserAsReadInput implements IMarkAllUnreadMessagesOfUserAsReadInput {
+export class MarkAllUnreadMessagesOfUserAsReadInput {
     tenantId?: number;
     userId?: number;
-
-    constructor(data?: IMarkAllUnreadMessagesOfUserAsReadInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5640,31 +4959,10 @@ export class MarkAllUnreadMessagesOfUserAsReadInput implements IMarkAllUnreadMes
         data["userId"] = this.userId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new MarkAllUnreadMessagesOfUserAsReadInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IMarkAllUnreadMessagesOfUserAsReadInput {
-    tenantId?: number;
-    userId?: number;
-}
-
-export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListResultDtoOfSubscribableEditionComboboxItemDto {
+export class ListResultDtoOfSubscribableEditionComboboxItemDto {
     items?: SubscribableEditionComboboxItemDto[];
-
-    constructor(data?: IListResultDtoOfSubscribableEditionComboboxItemDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5692,33 +4990,13 @@ export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListR
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfSubscribableEditionComboboxItemDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfSubscribableEditionComboboxItemDto {
-    items?: SubscribableEditionComboboxItemDto[];
-}
-
-export class SubscribableEditionComboboxItemDto implements ISubscribableEditionComboboxItemDto {
+export class SubscribableEditionComboboxItemDto {
     isFree?: boolean;
     value?: string;
     displayText?: string;
     isSelected?: boolean;
-
-    constructor(data?: ISubscribableEditionComboboxItemDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5744,36 +5022,13 @@ export class SubscribableEditionComboboxItemDto implements ISubscribableEditionC
         data["isSelected"] = this.isSelected;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SubscribableEditionComboboxItemDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISubscribableEditionComboboxItemDto {
-    isFree?: boolean;
-    value?: string;
-    displayText?: string;
-    isSelected?: boolean;
-}
-
-export class FindUsersInput implements IFindUsersInput {
+export class FindUsersInput {
     tenantId?: number;
     maxResultCount?: number;
     skipCount?: number;
     filter?: string;
-
-    constructor(data?: IFindUsersInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5799,34 +5054,11 @@ export class FindUsersInput implements IFindUsersInput {
         data["filter"] = this.filter;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FindUsersInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFindUsersInput {
-    tenantId?: number;
-    maxResultCount?: number;
-    skipCount?: number;
-    filter?: string;
-}
-
-export class PagedResultDtoOfNameValueDto implements IPagedResultDtoOfNameValueDto {
+export class PagedResultDtoOfNameValueDto {
     totalCount?: number;
     items?: NameValueDto[];
-
-    constructor(data?: IPagedResultDtoOfNameValueDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5856,32 +5088,11 @@ export class PagedResultDtoOfNameValueDto implements IPagedResultDtoOfNameValueD
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfNameValueDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfNameValueDto {
-    totalCount?: number;
-    items?: NameValueDto[];
-}
-
-export class NameValueDto implements INameValueDto {
+export class NameValueDto {
     name?: string;
     value?: string;
-
-    constructor(data?: INameValueDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5903,31 +5114,10 @@ export class NameValueDto implements INameValueDto {
         data["value"] = this.value;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NameValueDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INameValueDto {
+export class GetDefaultEditionNameOutput {
     name?: string;
-    value?: string;
-}
-
-export class GetDefaultEditionNameOutput implements IGetDefaultEditionNameOutput {
-    name?: string;
-
-    constructor(data?: IGetDefaultEditionNameOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5947,30 +5137,10 @@ export class GetDefaultEditionNameOutput implements IGetDefaultEditionNameOutput
         data["name"] = this.name;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetDefaultEditionNameOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetDefaultEditionNameOutput {
-    name?: string;
-}
-
-export class ChangeUiThemeInput implements IChangeUiThemeInput {
+export class ChangeUiThemeInput {
     theme: string;
-
-    constructor(data?: IChangeUiThemeInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -5990,30 +5160,10 @@ export class ChangeUiThemeInput implements IChangeUiThemeInput {
         data["theme"] = this.theme;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ChangeUiThemeInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IChangeUiThemeInput {
-    theme: string;
-}
-
-export class DateToStringOutput implements IDateToStringOutput {
+export class DateToStringOutput {
     dateString?: string;
-
-    constructor(data?: IDateToStringOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6033,31 +5183,11 @@ export class DateToStringOutput implements IDateToStringOutput {
         data["dateString"] = this.dateString;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new DateToStringOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IDateToStringOutput {
-    dateString?: string;
-}
-
-export class NameValueOfString implements INameValueOfString {
+export class NameValueOfString {
     name?: string;
     value?: string;
-
-    constructor(data?: INameValueOfString) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6079,31 +5209,10 @@ export class NameValueOfString implements INameValueOfString {
         data["value"] = this.value;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NameValueOfString();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INameValueOfString {
-    name?: string;
-    value?: string;
-}
-
-export class StringOutput implements IStringOutput {
+export class StringOutput {
     output?: string;
-
-    constructor(data?: IStringOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6123,30 +5232,10 @@ export class StringOutput implements IStringOutput {
         data["output"] = this.output;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new StringOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IStringOutput {
-    output?: string;
-}
-
-export class ListResultDtoOfEditionListDto implements IListResultDtoOfEditionListDto {
+export class ListResultDtoOfEditionListDto {
     items?: EditionListDto[];
-
-    constructor(data?: IListResultDtoOfEditionListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6174,33 +5263,13 @@ export class ListResultDtoOfEditionListDto implements IListResultDtoOfEditionLis
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfEditionListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfEditionListDto {
-    items?: EditionListDto[];
-}
-
-export class EditionListDto implements IEditionListDto {
+export class EditionListDto {
     name?: string;
     displayName?: string;
     creationTime?: Date;
     id?: number;
-
-    constructor(data?: IEditionListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6226,35 +5295,12 @@ export class EditionListDto implements IEditionListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionListDto {
-    name?: string;
-    displayName?: string;
-    creationTime?: Date;
-    id?: number;
-}
-
-export class GetEditionEditOutput implements IGetEditionEditOutput {
+export class GetEditionEditOutput {
     edition?: EditionEditDto;
     featureValues?: NameValueDto[];
     features?: FlatFeatureDto[];
-
-    constructor(data?: IGetEditionEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6294,22 +5340,9 @@ export class GetEditionEditOutput implements IGetEditionEditOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetEditionEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetEditionEditOutput {
-    edition?: EditionEditDto;
-    featureValues?: NameValueDto[];
-    features?: FlatFeatureDto[];
-}
-
-export class EditionEditDto implements IEditionEditDto {
+export class EditionEditDto {
     id?: number;
     displayName: string;
     monthlyPrice?: number;
@@ -6317,15 +5350,6 @@ export class EditionEditDto implements IEditionEditDto {
     trialDayCount?: number;
     waitingDayAfterExpire?: number;
     expiringEditionId?: number;
-
-    constructor(data?: IEditionEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6357,41 +5381,15 @@ export class EditionEditDto implements IEditionEditDto {
         data["expiringEditionId"] = this.expiringEditionId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionEditDto {
-    id?: number;
-    displayName: string;
-    monthlyPrice?: number;
-    annualPrice?: number;
-    trialDayCount?: number;
-    waitingDayAfterExpire?: number;
-    expiringEditionId?: number;
-}
-
-export class FlatFeatureDto implements IFlatFeatureDto {
+export class FlatFeatureDto {
     parentName?: string;
     name?: string;
     displayName?: string;
     description?: string;
     defaultValue?: string;
     inputType?: FeatureInputTypeDto;
-
-    constructor(data?: IFlatFeatureDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6421,38 +5419,13 @@ export class FlatFeatureDto implements IFlatFeatureDto {
         data["inputType"] = this.inputType ? this.inputType.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FlatFeatureDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFlatFeatureDto {
-    parentName?: string;
-    name?: string;
-    displayName?: string;
-    description?: string;
-    defaultValue?: string;
-    inputType?: FeatureInputTypeDto;
-}
-
-export class FeatureInputTypeDto implements IFeatureInputTypeDto {
+export class FeatureInputTypeDto {
     name?: string;
     attributes?: { [key: string] : any; };
     validator?: IValueValidator;
     itemSource?: LocalizableComboboxItemSourceDto;
-
-    constructor(data?: IFeatureInputTypeDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6490,34 +5463,11 @@ export class FeatureInputTypeDto implements IFeatureInputTypeDto {
         data["itemSource"] = this.itemSource ? this.itemSource.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FeatureInputTypeDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFeatureInputTypeDto {
+export class IValueValidator {
     name?: string;
     attributes?: { [key: string] : any; };
-    validator?: IValueValidator;
-    itemSource?: LocalizableComboboxItemSourceDto;
-}
-
-export class IValueValidator implements IIValueValidator {
-    name?: string;
-    attributes?: { [key: string] : any; };
-
-    constructor(data?: IIValueValidator) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6551,31 +5501,10 @@ export class IValueValidator implements IIValueValidator {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new IValueValidator();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IIValueValidator {
-    name?: string;
-    attributes?: { [key: string] : any; };
-}
-
-export class LocalizableComboboxItemSourceDto implements ILocalizableComboboxItemSourceDto {
+export class LocalizableComboboxItemSourceDto {
     items?: LocalizableComboboxItemDto[];
-
-    constructor(data?: ILocalizableComboboxItemSourceDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6603,31 +5532,11 @@ export class LocalizableComboboxItemSourceDto implements ILocalizableComboboxIte
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LocalizableComboboxItemSourceDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILocalizableComboboxItemSourceDto {
-    items?: LocalizableComboboxItemDto[];
-}
-
-export class LocalizableComboboxItemDto implements ILocalizableComboboxItemDto {
+export class LocalizableComboboxItemDto {
     value?: string;
     displayText?: string;
-
-    constructor(data?: ILocalizableComboboxItemDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6649,36 +5558,11 @@ export class LocalizableComboboxItemDto implements ILocalizableComboboxItemDto {
         data["displayText"] = this.displayText;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LocalizableComboboxItemDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILocalizableComboboxItemDto {
-    value?: string;
-    displayText?: string;
-}
-
-export class CreateOrUpdateEditionDto implements ICreateOrUpdateEditionDto {
+export class CreateOrUpdateEditionDto {
     edition: EditionEditDto;
     featureValues: NameValueDto[];
-
-    constructor(data?: ICreateOrUpdateEditionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.edition = new EditionEditDto();
-            this.featureValues = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6708,32 +5592,11 @@ export class CreateOrUpdateEditionDto implements ICreateOrUpdateEditionDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateOrUpdateEditionDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateOrUpdateEditionDto {
-    edition: EditionEditDto;
-    featureValues: NameValueDto[];
-}
-
-export class CreateFriendshipRequestInput implements ICreateFriendshipRequestInput {
+export class CreateFriendshipRequestInput {
     userId?: number;
     tenantId?: number;
-
-    constructor(data?: ICreateFriendshipRequestInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6755,32 +5618,11 @@ export class CreateFriendshipRequestInput implements ICreateFriendshipRequestInp
         data["tenantId"] = this.tenantId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateFriendshipRequestInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateFriendshipRequestInput {
-    userId?: number;
-    tenantId?: number;
-}
-
-export class CreateFriendshipRequestByUserNameInput implements ICreateFriendshipRequestByUserNameInput {
+export class CreateFriendshipRequestByUserNameInput {
     tenancyName: string;
     userName?: string;
-
-    constructor(data?: ICreateFriendshipRequestByUserNameInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6802,32 +5644,11 @@ export class CreateFriendshipRequestByUserNameInput implements ICreateFriendship
         data["userName"] = this.userName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateFriendshipRequestByUserNameInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateFriendshipRequestByUserNameInput {
-    tenancyName: string;
-    userName?: string;
-}
-
-export class BlockUserInput implements IBlockUserInput {
+export class BlockUserInput {
     userId?: number;
     tenantId?: number;
-
-    constructor(data?: IBlockUserInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6849,32 +5670,11 @@ export class BlockUserInput implements IBlockUserInput {
         data["tenantId"] = this.tenantId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new BlockUserInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IBlockUserInput {
+export class UnblockUserInput {
     userId?: number;
     tenantId?: number;
-}
-
-export class UnblockUserInput implements IUnblockUserInput {
-    userId?: number;
-    tenantId?: number;
-
-    constructor(data?: IUnblockUserInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6896,32 +5696,11 @@ export class UnblockUserInput implements IUnblockUserInput {
         data["tenantId"] = this.tenantId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UnblockUserInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUnblockUserInput {
+export class AcceptFriendshipRequestInput {
     userId?: number;
     tenantId?: number;
-}
-
-export class AcceptFriendshipRequestInput implements IAcceptFriendshipRequestInput {
-    userId?: number;
-    tenantId?: number;
-
-    constructor(data?: IAcceptFriendshipRequestInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -6943,21 +5722,9 @@ export class AcceptFriendshipRequestInput implements IAcceptFriendshipRequestInp
         data["tenantId"] = this.tenantId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AcceptFriendshipRequestInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IAcceptFriendshipRequestInput {
-    userId?: number;
-    tenantId?: number;
-}
-
-export class HostDashboardData implements IHostDashboardData {
+export class HostDashboardData {
     newTenantsCount?: number;
     newSubscriptionAmount?: number;
     dashboardPlaceholder1?: number;
@@ -6973,15 +5740,6 @@ export class HostDashboardData implements IHostDashboardData {
     subscriptionEndDateStart?: Date;
     subscriptionEndDateEnd?: Date;
     tenantCreationStartDate?: Date;
-
-    constructor(data?: IHostDashboardData) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7061,46 +5819,12 @@ export class HostDashboardData implements IHostDashboardData {
         data["tenantCreationStartDate"] = this.tenantCreationStartDate ? this.tenantCreationStartDate.toISOString() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new HostDashboardData();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IHostDashboardData {
-    newTenantsCount?: number;
-    newSubscriptionAmount?: number;
-    dashboardPlaceholder1?: number;
-    dashboardPlaceholder2?: number;
-    incomeStatistics?: IncomeStastistic[];
-    editionStatistics?: TenantEdition[];
-    expiringTenants?: ExpiringTenant[];
-    recentTenants?: RecentTenant[];
-    maxExpiringTenantsShownCount?: number;
-    maxRecentTenantsShownCount?: number;
-    subscriptionEndAlertDayCount?: number;
-    recentTenantsDayCount?: number;
-    subscriptionEndDateStart?: Date;
-    subscriptionEndDateEnd?: Date;
-    tenantCreationStartDate?: Date;
-}
-
-export class IncomeStastistic implements IIncomeStastistic {
+export class IncomeStastistic {
     label?: string;
     date?: Date;
     amount?: number;
-
-    constructor(data?: IIncomeStastistic) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7124,33 +5848,11 @@ export class IncomeStastistic implements IIncomeStastistic {
         data["amount"] = this.amount;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new IncomeStastistic();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IIncomeStastistic {
-    label?: string;
-    date?: Date;
-    amount?: number;
-}
-
-export class TenantEdition implements ITenantEdition {
+export class TenantEdition {
     label?: string;
     value?: number;
-
-    constructor(data?: ITenantEdition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7172,32 +5874,11 @@ export class TenantEdition implements ITenantEdition {
         data["value"] = this.value;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantEdition();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantEdition {
-    label?: string;
-    value?: number;
-}
-
-export class ExpiringTenant implements IExpiringTenant {
+export class ExpiringTenant {
     tenantName?: string;
     remainingDayCount?: number;
-
-    constructor(data?: IExpiringTenant) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7219,33 +5900,12 @@ export class ExpiringTenant implements IExpiringTenant {
         data["remainingDayCount"] = this.remainingDayCount;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ExpiringTenant();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IExpiringTenant {
-    tenantName?: string;
-    remainingDayCount?: number;
-}
-
-export class RecentTenant implements IRecentTenant {
+export class RecentTenant {
     id?: number;
     name?: string;
     creationTime?: Date;
-
-    constructor(data?: IRecentTenant) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7269,32 +5929,10 @@ export class RecentTenant implements IRecentTenant {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RecentTenant();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRecentTenant {
-    id?: number;
-    name?: string;
-    creationTime?: Date;
-}
-
-export class GetIncomeStatisticsDataOutput implements IGetIncomeStatisticsDataOutput {
+export class GetIncomeStatisticsDataOutput {
     incomeStatistics?: IncomeStastistic[];
-
-    constructor(data?: IGetIncomeStatisticsDataOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7322,30 +5960,10 @@ export class GetIncomeStatisticsDataOutput implements IGetIncomeStatisticsDataOu
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetIncomeStatisticsDataOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetIncomeStatisticsDataOutput {
-    incomeStatistics?: IncomeStastistic[];
-}
-
-export class GetEditionTenantStatisticsOutput implements IGetEditionTenantStatisticsOutput {
+export class GetEditionTenantStatisticsOutput {
     editionStatistics?: TenantEdition[];
-
-    constructor(data?: IGetEditionTenantStatisticsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7373,42 +5991,15 @@ export class GetEditionTenantStatisticsOutput implements IGetEditionTenantStatis
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetEditionTenantStatisticsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetEditionTenantStatisticsOutput {
-    editionStatistics?: TenantEdition[];
-}
-
-export class HostSettingsEditDto implements IHostSettingsEditDto {
+export class HostSettingsEditDto {
     general: GeneralSettingsEditDto;
     userManagement: HostUserManagementSettingsEditDto;
     email: EmailSettingsEditDto;
     tenantManagement: TenantManagementSettingsEditDto;
     security: SecuritySettingsEditDto;
     billing?: HostBillingSettingsEditDto;
-
-    constructor(data?: IHostSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.general = new GeneralSettingsEditDto();
-            this.userManagement = new HostUserManagementSettingsEditDto();
-            this.email = new EmailSettingsEditDto();
-            this.tenantManagement = new TenantManagementSettingsEditDto();
-            this.security = new SecuritySettingsEditDto();
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7438,36 +6029,11 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
         data["billing"] = this.billing ? this.billing.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new HostSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IHostSettingsEditDto {
-    general: GeneralSettingsEditDto;
-    userManagement: HostUserManagementSettingsEditDto;
-    email: EmailSettingsEditDto;
-    tenantManagement: TenantManagementSettingsEditDto;
-    security: SecuritySettingsEditDto;
-    billing?: HostBillingSettingsEditDto;
-}
-
-export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
+export class GeneralSettingsEditDto {
     timezone?: string;
     timezoneForComparison?: string;
-
-    constructor(data?: IGeneralSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7489,32 +6055,11 @@ export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
         data["timezoneForComparison"] = this.timezoneForComparison;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GeneralSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGeneralSettingsEditDto {
-    timezone?: string;
-    timezoneForComparison?: string;
-}
-
-export class HostUserManagementSettingsEditDto implements IHostUserManagementSettingsEditDto {
+export class HostUserManagementSettingsEditDto {
     isEmailConfirmationRequiredForLogin?: boolean;
     smsVerificationEnabled?: boolean;
-
-    constructor(data?: IHostUserManagementSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7536,21 +6081,9 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
         data["smsVerificationEnabled"] = this.smsVerificationEnabled;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new HostUserManagementSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IHostUserManagementSettingsEditDto {
-    isEmailConfirmationRequiredForLogin?: boolean;
-    smsVerificationEnabled?: boolean;
-}
-
-export class EmailSettingsEditDto implements IEmailSettingsEditDto {
+export class EmailSettingsEditDto {
     defaultFromAddress?: string;
     defaultFromDisplayName?: string;
     smtpHost?: string;
@@ -7560,15 +6093,6 @@ export class EmailSettingsEditDto implements IEmailSettingsEditDto {
     smtpDomain?: string;
     smtpEnableSsl?: boolean;
     smtpUseDefaultCredentials?: boolean;
-
-    constructor(data?: IEmailSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7604,41 +6128,13 @@ export class EmailSettingsEditDto implements IEmailSettingsEditDto {
         data["smtpUseDefaultCredentials"] = this.smtpUseDefaultCredentials;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EmailSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEmailSettingsEditDto {
-    defaultFromAddress?: string;
-    defaultFromDisplayName?: string;
-    smtpHost?: string;
-    smtpPort?: number;
-    smtpUserName?: string;
-    smtpPassword?: string;
-    smtpDomain?: string;
-    smtpEnableSsl?: boolean;
-    smtpUseDefaultCredentials?: boolean;
-}
-
-export class TenantManagementSettingsEditDto implements ITenantManagementSettingsEditDto {
+export class TenantManagementSettingsEditDto {
     allowSelfRegistration?: boolean;
     isNewRegisteredTenantActiveByDefault?: boolean;
     useCaptchaOnRegistration?: boolean;
     defaultEditionId?: number;
-
-    constructor(data?: ITenantManagementSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7664,37 +6160,14 @@ export class TenantManagementSettingsEditDto implements ITenantManagementSetting
         data["defaultEditionId"] = this.defaultEditionId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantManagementSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantManagementSettingsEditDto {
-    allowSelfRegistration?: boolean;
-    isNewRegisteredTenantActiveByDefault?: boolean;
-    useCaptchaOnRegistration?: boolean;
-    defaultEditionId?: number;
-}
-
-export class SecuritySettingsEditDto implements ISecuritySettingsEditDto {
+export class SecuritySettingsEditDto {
     useDefaultPasswordComplexitySettings?: boolean;
     passwordComplexity?: PasswordComplexitySetting;
     defaultPasswordComplexity?: PasswordComplexitySetting;
     userLockOut?: UserLockOutSettingsEditDto;
     twoFactorLogin?: TwoFactorLoginSettingsEditDto;
-
-    constructor(data?: ISecuritySettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7722,35 +6195,11 @@ export class SecuritySettingsEditDto implements ISecuritySettingsEditDto {
         data["twoFactorLogin"] = this.twoFactorLogin ? this.twoFactorLogin.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SecuritySettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISecuritySettingsEditDto {
-    useDefaultPasswordComplexitySettings?: boolean;
-    passwordComplexity?: PasswordComplexitySetting;
-    defaultPasswordComplexity?: PasswordComplexitySetting;
-    userLockOut?: UserLockOutSettingsEditDto;
-    twoFactorLogin?: TwoFactorLoginSettingsEditDto;
-}
-
-export class HostBillingSettingsEditDto implements IHostBillingSettingsEditDto {
+export class HostBillingSettingsEditDto {
     legalName?: string;
     address?: string;
-
-    constructor(data?: IHostBillingSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7772,35 +6221,14 @@ export class HostBillingSettingsEditDto implements IHostBillingSettingsEditDto {
         data["address"] = this.address;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new HostBillingSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IHostBillingSettingsEditDto {
-    legalName?: string;
-    address?: string;
-}
-
-export class PasswordComplexitySetting implements IPasswordComplexitySetting {
+export class PasswordComplexitySetting {
     requireDigit?: boolean;
     requireLowercase?: boolean;
     requireNonAlphanumeric?: boolean;
     requireUppercase?: boolean;
     requiredLength?: number;
-
-    constructor(data?: IPasswordComplexitySetting) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7828,36 +6256,12 @@ export class PasswordComplexitySetting implements IPasswordComplexitySetting {
         data["requiredLength"] = this.requiredLength;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PasswordComplexitySetting();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPasswordComplexitySetting {
-    requireDigit?: boolean;
-    requireLowercase?: boolean;
-    requireNonAlphanumeric?: boolean;
-    requireUppercase?: boolean;
-    requiredLength?: number;
-}
-
-export class UserLockOutSettingsEditDto implements IUserLockOutSettingsEditDto {
+export class UserLockOutSettingsEditDto {
     isEnabled?: boolean;
     maxFailedAccessAttemptsBeforeLockout?: number;
     defaultAccountLockoutSeconds?: number;
-
-    constructor(data?: IUserLockOutSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7881,37 +6285,15 @@ export class UserLockOutSettingsEditDto implements IUserLockOutSettingsEditDto {
         data["defaultAccountLockoutSeconds"] = this.defaultAccountLockoutSeconds;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserLockOutSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserLockOutSettingsEditDto {
-    isEnabled?: boolean;
-    maxFailedAccessAttemptsBeforeLockout?: number;
-    defaultAccountLockoutSeconds?: number;
-}
-
-export class TwoFactorLoginSettingsEditDto implements ITwoFactorLoginSettingsEditDto {
+export class TwoFactorLoginSettingsEditDto {
     isEnabledForApplication?: boolean;
     isEnabled?: boolean;
     isEmailProviderEnabled?: boolean;
     isSmsProviderEnabled?: boolean;
     isRememberBrowserEnabled?: boolean;
     isGoogleAuthenticatorEnabled?: boolean;
-
-    constructor(data?: ITwoFactorLoginSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7941,35 +6323,10 @@ export class TwoFactorLoginSettingsEditDto implements ITwoFactorLoginSettingsEdi
         data["isGoogleAuthenticatorEnabled"] = this.isGoogleAuthenticatorEnabled;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TwoFactorLoginSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITwoFactorLoginSettingsEditDto {
-    isEnabledForApplication?: boolean;
-    isEnabled?: boolean;
-    isEmailProviderEnabled?: boolean;
-    isSmsProviderEnabled?: boolean;
-    isRememberBrowserEnabled?: boolean;
-    isGoogleAuthenticatorEnabled?: boolean;
-}
-
-export class SendTestEmailInput implements ISendTestEmailInput {
+export class SendTestEmailInput {
     emailAddress: string;
-
-    constructor(data?: ISendTestEmailInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -7989,20 +6346,9 @@ export class SendTestEmailInput implements ISendTestEmailInput {
         data["emailAddress"] = this.emailAddress;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SendTestEmailInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISendTestEmailInput {
-    emailAddress: string;
-}
-
-export class InstallDto implements IInstallDto {
+export class InstallDto {
     connectionString: string;
     adminPassword: string;
     webSiteUrl: string;
@@ -8010,15 +6356,6 @@ export class InstallDto implements IInstallDto {
     defaultLanguage: string;
     smtpSettings?: EmailSettingsEditDto;
     billInfo?: HostBillingSettingsEditDto;
-
-    constructor(data?: IInstallDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8050,39 +6387,13 @@ export class InstallDto implements IInstallDto {
         data["billInfo"] = this.billInfo ? this.billInfo.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new InstallDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IInstallDto {
-    connectionString: string;
-    adminPassword: string;
-    webSiteUrl: string;
-    serverUrl?: string;
-    defaultLanguage: string;
-    smtpSettings?: EmailSettingsEditDto;
-    billInfo?: HostBillingSettingsEditDto;
-}
-
-export class AppSettingsJsonDto implements IAppSettingsJsonDto {
+export class AppSettingsJsonDto {
     connectionString?: string;
     webSiteUrl?: string;
     serverSiteUrl?: string;
     languages?: NameValue[];
-
-    constructor(data?: IAppSettingsJsonDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8116,34 +6427,11 @@ export class AppSettingsJsonDto implements IAppSettingsJsonDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AppSettingsJsonDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IAppSettingsJsonDto {
-    connectionString?: string;
-    webSiteUrl?: string;
-    serverSiteUrl?: string;
-    languages?: NameValue[];
-}
-
-export class NameValue implements INameValue {
+export class NameValue {
     name?: string;
     value?: string;
-
-    constructor(data?: INameValue) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8165,31 +6453,10 @@ export class NameValue implements INameValue {
         data["value"] = this.value;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NameValue();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INameValue {
-    name?: string;
-    value?: string;
-}
-
-export class CheckDatabaseOutput implements ICheckDatabaseOutput {
+export class CheckDatabaseOutput {
     isDatabaseExist?: boolean;
-
-    constructor(data?: ICheckDatabaseOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8209,20 +6476,9 @@ export class CheckDatabaseOutput implements ICheckDatabaseOutput {
         data["isDatabaseExist"] = this.isDatabaseExist;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CheckDatabaseOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICheckDatabaseOutput {
-    isDatabaseExist?: boolean;
-}
-
-export class InvoiceDto implements IInvoiceDto {
+export class InvoiceDto {
     amount?: number;
     editionDisplayName?: string;
     invoiceNo?: string;
@@ -8232,15 +6488,6 @@ export class InvoiceDto implements IInvoiceDto {
     tenantTaxNo?: string;
     hostLegalName?: string;
     hostAddress?: string[];
-
-    constructor(data?: IInvoiceDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8292,38 +6539,10 @@ export class InvoiceDto implements IInvoiceDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new InvoiceDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IInvoiceDto {
-    amount?: number;
-    editionDisplayName?: string;
-    invoiceNo?: string;
-    invoiceDate?: Date;
-    tenantLegalName?: string;
-    tenantAddress?: string[];
-    tenantTaxNo?: string;
-    hostLegalName?: string;
-    hostAddress?: string[];
-}
-
-export class CreateInvoiceDto implements ICreateInvoiceDto {
+export class CreateInvoiceDto {
     subscriptionPaymentId?: number;
-
-    constructor(data?: ICreateInvoiceDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8343,31 +6562,11 @@ export class CreateInvoiceDto implements ICreateInvoiceDto {
         data["subscriptionPaymentId"] = this.subscriptionPaymentId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateInvoiceDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateInvoiceDto {
-    subscriptionPaymentId?: number;
-}
-
-export class GetLanguagesOutput implements IGetLanguagesOutput {
+export class GetLanguagesOutput {
     defaultLanguageName?: string;
     items?: ApplicationLanguageListDto[];
-
-    constructor(data?: IGetLanguagesOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8397,21 +6596,9 @@ export class GetLanguagesOutput implements IGetLanguagesOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetLanguagesOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetLanguagesOutput {
-    defaultLanguageName?: string;
-    items?: ApplicationLanguageListDto[];
-}
-
-export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
+export class ApplicationLanguageListDto {
     tenantId?: number;
     name?: string;
     displayName?: string;
@@ -8425,15 +6612,6 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
     creationTime?: Date;
     creatorUserId?: number;
     id?: number;
-
-    constructor(data?: IApplicationLanguageListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8477,44 +6655,12 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ApplicationLanguageListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IApplicationLanguageListDto {
-    tenantId?: number;
-    name?: string;
-    displayName?: string;
-    icon?: string;
-    isDisabled?: boolean;
-    isDeleted?: boolean;
-    deleterUserId?: number;
-    deletionTime?: Date;
-    lastModificationTime?: Date;
-    lastModifierUserId?: number;
-    creationTime?: Date;
-    creatorUserId?: number;
-    id?: number;
-}
-
-export class GetLanguageForEditOutput implements IGetLanguageForEditOutput {
+export class GetLanguageForEditOutput {
     language?: ApplicationLanguageEditDto;
     languageNames?: ComboboxItemDto[];
     flags?: ComboboxItemDto[];
-
-    constructor(data?: IGetLanguageForEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8554,35 +6700,13 @@ export class GetLanguageForEditOutput implements IGetLanguageForEditOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetLanguageForEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetLanguageForEditOutput {
-    language?: ApplicationLanguageEditDto;
-    languageNames?: ComboboxItemDto[];
-    flags?: ComboboxItemDto[];
-}
-
-export class ApplicationLanguageEditDto implements IApplicationLanguageEditDto {
+export class ApplicationLanguageEditDto {
     id?: number;
     name: string;
     icon?: string;
     isEnabled?: boolean;
-
-    constructor(data?: IApplicationLanguageEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8608,35 +6732,12 @@ export class ApplicationLanguageEditDto implements IApplicationLanguageEditDto {
         data["isEnabled"] = this.isEnabled;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ApplicationLanguageEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IApplicationLanguageEditDto {
-    id?: number;
-    name: string;
-    icon?: string;
-    isEnabled?: boolean;
-}
-
-export class ComboboxItemDto implements IComboboxItemDto {
+export class ComboboxItemDto {
     value?: string;
     displayText?: string;
     isSelected?: boolean;
-
-    constructor(data?: IComboboxItemDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8660,35 +6761,10 @@ export class ComboboxItemDto implements IComboboxItemDto {
         data["isSelected"] = this.isSelected;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ComboboxItemDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IComboboxItemDto {
-    value?: string;
-    displayText?: string;
-    isSelected?: boolean;
-}
-
-export class CreateOrUpdateLanguageInput implements ICreateOrUpdateLanguageInput {
+export class CreateOrUpdateLanguageInput {
     language: ApplicationLanguageEditDto;
-
-    constructor(data?: ICreateOrUpdateLanguageInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.language = new ApplicationLanguageEditDto();
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8708,30 +6784,10 @@ export class CreateOrUpdateLanguageInput implements ICreateOrUpdateLanguageInput
         data["language"] = this.language ? this.language.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateOrUpdateLanguageInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateOrUpdateLanguageInput {
-    language: ApplicationLanguageEditDto;
-}
-
-export class SetDefaultLanguageInput implements ISetDefaultLanguageInput {
+export class SetDefaultLanguageInput {
     name: string;
-
-    constructor(data?: ISetDefaultLanguageInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8751,31 +6807,11 @@ export class SetDefaultLanguageInput implements ISetDefaultLanguageInput {
         data["name"] = this.name;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SetDefaultLanguageInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISetDefaultLanguageInput {
-    name: string;
-}
-
-export class PagedResultDtoOfLanguageTextListDto implements IPagedResultDtoOfLanguageTextListDto {
+export class PagedResultDtoOfLanguageTextListDto {
     totalCount?: number;
     items?: LanguageTextListDto[];
-
-    constructor(data?: IPagedResultDtoOfLanguageTextListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8805,33 +6841,12 @@ export class PagedResultDtoOfLanguageTextListDto implements IPagedResultDtoOfLan
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfLanguageTextListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfLanguageTextListDto {
-    totalCount?: number;
-    items?: LanguageTextListDto[];
-}
-
-export class LanguageTextListDto implements ILanguageTextListDto {
+export class LanguageTextListDto {
     key?: string;
     baseValue?: string;
     targetValue?: string;
-
-    constructor(data?: ILanguageTextListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8855,35 +6870,13 @@ export class LanguageTextListDto implements ILanguageTextListDto {
         data["targetValue"] = this.targetValue;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LanguageTextListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILanguageTextListDto {
-    key?: string;
-    baseValue?: string;
-    targetValue?: string;
-}
-
-export class UpdateLanguageTextInput implements IUpdateLanguageTextInput {
+export class UpdateLanguageTextInput {
     languageName: string;
     sourceName: string;
     key: string;
     value: string;
-
-    constructor(data?: IUpdateLanguageTextInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8909,35 +6902,12 @@ export class UpdateLanguageTextInput implements IUpdateLanguageTextInput {
         data["value"] = this.value;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateLanguageTextInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateLanguageTextInput {
-    languageName: string;
-    sourceName: string;
-    key: string;
-    value: string;
-}
-
-export class GetNotificationsOutput implements IGetNotificationsOutput {
+export class GetNotificationsOutput {
     unreadCount?: number;
     totalCount?: number;
     items?: UserNotification[];
-
-    constructor(data?: IGetNotificationsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -8969,36 +6939,14 @@ export class GetNotificationsOutput implements IGetNotificationsOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetNotificationsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetNotificationsOutput {
-    unreadCount?: number;
-    totalCount?: number;
-    items?: UserNotification[];
-}
-
-export class UserNotification implements IUserNotification {
+export class UserNotification {
     tenantId?: number;
     userId?: number;
     state?: UserNotificationState;
     notification?: TenantNotification;
     id?: string;
-
-    constructor(data?: IUserNotification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9026,24 +6974,9 @@ export class UserNotification implements IUserNotification {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserNotification();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserNotification {
-    tenantId?: number;
-    userId?: number;
-    state?: UserNotificationState;
-    notification?: TenantNotification;
-    id?: string;
-}
-
-export class TenantNotification implements ITenantNotification {
+export class TenantNotification {
     tenantId?: number;
     notificationName?: string;
     data?: NotificationData;
@@ -9053,15 +6986,6 @@ export class TenantNotification implements ITenantNotification {
     severity?: TenantNotificationSeverity;
     creationTime?: Date;
     id?: string;
-
-    constructor(data?: ITenantNotification) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9109,39 +7033,11 @@ export class TenantNotification implements ITenantNotification {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantNotification();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantNotification {
-    tenantId?: number;
-    notificationName?: string;
-    data?: NotificationData;
-    entityType?: string;
-    entityTypeName?: string;
-    entityId?: any;
-    severity?: TenantNotificationSeverity;
-    creationTime?: Date;
-    id?: string;
-}
-
-export class NotificationData implements INotificationData {
+export class NotificationData {
     type?: string;
     properties?: { [key: string] : any; };
-
-    constructor(data?: INotificationData) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9175,31 +7071,10 @@ export class NotificationData implements INotificationData {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NotificationData();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INotificationData {
-    type?: string;
-    properties?: { [key: string] : any; };
-}
-
-export class EntityDtoOfGuid implements IEntityDtoOfGuid {
+export class EntityDtoOfGuid {
     id?: string;
-
-    constructor(data?: IEntityDtoOfGuid) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9219,31 +7094,11 @@ export class EntityDtoOfGuid implements IEntityDtoOfGuid {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EntityDtoOfGuid();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEntityDtoOfGuid {
-    id?: string;
-}
-
-export class GetNotificationSettingsOutput implements IGetNotificationSettingsOutput {
+export class GetNotificationSettingsOutput {
     receiveNotifications?: boolean;
     notifications?: NotificationSubscriptionWithDisplayNameDto[];
-
-    constructor(data?: IGetNotificationSettingsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9273,34 +7128,13 @@ export class GetNotificationSettingsOutput implements IGetNotificationSettingsOu
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetNotificationSettingsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetNotificationSettingsOutput {
-    receiveNotifications?: boolean;
-    notifications?: NotificationSubscriptionWithDisplayNameDto[];
-}
-
-export class NotificationSubscriptionWithDisplayNameDto implements INotificationSubscriptionWithDisplayNameDto {
+export class NotificationSubscriptionWithDisplayNameDto {
     displayName?: string;
     description?: string;
     name: string;
     isSubscribed?: boolean;
-
-    constructor(data?: INotificationSubscriptionWithDisplayNameDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9326,34 +7160,11 @@ export class NotificationSubscriptionWithDisplayNameDto implements INotification
         data["isSubscribed"] = this.isSubscribed;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NotificationSubscriptionWithDisplayNameDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INotificationSubscriptionWithDisplayNameDto {
-    displayName?: string;
-    description?: string;
-    name: string;
-    isSubscribed?: boolean;
-}
-
-export class UpdateNotificationSettingsInput implements IUpdateNotificationSettingsInput {
+export class UpdateNotificationSettingsInput {
     receiveNotifications?: boolean;
     notifications?: NotificationSubscriptionDto[];
-
-    constructor(data?: IUpdateNotificationSettingsInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9383,32 +7194,11 @@ export class UpdateNotificationSettingsInput implements IUpdateNotificationSetti
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateNotificationSettingsInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateNotificationSettingsInput {
-    receiveNotifications?: boolean;
-    notifications?: NotificationSubscriptionDto[];
-}
-
-export class NotificationSubscriptionDto implements INotificationSubscriptionDto {
+export class NotificationSubscriptionDto {
     name: string;
     isSubscribed?: boolean;
-
-    constructor(data?: INotificationSubscriptionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9430,31 +7220,10 @@ export class NotificationSubscriptionDto implements INotificationSubscriptionDto
         data["isSubscribed"] = this.isSubscribed;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new NotificationSubscriptionDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface INotificationSubscriptionDto {
-    name: string;
-    isSubscribed?: boolean;
-}
-
-export class ListResultDtoOfOrganizationUnitDto implements IListResultDtoOfOrganizationUnitDto {
+export class ListResultDtoOfOrganizationUnitDto {
     items?: OrganizationUnitDto[];
-
-    constructor(data?: IListResultDtoOfOrganizationUnitDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9482,20 +7251,9 @@ export class ListResultDtoOfOrganizationUnitDto implements IListResultDtoOfOrgan
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfOrganizationUnitDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfOrganizationUnitDto {
-    items?: OrganizationUnitDto[];
-}
-
-export class OrganizationUnitDto implements IOrganizationUnitDto {
+export class OrganizationUnitDto {
     parentId?: number;
     code?: string;
     displayName?: string;
@@ -9505,15 +7263,6 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
     creationTime?: Date;
     creatorUserId?: number;
     id?: number;
-
-    constructor(data?: IOrganizationUnitDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9549,39 +7298,11 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new OrganizationUnitDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IOrganizationUnitDto {
-    parentId?: number;
-    code?: string;
-    displayName?: string;
-    memberCount?: number;
-    lastModificationTime?: Date;
-    lastModifierUserId?: number;
-    creationTime?: Date;
-    creatorUserId?: number;
-    id?: number;
-}
-
-export class PagedResultDtoOfOrganizationUnitUserListDto implements IPagedResultDtoOfOrganizationUnitUserListDto {
+export class PagedResultDtoOfOrganizationUnitUserListDto {
     totalCount?: number;
     items?: OrganizationUnitUserListDto[];
-
-    constructor(data?: IPagedResultDtoOfOrganizationUnitUserListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9611,21 +7332,9 @@ export class PagedResultDtoOfOrganizationUnitUserListDto implements IPagedResult
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfOrganizationUnitUserListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfOrganizationUnitUserListDto {
-    totalCount?: number;
-    items?: OrganizationUnitUserListDto[];
-}
-
-export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto {
+export class OrganizationUnitUserListDto {
     name?: string;
     surname?: string;
     userName?: string;
@@ -9633,15 +7342,6 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
     profilePictureId?: string;
     addedTime?: Date;
     id?: number;
-
-    constructor(data?: IOrganizationUnitUserListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9673,37 +7373,11 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new OrganizationUnitUserListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IOrganizationUnitUserListDto {
-    name?: string;
-    surname?: string;
-    userName?: string;
-    emailAddress?: string;
-    profilePictureId?: string;
-    addedTime?: Date;
-    id?: number;
-}
-
-export class CreateOrganizationUnitInput implements ICreateOrganizationUnitInput {
+export class CreateOrganizationUnitInput {
     parentId?: number;
     displayName: string;
-
-    constructor(data?: ICreateOrganizationUnitInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9725,32 +7399,11 @@ export class CreateOrganizationUnitInput implements ICreateOrganizationUnitInput
         data["displayName"] = this.displayName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateOrganizationUnitInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateOrganizationUnitInput {
-    parentId?: number;
-    displayName: string;
-}
-
-export class UpdateOrganizationUnitInput implements IUpdateOrganizationUnitInput {
+export class UpdateOrganizationUnitInput {
     id?: number;
     displayName: string;
-
-    constructor(data?: IUpdateOrganizationUnitInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9772,32 +7425,11 @@ export class UpdateOrganizationUnitInput implements IUpdateOrganizationUnitInput
         data["displayName"] = this.displayName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateOrganizationUnitInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateOrganizationUnitInput {
-    id?: number;
-    displayName: string;
-}
-
-export class MoveOrganizationUnitInput implements IMoveOrganizationUnitInput {
+export class MoveOrganizationUnitInput {
     id?: number;
     newParentId?: number;
-
-    constructor(data?: IMoveOrganizationUnitInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9819,32 +7451,11 @@ export class MoveOrganizationUnitInput implements IMoveOrganizationUnitInput {
         data["newParentId"] = this.newParentId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new MoveOrganizationUnitInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IMoveOrganizationUnitInput {
-    id?: number;
-    newParentId?: number;
-}
-
-export class UsersToOrganizationUnitInput implements IUsersToOrganizationUnitInput {
+export class UsersToOrganizationUnitInput {
     userIds?: number[];
     organizationUnitId?: number;
-
-    constructor(data?: IUsersToOrganizationUnitInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9874,34 +7485,13 @@ export class UsersToOrganizationUnitInput implements IUsersToOrganizationUnitInp
         data["organizationUnitId"] = this.organizationUnitId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UsersToOrganizationUnitInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUsersToOrganizationUnitInput {
-    userIds?: number[];
-    organizationUnitId?: number;
-}
-
-export class FindOrganizationUnitUsersInput implements IFindOrganizationUnitUsersInput {
+export class FindOrganizationUnitUsersInput {
     organizationUnitId?: number;
     maxResultCount?: number;
     skipCount?: number;
     filter?: string;
-
-    constructor(data?: IFindOrganizationUnitUsersInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9927,34 +7517,11 @@ export class FindOrganizationUnitUsersInput implements IFindOrganizationUnitUser
         data["filter"] = this.filter;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FindOrganizationUnitUsersInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFindOrganizationUnitUsersInput {
-    organizationUnitId?: number;
-    maxResultCount?: number;
-    skipCount?: number;
-    filter?: string;
-}
-
-export class PaymentInfoDto implements IPaymentInfoDto {
+export class PaymentInfoDto {
     edition?: EditionSelectDto;
     additionalPrice?: number;
-
-    constructor(data?: IPaymentInfoDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -9976,21 +7543,9 @@ export class PaymentInfoDto implements IPaymentInfoDto {
         data["additionalPrice"] = this.additionalPrice;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PaymentInfoDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPaymentInfoDto {
-    edition?: EditionSelectDto;
-    additionalPrice?: number;
-}
-
-export class EditionSelectDto implements IEditionSelectDto {
+export class EditionSelectDto {
     id?: number;
     name?: string;
     displayName?: string;
@@ -10001,15 +7556,6 @@ export class EditionSelectDto implements IEditionSelectDto {
     waitingDayAfterExpire?: number;
     isFree?: boolean;
     additionalData?: AdditionalData;
-
-    constructor(data?: IEditionSelectDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10047,42 +7593,13 @@ export class EditionSelectDto implements IEditionSelectDto {
         data["additionalData"] = this.additionalData ? this.additionalData.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionSelectDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionSelectDto {
-    id?: number;
-    name?: string;
-    displayName?: string;
-    expiringEditionId?: number;
-    monthlyPrice?: number;
-    annualPrice?: number;
-    trialDayCount?: number;
-    waitingDayAfterExpire?: number;
-    isFree?: boolean;
-    additionalData?: AdditionalData;
-}
-
-export class CreatePaymentDto implements ICreatePaymentDto {
+export class CreatePaymentDto {
     editionId?: number;
     editionPaymentType?: CreatePaymentDtoEditionPaymentType;
     paymentPeriodType?: CreatePaymentDtoPaymentPeriodType;
     subscriptionPaymentGatewayType?: CreatePaymentDtoSubscriptionPaymentGatewayType;
-
-    constructor(data?: ICreatePaymentDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10108,37 +7625,14 @@ export class CreatePaymentDto implements ICreatePaymentDto {
         data["subscriptionPaymentGatewayType"] = this.subscriptionPaymentGatewayType;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreatePaymentDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreatePaymentDto {
-    editionId?: number;
-    editionPaymentType?: CreatePaymentDtoEditionPaymentType;
-    paymentPeriodType?: CreatePaymentDtoPaymentPeriodType;
-    subscriptionPaymentGatewayType?: CreatePaymentDtoSubscriptionPaymentGatewayType;
-}
-
-export class ExecutePaymentDto implements IExecutePaymentDto {
+export class ExecutePaymentDto {
     gateway?: ExecutePaymentDtoGateway;
     editionPaymentType?: ExecutePaymentDtoEditionPaymentType;
     editionId?: number;
     paymentPeriodType?: ExecutePaymentDtoPaymentPeriodType;
     additionalData?: { [key: string] : string; };
-
-    constructor(data?: IExecutePaymentDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10178,35 +7672,11 @@ export class ExecutePaymentDto implements IExecutePaymentDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ExecutePaymentDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IExecutePaymentDto {
-    gateway?: ExecutePaymentDtoGateway;
-    editionPaymentType?: ExecutePaymentDtoEditionPaymentType;
-    editionId?: number;
-    paymentPeriodType?: ExecutePaymentDtoPaymentPeriodType;
-    additionalData?: { [key: string] : string; };
-}
-
-export class PagedResultDtoOfSubscriptionPaymentListDto implements IPagedResultDtoOfSubscriptionPaymentListDto {
+export class PagedResultDtoOfSubscriptionPaymentListDto {
     totalCount?: number;
     items?: SubscriptionPaymentListDto[];
-
-    constructor(data?: IPagedResultDtoOfSubscriptionPaymentListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10236,21 +7706,9 @@ export class PagedResultDtoOfSubscriptionPaymentListDto implements IPagedResultD
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfSubscriptionPaymentListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfSubscriptionPaymentListDto {
-    totalCount?: number;
-    items?: SubscriptionPaymentListDto[];
-}
-
-export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
+export class SubscriptionPaymentListDto {
     gateway?: string;
     amount?: number;
     editionId?: number;
@@ -10267,15 +7725,6 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
     creationTime?: Date;
     creatorUserId?: number;
     id?: number;
-
-    constructor(data?: ISubscriptionPaymentListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10325,45 +7774,10 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SubscriptionPaymentListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISubscriptionPaymentListDto {
-    gateway?: string;
-    amount?: number;
-    editionId?: number;
-    dayCount?: number;
-    paymentPeriodType?: string;
-    paymentId?: string;
-    payerId?: string;
-    status?: string;
-    editionDisplayName?: string;
-    tenantId?: number;
-    invoiceNo?: string;
-    lastModificationTime?: Date;
-    lastModifierUserId?: number;
-    creationTime?: Date;
-    creatorUserId?: number;
-    id?: number;
-}
-
-export class ListResultDtoOfFlatPermissionWithLevelDto implements IListResultDtoOfFlatPermissionWithLevelDto {
+export class ListResultDtoOfFlatPermissionWithLevelDto {
     items?: FlatPermissionWithLevelDto[];
-
-    constructor(data?: IListResultDtoOfFlatPermissionWithLevelDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10391,35 +7805,15 @@ export class ListResultDtoOfFlatPermissionWithLevelDto implements IListResultDto
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfFlatPermissionWithLevelDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfFlatPermissionWithLevelDto {
-    items?: FlatPermissionWithLevelDto[];
-}
-
-export class FlatPermissionWithLevelDto implements IFlatPermissionWithLevelDto {
+export class FlatPermissionWithLevelDto {
     level?: number;
     parentName?: string;
     name?: string;
     displayName?: string;
     description?: string;
     isGrantedByDefault?: boolean;
-
-    constructor(data?: IFlatPermissionWithLevelDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10449,25 +7843,9 @@ export class FlatPermissionWithLevelDto implements IFlatPermissionWithLevelDto {
         data["isGrantedByDefault"] = this.isGrantedByDefault;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FlatPermissionWithLevelDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFlatPermissionWithLevelDto {
-    level?: number;
-    parentName?: string;
-    name?: string;
-    displayName?: string;
-    description?: string;
-    isGrantedByDefault?: boolean;
-}
-
-export class ProductSummaryDto implements IProductSummaryDto {
+export class ProductSummaryDto {
     name?: string;
     creationTime?: Date;
     creatorUserId?: number;
@@ -10477,15 +7855,6 @@ export class ProductSummaryDto implements IProductSummaryDto {
     deletionTime?: Date;
     deleterUserId?: number;
     id?: number;
-
-    constructor(data?: IProductSummaryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10521,39 +7890,11 @@ export class ProductSummaryDto implements IProductSummaryDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ProductSummaryDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IProductSummaryDto {
-    name?: string;
-    creationTime?: Date;
-    creatorUserId?: number;
-    lastModificationTime?: Date;
-    lastModifierUserId?: number;
-    isDeleted?: boolean;
-    deletionTime?: Date;
-    deleterUserId?: number;
-    id?: number;
-}
-
-export class PagedResultDtoOfProductSummaryDto implements IPagedResultDtoOfProductSummaryDto {
+export class PagedResultDtoOfProductSummaryDto {
     totalCount?: number;
     items?: ProductSummaryDto[];
-
-    constructor(data?: IPagedResultDtoOfProductSummaryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10583,32 +7924,11 @@ export class PagedResultDtoOfProductSummaryDto implements IPagedResultDtoOfProdu
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfProductSummaryDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfProductSummaryDto {
-    totalCount?: number;
-    items?: ProductSummaryDto[];
-}
-
-export class ProductCreateDto implements IProductCreateDto {
+export class ProductCreateDto {
     name?: string;
     id?: number;
-
-    constructor(data?: IProductCreateDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10630,21 +7950,9 @@ export class ProductCreateDto implements IProductCreateDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ProductCreateDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IProductCreateDto {
-    name?: string;
-    id?: number;
-}
-
-export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
+export class CurrentUserProfileEditDto {
     name: string;
     surname: string;
     userName: string;
@@ -10653,15 +7961,6 @@ export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
     isPhoneNumberConfirmed?: boolean;
     timezone?: string;
     qrCodeSetupImageUrl?: string;
-
-    constructor(data?: ICurrentUserProfileEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10695,37 +7994,10 @@ export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
         data["qrCodeSetupImageUrl"] = this.qrCodeSetupImageUrl;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CurrentUserProfileEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICurrentUserProfileEditDto {
-    name: string;
-    surname: string;
-    userName: string;
-    emailAddress: string;
-    phoneNumber?: string;
-    isPhoneNumberConfirmed?: boolean;
-    timezone?: string;
-    qrCodeSetupImageUrl?: string;
-}
-
-export class VerifySmsCodeInputDto implements IVerifySmsCodeInputDto {
+export class VerifySmsCodeInputDto {
     code?: string;
-
-    constructor(data?: IVerifySmsCodeInputDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10745,31 +8017,11 @@ export class VerifySmsCodeInputDto implements IVerifySmsCodeInputDto {
         data["code"] = this.code;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new VerifySmsCodeInputDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IVerifySmsCodeInputDto {
-    code?: string;
-}
-
-export class ChangePasswordInput implements IChangePasswordInput {
+export class ChangePasswordInput {
     currentPassword: string;
     newPassword: string;
-
-    constructor(data?: IChangePasswordInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10791,35 +8043,14 @@ export class ChangePasswordInput implements IChangePasswordInput {
         data["newPassword"] = this.newPassword;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ChangePasswordInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IChangePasswordInput {
-    currentPassword: string;
-    newPassword: string;
-}
-
-export class UpdateProfilePictureInput implements IUpdateProfilePictureInput {
+export class UpdateProfilePictureInput {
     fileName: string;
     x?: number;
     y?: number;
     width?: number;
     height?: number;
-
-    constructor(data?: IUpdateProfilePictureInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10847,34 +8078,10 @@ export class UpdateProfilePictureInput implements IUpdateProfilePictureInput {
         data["height"] = this.height;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateProfilePictureInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateProfilePictureInput {
-    fileName: string;
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
-}
-
-export class GetPasswordComplexitySettingOutput implements IGetPasswordComplexitySettingOutput {
+export class GetPasswordComplexitySettingOutput {
     setting?: PasswordComplexitySetting;
-
-    constructor(data?: IGetPasswordComplexitySettingOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10894,30 +8101,10 @@ export class GetPasswordComplexitySettingOutput implements IGetPasswordComplexit
         data["setting"] = this.setting ? this.setting.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetPasswordComplexitySettingOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetPasswordComplexitySettingOutput {
-    setting?: PasswordComplexitySetting;
-}
-
-export class GetProfilePictureOutput implements IGetProfilePictureOutput {
+export class GetProfilePictureOutput {
     profilePicture?: string;
-
-    constructor(data?: IGetProfilePictureOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10937,30 +8124,10 @@ export class GetProfilePictureOutput implements IGetProfilePictureOutput {
         data["profilePicture"] = this.profilePicture;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetProfilePictureOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetProfilePictureOutput {
-    profilePicture?: string;
-}
-
-export class ChangeUserLanguageDto implements IChangeUserLanguageDto {
+export class ChangeUserLanguageDto {
     languageName: string;
-
-    constructor(data?: IChangeUserLanguageDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -10980,35 +8147,15 @@ export class ChangeUserLanguageDto implements IChangeUserLanguageDto {
         data["languageName"] = this.languageName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ChangeUserLanguageDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IChangeUserLanguageDto {
-    languageName: string;
-}
-
-export class CreateRoleDto implements ICreateRoleDto {
+export class CreateRoleDto {
     name: string;
     displayName: string;
     normalizedName?: string;
     description?: string;
     isStatic?: boolean;
     permissions?: string[];
-
-    constructor(data?: ICreateRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11046,25 +8193,9 @@ export class CreateRoleDto implements ICreateRoleDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateRoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateRoleDto {
-    name: string;
-    displayName: string;
-    normalizedName?: string;
-    description?: string;
-    isStatic?: boolean;
-    permissions?: string[];
-}
-
-export class RoleDto implements IRoleDto {
+export class RoleDto {
     name: string;
     displayName: string;
     normalizedName?: string;
@@ -11072,15 +8203,6 @@ export class RoleDto implements IRoleDto {
     isStatic?: boolean;
     permissions?: string[];
     id?: number;
-
-    constructor(data?: IRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11120,36 +8242,10 @@ export class RoleDto implements IRoleDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRoleDto {
-    name: string;
-    displayName: string;
-    normalizedName?: string;
-    description?: string;
-    isStatic?: boolean;
-    permissions?: string[];
-    id?: number;
-}
-
-export class ListResultDtoOfPermissionDto implements IListResultDtoOfPermissionDto {
+export class ListResultDtoOfPermissionDto {
     items?: PermissionDto[];
-
-    constructor(data?: IListResultDtoOfPermissionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11177,33 +8273,13 @@ export class ListResultDtoOfPermissionDto implements IListResultDtoOfPermissionD
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfPermissionDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfPermissionDto {
-    items?: PermissionDto[];
-}
-
-export class PermissionDto implements IPermissionDto {
+export class PermissionDto {
     name?: string;
     displayName?: string;
     description?: string;
     id?: number;
-
-    constructor(data?: IPermissionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11229,34 +8305,11 @@ export class PermissionDto implements IPermissionDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PermissionDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPermissionDto {
-    name?: string;
-    displayName?: string;
-    description?: string;
-    id?: number;
-}
-
-export class PagedResultDtoOfRoleDto implements IPagedResultDtoOfRoleDto {
+export class PagedResultDtoOfRoleDto {
     totalCount?: number;
     items?: RoleDto[];
-
-    constructor(data?: IPagedResultDtoOfRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11286,31 +8339,10 @@ export class PagedResultDtoOfRoleDto implements IPagedResultDtoOfRoleDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfRoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfRoleDto {
-    totalCount?: number;
-    items?: RoleDto[];
-}
-
-export class ListResultDtoOfRoleListDto implements IListResultDtoOfRoleListDto {
+export class ListResultDtoOfRoleListDto {
     items?: RoleListDto[];
-
-    constructor(data?: IListResultDtoOfRoleListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11338,35 +8370,15 @@ export class ListResultDtoOfRoleListDto implements IListResultDtoOfRoleListDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfRoleListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfRoleListDto {
-    items?: RoleListDto[];
-}
-
-export class RoleListDto implements IRoleListDto {
+export class RoleListDto {
     name?: string;
     displayName?: string;
     isStatic?: boolean;
     isDefault?: boolean;
     creationTime?: Date;
     id?: number;
-
-    constructor(data?: IRoleListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11396,37 +8408,12 @@ export class RoleListDto implements IRoleListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RoleListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRoleListDto {
-    name?: string;
-    displayName?: string;
-    isStatic?: boolean;
-    isDefault?: boolean;
-    creationTime?: Date;
-    id?: number;
-}
-
-export class GetRoleForEditOutput implements IGetRoleForEditOutput {
+export class GetRoleForEditOutput {
     role?: RoleEditDto;
     permissions?: FlatPermissionDto[];
     grantedPermissionNames?: string[];
-
-    constructor(data?: IGetRoleForEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11466,34 +8453,12 @@ export class GetRoleForEditOutput implements IGetRoleForEditOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetRoleForEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetRoleForEditOutput {
-    role?: RoleEditDto;
-    permissions?: FlatPermissionDto[];
-    grantedPermissionNames?: string[];
-}
-
-export class RoleEditDto implements IRoleEditDto {
+export class RoleEditDto {
     id?: number;
     displayName: string;
     isDefault?: boolean;
-
-    constructor(data?: IRoleEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11517,36 +8482,14 @@ export class RoleEditDto implements IRoleEditDto {
         data["isDefault"] = this.isDefault;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RoleEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRoleEditDto {
-    id?: number;
-    displayName: string;
-    isDefault?: boolean;
-}
-
-export class FlatPermissionDto implements IFlatPermissionDto {
+export class FlatPermissionDto {
     parentName?: string;
     name?: string;
     displayName?: string;
     description?: string;
     isGrantedByDefault?: boolean;
-
-    constructor(data?: IFlatPermissionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11574,39 +8517,11 @@ export class FlatPermissionDto implements IFlatPermissionDto {
         data["isGrantedByDefault"] = this.isGrantedByDefault;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FlatPermissionDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFlatPermissionDto {
-    parentName?: string;
-    name?: string;
-    displayName?: string;
-    description?: string;
-    isGrantedByDefault?: boolean;
-}
-
-export class CreateOrUpdateRoleInput implements ICreateOrUpdateRoleInput {
+export class CreateOrUpdateRoleInput {
     role: RoleEditDto;
     grantedPermissionNames: string[];
-
-    constructor(data?: ICreateOrUpdateRoleInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.role = new RoleEditDto();
-            this.grantedPermissionNames = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11636,33 +8551,12 @@ export class CreateOrUpdateRoleInput implements ICreateOrUpdateRoleInput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateOrUpdateRoleInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateOrUpdateRoleInput {
-    role: RoleEditDto;
-    grantedPermissionNames: string[];
-}
-
-export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInformationsOutput {
+export class GetCurrentLoginInformationsOutput {
     user?: UserLoginInfoDto;
     tenant?: TenantLoginInfoDto;
     application?: ApplicationInfoDto;
-
-    constructor(data?: IGetCurrentLoginInformationsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11686,37 +8580,15 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["application"] = this.application ? this.application.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetCurrentLoginInformationsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetCurrentLoginInformationsOutput {
-    user?: UserLoginInfoDto;
-    tenant?: TenantLoginInfoDto;
-    application?: ApplicationInfoDto;
-}
-
-export class UserLoginInfoDto implements IUserLoginInfoDto {
+export class UserLoginInfoDto {
     name?: string;
     surname?: string;
     userName?: string;
     emailAddress?: string;
     profilePictureId?: string;
     id?: number;
-
-    constructor(data?: IUserLoginInfoDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11746,25 +8618,9 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserLoginInfoDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserLoginInfoDto {
-    name?: string;
-    surname?: string;
-    userName?: string;
-    emailAddress?: string;
-    profilePictureId?: string;
-    id?: number;
-}
-
-export class TenantLoginInfoDto implements ITenantLoginInfoDto {
+export class TenantLoginInfoDto {
     tenancyName?: string;
     name?: string;
     logoId?: string;
@@ -11778,15 +8634,6 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
     subscriptionDateString?: string;
     creationTimeString?: string;
     id?: number;
-
-    constructor(data?: ITenantLoginInfoDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11830,44 +8677,12 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantLoginInfoDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantLoginInfoDto {
-    tenancyName?: string;
-    name?: string;
-    logoId?: string;
-    logoFileType?: string;
-    customCssId?: string;
-    subscriptionEndDateUtc?: Date;
-    isInTrialPeriod?: boolean;
-    edition?: EditionInfoDto;
-    creationTime?: Date;
-    paymentPeriodType?: TenantLoginInfoDtoPaymentPeriodType;
-    subscriptionDateString?: string;
-    creationTimeString?: string;
-    id?: number;
-}
-
-export class ApplicationInfoDto implements IApplicationInfoDto {
+export class ApplicationInfoDto {
     version?: string;
     releaseDate?: Date;
     features?: { [key: string] : boolean; };
-
-    constructor(data?: IApplicationInfoDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11903,22 +8718,9 @@ export class ApplicationInfoDto implements IApplicationInfoDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ApplicationInfoDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IApplicationInfoDto {
-    version?: string;
-    releaseDate?: Date;
-    features?: { [key: string] : boolean; };
-}
-
-export class EditionInfoDto implements IEditionInfoDto {
+export class EditionInfoDto {
     displayName?: string;
     trialDayCount?: number;
     monthlyPrice?: number;
@@ -11926,15 +8728,6 @@ export class EditionInfoDto implements IEditionInfoDto {
     isHighestEdition?: boolean;
     isFree?: boolean;
     id?: number;
-
-    constructor(data?: IEditionInfoDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -11966,38 +8759,12 @@ export class EditionInfoDto implements IEditionInfoDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionInfoDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionInfoDto {
-    displayName?: string;
-    trialDayCount?: number;
-    monthlyPrice?: number;
-    annualPrice?: number;
-    isHighestEdition?: boolean;
-    isFree?: boolean;
-    id?: number;
-}
-
-export class UpdateUserSignInTokenOutput implements IUpdateUserSignInTokenOutput {
+export class UpdateUserSignInTokenOutput {
     signInToken?: string;
     encodedUserId?: string;
     encodedTenantId?: string;
-
-    constructor(data?: IUpdateUserSignInTokenOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12021,33 +8788,11 @@ export class UpdateUserSignInTokenOutput implements IUpdateUserSignInTokenOutput
         data["encodedTenantId"] = this.encodedTenantId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateUserSignInTokenOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateUserSignInTokenOutput {
-    signInToken?: string;
-    encodedUserId?: string;
-    encodedTenantId?: string;
-}
-
-export class PagedResultDtoOfTenantListDto implements IPagedResultDtoOfTenantListDto {
+export class PagedResultDtoOfTenantListDto {
     totalCount?: number;
     items?: TenantListDto[];
-
-    constructor(data?: IPagedResultDtoOfTenantListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12077,21 +8822,9 @@ export class PagedResultDtoOfTenantListDto implements IPagedResultDtoOfTenantLis
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfTenantListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfTenantListDto {
-    totalCount?: number;
-    items?: TenantListDto[];
-}
-
-export class TenantListDto implements ITenantListDto {
+export class TenantListDto {
     tenancyName?: string;
     name?: string;
     editionDisplayName?: string;
@@ -12102,15 +8835,6 @@ export class TenantListDto implements ITenantListDto {
     editionId?: number;
     isInTrialPeriod?: boolean;
     id?: number;
-
-    constructor(data?: ITenantListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12148,29 +8872,9 @@ export class TenantListDto implements ITenantListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantListDto {
-    tenancyName?: string;
-    name?: string;
-    editionDisplayName?: string;
-    connectionString?: string;
-    isActive?: boolean;
-    creationTime?: Date;
-    subscriptionEndDateUtc?: Date;
-    editionId?: number;
-    isInTrialPeriod?: boolean;
-    id?: number;
-}
-
-export class CreateTenantInput implements ICreateTenantInput {
+export class CreateTenantInput {
     tenancyName: string;
     name: string;
     adminEmailAddress: string;
@@ -12182,15 +8886,6 @@ export class CreateTenantInput implements ICreateTenantInput {
     isActive?: boolean;
     subscriptionEndDateUtc?: Date;
     isInTrialPeriod?: boolean;
-
-    constructor(data?: ICreateTenantInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12230,30 +8925,9 @@ export class CreateTenantInput implements ICreateTenantInput {
         data["isInTrialPeriod"] = this.isInTrialPeriod;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateTenantInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateTenantInput {
-    tenancyName: string;
-    name: string;
-    adminEmailAddress: string;
-    adminPassword?: string;
-    connectionString?: string;
-    shouldChangePasswordOnNextLogin?: boolean;
-    sendActivationEmail?: boolean;
-    editionId?: number;
-    isActive?: boolean;
-    subscriptionEndDateUtc?: Date;
-    isInTrialPeriod?: boolean;
-}
-
-export class TenantEditDto implements ITenantEditDto {
+export class TenantEditDto {
     tenancyName: string;
     name: string;
     connectionString?: string;
@@ -12262,15 +8936,6 @@ export class TenantEditDto implements ITenantEditDto {
     subscriptionEndDateUtc?: Date;
     isInTrialPeriod?: boolean;
     id?: number;
-
-    constructor(data?: ITenantEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12304,38 +8969,11 @@ export class TenantEditDto implements ITenantEditDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantEditDto {
-    tenancyName: string;
-    name: string;
-    connectionString?: string;
-    editionId?: number;
-    isActive?: boolean;
-    subscriptionEndDateUtc?: Date;
-    isInTrialPeriod?: boolean;
-    id?: number;
-}
-
-export class GetTenantFeaturesEditOutput implements IGetTenantFeaturesEditOutput {
+export class GetTenantFeaturesEditOutput {
     featureValues?: NameValueDto[];
     features?: FlatFeatureDto[];
-
-    constructor(data?: IGetTenantFeaturesEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12373,35 +9011,11 @@ export class GetTenantFeaturesEditOutput implements IGetTenantFeaturesEditOutput
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetTenantFeaturesEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetTenantFeaturesEditOutput {
-    featureValues?: NameValueDto[];
-    features?: FlatFeatureDto[];
-}
-
-export class UpdateTenantFeaturesInput implements IUpdateTenantFeaturesInput {
+export class UpdateTenantFeaturesInput {
     id?: number;
     featureValues: NameValueDto[];
-
-    constructor(data?: IUpdateTenantFeaturesInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.featureValues = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12431,31 +9045,10 @@ export class UpdateTenantFeaturesInput implements IUpdateTenantFeaturesInput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateTenantFeaturesInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateTenantFeaturesInput {
+export class EntityDto {
     id?: number;
-    featureValues: NameValueDto[];
-}
-
-export class EntityDto implements IEntityDto {
-    id?: number;
-
-    constructor(data?: IEntityDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12475,30 +9068,10 @@ export class EntityDto implements IEntityDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EntityDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEntityDto {
-    id?: number;
-}
-
-export class GetMemberActivityOutput implements IGetMemberActivityOutput {
+export class GetMemberActivityOutput {
     memberActivities?: MemberActivity[];
-
-    constructor(data?: IGetMemberActivityOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12526,34 +9099,14 @@ export class GetMemberActivityOutput implements IGetMemberActivityOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetMemberActivityOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetMemberActivityOutput {
-    memberActivities?: MemberActivity[];
-}
-
-export class MemberActivity implements IMemberActivity {
+export class MemberActivity {
     name?: string;
     earnings?: string;
     cases?: number;
     closed?: number;
     rate?: string;
-
-    constructor(data?: IMemberActivity) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12581,24 +9134,9 @@ export class MemberActivity implements IMemberActivity {
         data["rate"] = this.rate;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new MemberActivity();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IMemberActivity {
-    name?: string;
-    earnings?: string;
-    cases?: number;
-    closed?: number;
-    rate?: string;
-}
-
-export class GetDashboardDataOutput implements IGetDashboardDataOutput {
+export class GetDashboardDataOutput {
     totalProfit?: number;
     newFeedbacks?: number;
     newOrders?: number;
@@ -12613,15 +9151,6 @@ export class GetDashboardDataOutput implements IGetDashboardDataOutput {
     bouncePercent?: number;
     dailySales?: number[];
     profitShares?: number[];
-
-    constructor(data?: IGetDashboardDataOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12691,45 +9220,12 @@ export class GetDashboardDataOutput implements IGetDashboardDataOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetDashboardDataOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetDashboardDataOutput {
-    totalProfit?: number;
-    newFeedbacks?: number;
-    newOrders?: number;
-    newUsers?: number;
-    salesSummary?: SalesSummaryData[];
-    totalSales?: number;
-    revenue?: number;
-    expenses?: number;
-    growth?: number;
-    transactionPercent?: number;
-    newVisitPercent?: number;
-    bouncePercent?: number;
-    dailySales?: number[];
-    profitShares?: number[];
-}
-
-export class SalesSummaryData implements ISalesSummaryData {
+export class SalesSummaryData {
     period?: string;
     sales?: number;
     profit?: number;
-
-    constructor(data?: ISalesSummaryData) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12753,32 +9249,10 @@ export class SalesSummaryData implements ISalesSummaryData {
         data["profit"] = this.profit;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SalesSummaryData();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISalesSummaryData {
-    period?: string;
-    sales?: number;
-    profit?: number;
-}
-
-export class GetSalesSummaryOutput implements IGetSalesSummaryOutput {
+export class GetSalesSummaryOutput {
     salesSummary?: SalesSummaryData[];
-
-    constructor(data?: IGetSalesSummaryOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12806,30 +9280,10 @@ export class GetSalesSummaryOutput implements IGetSalesSummaryOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetSalesSummaryOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetSalesSummaryOutput {
-    salesSummary?: SalesSummaryData[];
-}
-
-export class GetWorldMapOutput implements IGetWorldMapOutput {
+export class GetWorldMapOutput {
     countries?: WorldMapCountry[];
-
-    constructor(data?: IGetWorldMapOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12857,31 +9311,11 @@ export class GetWorldMapOutput implements IGetWorldMapOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetWorldMapOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetWorldMapOutput {
-    countries?: WorldMapCountry[];
-}
-
-export class WorldMapCountry implements IWorldMapCountry {
+export class WorldMapCountry {
     countryName?: string;
     color?: number;
-
-    constructor(data?: IWorldMapCountry) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12903,33 +9337,12 @@ export class WorldMapCountry implements IWorldMapCountry {
         data["color"] = this.color;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new WorldMapCountry();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IWorldMapCountry {
-    countryName?: string;
-    color?: number;
-}
-
-export class GetGeneralStatsOutput implements IGetGeneralStatsOutput {
+export class GetGeneralStatsOutput {
     transactionPercent?: number;
     newVisitPercent?: number;
     bouncePercent?: number;
-
-    constructor(data?: IGetGeneralStatsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -12953,22 +9366,9 @@ export class GetGeneralStatsOutput implements IGetGeneralStatsOutput {
         data["bouncePercent"] = this.bouncePercent;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetGeneralStatsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetGeneralStatsOutput {
-    transactionPercent?: number;
-    newVisitPercent?: number;
-    bouncePercent?: number;
-}
-
-export class RegisterTenantInput implements IRegisterTenantInput {
+export class RegisterTenantInput {
     tenancyName: string;
     name: string;
     adminEmailAddress: string;
@@ -12978,15 +9378,6 @@ export class RegisterTenantInput implements IRegisterTenantInput {
     gateway?: RegisterTenantInputGateway;
     editionId?: number;
     paymentId?: string;
-
-    constructor(data?: IRegisterTenantInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13022,28 +9413,9 @@ export class RegisterTenantInput implements IRegisterTenantInput {
         data["paymentId"] = this.paymentId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RegisterTenantInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRegisterTenantInput {
-    tenancyName: string;
-    name: string;
-    adminEmailAddress: string;
-    adminPassword?: string;
-    captchaResponse?: string;
-    subscriptionStartType?: RegisterTenantInputSubscriptionStartType;
-    gateway?: RegisterTenantInputGateway;
-    editionId?: number;
-    paymentId?: string;
-}
-
-export class RegisterTenantOutput implements IRegisterTenantOutput {
+export class RegisterTenantOutput {
     tenantId?: number;
     tenancyName?: string;
     name?: string;
@@ -13052,15 +9424,6 @@ export class RegisterTenantOutput implements IRegisterTenantOutput {
     isTenantActive?: boolean;
     isActive?: boolean;
     isEmailConfirmationRequired?: boolean;
-
-    constructor(data?: IRegisterTenantOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13094,39 +9457,12 @@ export class RegisterTenantOutput implements IRegisterTenantOutput {
         data["isEmailConfirmationRequired"] = this.isEmailConfirmationRequired;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new RegisterTenantOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IRegisterTenantOutput {
-    tenantId?: number;
-    tenancyName?: string;
-    name?: string;
-    userName?: string;
-    emailAddress?: string;
-    isTenantActive?: boolean;
-    isActive?: boolean;
-    isEmailConfirmationRequired?: boolean;
-}
-
-export class EditionsSelectOutput implements IEditionsSelectOutput {
+export class EditionsSelectOutput {
     allFeatures?: FlatFeatureSelectDto[];
     editionsWithFeatures?: EditionWithFeaturesDto[];
     tenantEditionId?: number;
-
-    constructor(data?: IEditionsSelectOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13166,22 +9502,9 @@ export class EditionsSelectOutput implements IEditionsSelectOutput {
         data["tenantEditionId"] = this.tenantEditionId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionsSelectOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionsSelectOutput {
-    allFeatures?: FlatFeatureSelectDto[];
-    editionsWithFeatures?: EditionWithFeaturesDto[];
-    tenantEditionId?: number;
-}
-
-export class FlatFeatureSelectDto implements IFlatFeatureSelectDto {
+export class FlatFeatureSelectDto {
     parentName?: string;
     name?: string;
     displayName?: string;
@@ -13189,15 +9512,6 @@ export class FlatFeatureSelectDto implements IFlatFeatureSelectDto {
     defaultValue?: string;
     inputType?: IInputType;
     textHtmlColor?: string;
-
-    constructor(data?: IFlatFeatureSelectDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13229,37 +9543,11 @@ export class FlatFeatureSelectDto implements IFlatFeatureSelectDto {
         data["textHtmlColor"] = this.textHtmlColor;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FlatFeatureSelectDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IFlatFeatureSelectDto {
-    parentName?: string;
-    name?: string;
-    displayName?: string;
-    description?: string;
-    defaultValue?: string;
-    inputType?: IInputType;
-    textHtmlColor?: string;
-}
-
-export class EditionWithFeaturesDto implements IEditionWithFeaturesDto {
+export class EditionWithFeaturesDto {
     edition?: EditionSelectDto;
     featureValues?: NameValueDto[];
-
-    constructor(data?: IEditionWithFeaturesDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13289,33 +9577,12 @@ export class EditionWithFeaturesDto implements IEditionWithFeaturesDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EditionWithFeaturesDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEditionWithFeaturesDto {
-    edition?: EditionSelectDto;
-    featureValues?: NameValueDto[];
-}
-
-export class IInputType implements IIInputType {
+export class IInputType {
     name?: string;
     attributes?: { [key: string] : any; };
     validator?: IValueValidator;
-
-    constructor(data?: IIInputType) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13351,41 +9618,15 @@ export class IInputType implements IIInputType {
         data["validator"] = this.validator ? this.validator.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new IInputType();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IIInputType {
-    name?: string;
-    attributes?: { [key: string] : any; };
-    validator?: IValueValidator;
-}
-
-export class TenantSettingsEditDto implements ITenantSettingsEditDto {
+export class TenantSettingsEditDto {
     general?: GeneralSettingsEditDto;
     userManagement: TenantUserManagementSettingsEditDto;
     email?: EmailSettingsEditDto;
     ldap?: LdapSettingsEditDto;
     security: SecuritySettingsEditDto;
     billing?: TenantBillingSettingsEditDto;
-
-    constructor(data?: ITenantSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.userManagement = new TenantUserManagementSettingsEditDto();
-            this.security = new SecuritySettingsEditDto();
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13415,38 +9656,13 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
         data["billing"] = this.billing ? this.billing.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantSettingsEditDto {
-    general?: GeneralSettingsEditDto;
-    userManagement: TenantUserManagementSettingsEditDto;
-    email?: EmailSettingsEditDto;
-    ldap?: LdapSettingsEditDto;
-    security: SecuritySettingsEditDto;
-    billing?: TenantBillingSettingsEditDto;
-}
-
-export class TenantUserManagementSettingsEditDto implements ITenantUserManagementSettingsEditDto {
+export class TenantUserManagementSettingsEditDto {
     allowSelfRegistration?: boolean;
     isNewRegisteredUserActiveByDefault?: boolean;
     isEmailConfirmationRequiredForLogin?: boolean;
     useCaptchaOnRegistration?: boolean;
-
-    constructor(data?: ITenantUserManagementSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13472,37 +9688,14 @@ export class TenantUserManagementSettingsEditDto implements ITenantUserManagemen
         data["useCaptchaOnRegistration"] = this.useCaptchaOnRegistration;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantUserManagementSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantUserManagementSettingsEditDto {
-    allowSelfRegistration?: boolean;
-    isNewRegisteredUserActiveByDefault?: boolean;
-    isEmailConfirmationRequiredForLogin?: boolean;
-    useCaptchaOnRegistration?: boolean;
-}
-
-export class LdapSettingsEditDto implements ILdapSettingsEditDto {
+export class LdapSettingsEditDto {
     isModuleEnabled?: boolean;
     isEnabled?: boolean;
     domain?: string;
     userName?: string;
     password?: string;
-
-    constructor(data?: ILdapSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13530,36 +9723,12 @@ export class LdapSettingsEditDto implements ILdapSettingsEditDto {
         data["password"] = this.password;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LdapSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILdapSettingsEditDto {
-    isModuleEnabled?: boolean;
-    isEnabled?: boolean;
-    domain?: string;
-    userName?: string;
-    password?: string;
-}
-
-export class TenantBillingSettingsEditDto implements ITenantBillingSettingsEditDto {
+export class TenantBillingSettingsEditDto {
     legalName?: string;
     address?: string;
     taxVatNo?: string;
-
-    constructor(data?: ITenantBillingSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13583,32 +9752,10 @@ export class TenantBillingSettingsEditDto implements ITenantBillingSettingsEditD
         data["taxVatNo"] = this.taxVatNo;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new TenantBillingSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ITenantBillingSettingsEditDto {
-    legalName?: string;
-    address?: string;
-    taxVatNo?: string;
-}
-
-export class ListResultDtoOfNameValueDto implements IListResultDtoOfNameValueDto {
+export class ListResultDtoOfNameValueDto {
     items?: NameValueDto[];
-
-    constructor(data?: IListResultDtoOfNameValueDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13636,20 +9783,9 @@ export class ListResultDtoOfNameValueDto implements IListResultDtoOfNameValueDto
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfNameValueDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfNameValueDto {
-    items?: NameValueDto[];
-}
-
-export class AuthenticateModel implements IAuthenticateModel {
+export class AuthenticateModel {
     userNameOrEmailAddress: string;
     password: string;
     twoFactorVerificationCode?: string;
@@ -13657,15 +9793,6 @@ export class AuthenticateModel implements IAuthenticateModel {
     twoFactorRememberClientToken?: string;
     singleSignIn?: boolean;
     returnUrl?: string;
-
-    constructor(data?: IAuthenticateModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13697,26 +9824,9 @@ export class AuthenticateModel implements IAuthenticateModel {
         data["returnUrl"] = this.returnUrl;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AuthenticateModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IAuthenticateModel {
-    userNameOrEmailAddress: string;
-    password: string;
-    twoFactorVerificationCode?: string;
-    rememberClient?: boolean;
-    twoFactorRememberClientToken?: string;
-    singleSignIn?: boolean;
-    returnUrl?: string;
-}
-
-export class AuthenticateResultModel implements IAuthenticateResultModel {
+export class AuthenticateResultModel {
     accessToken?: string;
     encryptedAccessToken?: string;
     expireInSeconds?: number;
@@ -13727,15 +9837,6 @@ export class AuthenticateResultModel implements IAuthenticateResultModel {
     twoFactorAuthProviders?: string[];
     twoFactorRememberClientToken?: string;
     returnUrl?: string;
-
-    constructor(data?: IAuthenticateResultModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13781,40 +9882,11 @@ export class AuthenticateResultModel implements IAuthenticateResultModel {
         data["returnUrl"] = this.returnUrl;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AuthenticateResultModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IAuthenticateResultModel {
-    accessToken?: string;
-    encryptedAccessToken?: string;
-    expireInSeconds?: number;
-    shouldResetPassword?: boolean;
-    passwordResetCode?: string;
-    userId?: number;
-    requiresTwoFactorVerification?: boolean;
-    twoFactorAuthProviders?: string[];
-    twoFactorRememberClientToken?: string;
-    returnUrl?: string;
-}
-
-export class SendTwoFactorAuthCodeModel implements ISendTwoFactorAuthCodeModel {
+export class SendTwoFactorAuthCodeModel {
     userId?: number;
     provider: string;
-
-    constructor(data?: ISendTwoFactorAuthCodeModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13836,33 +9908,12 @@ export class SendTwoFactorAuthCodeModel implements ISendTwoFactorAuthCodeModel {
         data["provider"] = this.provider;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SendTwoFactorAuthCodeModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISendTwoFactorAuthCodeModel {
-    userId?: number;
-    provider: string;
-}
-
-export class ImpersonatedAuthenticateResultModel implements IImpersonatedAuthenticateResultModel {
+export class ImpersonatedAuthenticateResultModel {
     accessToken?: string;
     encryptedAccessToken?: string;
     expireInSeconds?: number;
-
-    constructor(data?: IImpersonatedAuthenticateResultModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13886,34 +9937,12 @@ export class ImpersonatedAuthenticateResultModel implements IImpersonatedAuthent
         data["expireInSeconds"] = this.expireInSeconds;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ImpersonatedAuthenticateResultModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IImpersonatedAuthenticateResultModel {
+export class SwitchedAccountAuthenticateResultModel {
     accessToken?: string;
     encryptedAccessToken?: string;
     expireInSeconds?: number;
-}
-
-export class SwitchedAccountAuthenticateResultModel implements ISwitchedAccountAuthenticateResultModel {
-    accessToken?: string;
-    encryptedAccessToken?: string;
-    expireInSeconds?: number;
-
-    constructor(data?: ISwitchedAccountAuthenticateResultModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13937,33 +9966,11 @@ export class SwitchedAccountAuthenticateResultModel implements ISwitchedAccountA
         data["expireInSeconds"] = this.expireInSeconds;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new SwitchedAccountAuthenticateResultModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ISwitchedAccountAuthenticateResultModel {
-    accessToken?: string;
-    encryptedAccessToken?: string;
-    expireInSeconds?: number;
-}
-
-export class ExternalLoginProviderInfoModel implements IExternalLoginProviderInfoModel {
+export class ExternalLoginProviderInfoModel {
     name?: string;
     clientId?: string;
-
-    constructor(data?: IExternalLoginProviderInfoModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -13985,35 +9992,14 @@ export class ExternalLoginProviderInfoModel implements IExternalLoginProviderInf
         data["clientId"] = this.clientId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ExternalLoginProviderInfoModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IExternalLoginProviderInfoModel {
-    name?: string;
-    clientId?: string;
-}
-
-export class ExternalAuthenticateModel implements IExternalAuthenticateModel {
+export class ExternalAuthenticateModel {
     authProvider: string;
     providerKey: string;
     providerAccessCode: string;
     returnUrl?: string;
     singleSignIn?: boolean;
-
-    constructor(data?: IExternalAuthenticateModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14041,38 +10027,14 @@ export class ExternalAuthenticateModel implements IExternalAuthenticateModel {
         data["singleSignIn"] = this.singleSignIn;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ExternalAuthenticateModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IExternalAuthenticateModel {
-    authProvider: string;
-    providerKey: string;
-    providerAccessCode: string;
-    returnUrl?: string;
-    singleSignIn?: boolean;
-}
-
-export class ExternalAuthenticateResultModel implements IExternalAuthenticateResultModel {
+export class ExternalAuthenticateResultModel {
     accessToken?: string;
     encryptedAccessToken?: string;
     expireInSeconds?: number;
     waitingForActivation?: boolean;
     returnUrl?: string;
-
-    constructor(data?: IExternalAuthenticateResultModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14100,37 +10062,13 @@ export class ExternalAuthenticateResultModel implements IExternalAuthenticateRes
         data["returnUrl"] = this.returnUrl;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ExternalAuthenticateResultModel();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IExternalAuthenticateResultModel {
-    accessToken?: string;
-    encryptedAccessToken?: string;
-    expireInSeconds?: number;
-    waitingForActivation?: boolean;
-    returnUrl?: string;
-}
-
-export class UiCustomizationSettingsEditDto implements IUiCustomizationSettingsEditDto {
+export class UiCustomizationSettingsEditDto {
     layout?: UiCustomizationLayoutSettingsEditDto;
     header?: UiCustomizationHeaderSettingsEditDto;
     menu?: UiCustomizationMenuSettingsEditDto;
     footer?: UiCustomizationFooterSettingsEditDto;
-
-    constructor(data?: IUiCustomizationSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14156,35 +10094,12 @@ export class UiCustomizationSettingsEditDto implements IUiCustomizationSettingsE
         data["footer"] = this.footer ? this.footer.toJSON() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UiCustomizationSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUiCustomizationSettingsEditDto {
-    layout?: UiCustomizationLayoutSettingsEditDto;
-    header?: UiCustomizationHeaderSettingsEditDto;
-    menu?: UiCustomizationMenuSettingsEditDto;
-    footer?: UiCustomizationFooterSettingsEditDto;
-}
-
-export class UiCustomizationLayoutSettingsEditDto implements IUiCustomizationLayoutSettingsEditDto {
+export class UiCustomizationLayoutSettingsEditDto {
     layoutType?: string;
     pageLoader?: string;
     contentSkin?: string;
-
-    constructor(data?: IUiCustomizationLayoutSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14208,37 +10123,15 @@ export class UiCustomizationLayoutSettingsEditDto implements IUiCustomizationLay
         data["contentSkin"] = this.contentSkin;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UiCustomizationLayoutSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUiCustomizationLayoutSettingsEditDto {
-    layoutType?: string;
-    pageLoader?: string;
-    contentSkin?: string;
-}
-
-export class UiCustomizationHeaderSettingsEditDto implements IUiCustomizationHeaderSettingsEditDto {
+export class UiCustomizationHeaderSettingsEditDto {
     desktopFixedHeader?: boolean;
     desktopMinimizeMode?: string;
     mobileFixedHeader?: boolean;
     dropdownSkinDesktop?: string;
     displaySubmenuArrowDesktop?: boolean;
     dropdownSkin?: string;
-
-    constructor(data?: IUiCustomizationHeaderSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14268,25 +10161,9 @@ export class UiCustomizationHeaderSettingsEditDto implements IUiCustomizationHea
         data["dropdownSkin"] = this.dropdownSkin;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UiCustomizationHeaderSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUiCustomizationHeaderSettingsEditDto {
-    desktopFixedHeader?: boolean;
-    desktopMinimizeMode?: string;
-    mobileFixedHeader?: boolean;
-    dropdownSkinDesktop?: string;
-    displaySubmenuArrowDesktop?: boolean;
-    dropdownSkin?: string;
-}
-
-export class UiCustomizationMenuSettingsEditDto implements IUiCustomizationMenuSettingsEditDto {
+export class UiCustomizationMenuSettingsEditDto {
     position?: string;
     asideSkin?: string;
     fixedAside?: boolean;
@@ -14297,15 +10174,6 @@ export class UiCustomizationMenuSettingsEditDto implements IUiCustomizationMenuS
     submenuToggle?: string;
     dropdownSubmenuSkin?: string;
     dropdownSubmenuArrow?: boolean;
-
-    constructor(data?: IUiCustomizationMenuSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14343,39 +10211,10 @@ export class UiCustomizationMenuSettingsEditDto implements IUiCustomizationMenuS
         data["dropdownSubmenuArrow"] = this.dropdownSubmenuArrow;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UiCustomizationMenuSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUiCustomizationMenuSettingsEditDto {
-    position?: string;
-    asideSkin?: string;
-    fixedAside?: boolean;
-    allowAsideMinimizing?: boolean;
-    defaultMinimizedAside?: boolean;
-    allowAsideHiding?: boolean;
-    defaultHiddenAside?: boolean;
-    submenuToggle?: string;
-    dropdownSubmenuSkin?: string;
-    dropdownSubmenuArrow?: boolean;
-}
-
-export class UiCustomizationFooterSettingsEditDto implements IUiCustomizationFooterSettingsEditDto {
+export class UiCustomizationFooterSettingsEditDto {
     fixedFooter?: boolean;
-
-    constructor(data?: IUiCustomizationFooterSettingsEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14395,20 +10234,9 @@ export class UiCustomizationFooterSettingsEditDto implements IUiCustomizationFoo
         data["fixedFooter"] = this.fixedFooter;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UiCustomizationFooterSettingsEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUiCustomizationFooterSettingsEditDto {
-    fixedFooter?: boolean;
-}
-
-export class CreateUserDto implements ICreateUserDto {
+export class CreateUserDto {
     userName: string;
     name: string;
     surname: string;
@@ -14416,15 +10244,6 @@ export class CreateUserDto implements ICreateUserDto {
     isActive?: boolean;
     roleNames?: string[];
     password: string;
-
-    constructor(data?: ICreateUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14464,26 +10283,9 @@ export class CreateUserDto implements ICreateUserDto {
         data["password"] = this.password;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateUserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateUserDto {
-    userName: string;
-    name: string;
-    surname: string;
-    emailAddress: string;
-    isActive?: boolean;
-    roleNames?: string[];
-    password: string;
-}
-
-export class UserDto implements IUserDto {
+export class UserDto {
     userName: string;
     name: string;
     surname: string;
@@ -14494,15 +10296,6 @@ export class UserDto implements IUserDto {
     creationTime?: Date;
     roleNames?: string[];
     id?: number;
-
-    constructor(data?: IUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14548,39 +10341,10 @@ export class UserDto implements IUserDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserDto {
-    userName: string;
-    name: string;
-    surname: string;
-    emailAddress: string;
-    isActive?: boolean;
-    fullName?: string;
-    lastLoginTime?: Date;
-    creationTime?: Date;
-    roleNames?: string[];
-    id?: number;
-}
-
-export class ListResultDtoOfRoleDto implements IListResultDtoOfRoleDto {
+export class ListResultDtoOfRoleDto {
     items?: RoleDto[];
-
-    constructor(data?: IListResultDtoOfRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14608,31 +10372,11 @@ export class ListResultDtoOfRoleDto implements IListResultDtoOfRoleDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfRoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfRoleDto {
-    items?: RoleDto[];
-}
-
-export class PagedResultDtoOfUserDto implements IPagedResultDtoOfUserDto {
+export class PagedResultDtoOfUserDto {
     totalCount?: number;
     items?: UserDto[];
-
-    constructor(data?: IPagedResultDtoOfUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14662,32 +10406,11 @@ export class PagedResultDtoOfUserDto implements IPagedResultDtoOfUserDto {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfUserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfUserDto {
-    totalCount?: number;
-    items?: UserDto[];
-}
-
-export class PagedResultDtoOfUserListDto implements IPagedResultDtoOfUserListDto {
+export class PagedResultDtoOfUserListDto {
     totalCount?: number;
     items?: UserListDto[];
-
-    constructor(data?: IPagedResultDtoOfUserListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14717,21 +10440,9 @@ export class PagedResultDtoOfUserListDto implements IPagedResultDtoOfUserListDto
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfUserListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfUserListDto {
-    totalCount?: number;
-    items?: UserListDto[];
-}
-
-export class UserListDto implements IUserListDto {
+export class UserListDto {
     name?: string;
     surname?: string;
     userName?: string;
@@ -14744,15 +10455,6 @@ export class UserListDto implements IUserListDto {
     isActive?: boolean;
     creationTime?: Date;
     id?: number;
-
-    constructor(data?: IUserListDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14802,42 +10504,11 @@ export class UserListDto implements IUserListDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserListDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserListDto {
-    name?: string;
-    surname?: string;
-    userName?: string;
-    emailAddress?: string;
-    phoneNumber?: string;
-    profilePictureId?: string;
-    isEmailConfirmed?: boolean;
-    roles?: UserListRoleDto[];
-    lastLoginTime?: Date;
-    isActive?: boolean;
-    creationTime?: Date;
-    id?: number;
-}
-
-export class UserListRoleDto implements IUserListRoleDto {
+export class UserListRoleDto {
     roleId?: number;
     roleName?: string;
-
-    constructor(data?: IUserListRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14859,35 +10530,14 @@ export class UserListRoleDto implements IUserListRoleDto {
         data["roleName"] = this.roleName;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserListRoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserListRoleDto {
-    roleId?: number;
-    roleName?: string;
-}
-
-export class GetUserForEditOutput implements IGetUserForEditOutput {
+export class GetUserForEditOutput {
     profilePictureId?: string;
     user?: UserEditDto;
     roles?: UserRoleDto[];
     allOrganizationUnits?: OrganizationUnitDto[];
     memberedOrganizationUnits?: string[];
-
-    constructor(data?: IGetUserForEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -14939,24 +10589,9 @@ export class GetUserForEditOutput implements IGetUserForEditOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetUserForEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetUserForEditOutput {
-    profilePictureId?: string;
-    user?: UserEditDto;
-    roles?: UserRoleDto[];
-    allOrganizationUnits?: OrganizationUnitDto[];
-    memberedOrganizationUnits?: string[];
-}
-
-export class UserEditDto implements IUserEditDto {
+export class UserEditDto {
     id?: number;
     name: string;
     surname: string;
@@ -14968,15 +10603,6 @@ export class UserEditDto implements IUserEditDto {
     shouldChangePasswordOnNextLogin?: boolean;
     isTwoFactorEnabled?: boolean;
     isLockoutEnabled?: boolean;
-
-    constructor(data?: IUserEditDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15016,43 +10642,13 @@ export class UserEditDto implements IUserEditDto {
         data["isLockoutEnabled"] = this.isLockoutEnabled;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserEditDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserEditDto {
-    id?: number;
-    name: string;
-    surname: string;
-    userName: string;
-    emailAddress: string;
-    phoneNumber?: string;
-    password?: string;
-    isActive?: boolean;
-    shouldChangePasswordOnNextLogin?: boolean;
-    isTwoFactorEnabled?: boolean;
-    isLockoutEnabled?: boolean;
-}
-
-export class UserRoleDto implements IUserRoleDto {
+export class UserRoleDto {
     roleId?: number;
     roleName?: string;
     roleDisplayName?: string;
     isAssigned?: boolean;
-
-    constructor(data?: IUserRoleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15078,34 +10674,11 @@ export class UserRoleDto implements IUserRoleDto {
         data["isAssigned"] = this.isAssigned;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserRoleDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserRoleDto {
-    roleId?: number;
-    roleName?: string;
-    roleDisplayName?: string;
-    isAssigned?: boolean;
-}
-
-export class GetUserPermissionsForEditOutput implements IGetUserPermissionsForEditOutput {
+export class GetUserPermissionsForEditOutput {
     permissions?: FlatPermissionDto[];
     grantedPermissionNames?: string[];
-
-    constructor(data?: IGetUserPermissionsForEditOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15143,31 +10716,10 @@ export class GetUserPermissionsForEditOutput implements IGetUserPermissionsForEd
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetUserPermissionsForEditOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetUserPermissionsForEditOutput {
-    permissions?: FlatPermissionDto[];
-    grantedPermissionNames?: string[];
-}
-
-export class EntityDtoOfInt64 implements IEntityDtoOfInt64 {
+export class EntityDtoOfInt64 {
     id?: number;
-
-    constructor(data?: IEntityDtoOfInt64) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15187,34 +10739,11 @@ export class EntityDtoOfInt64 implements IEntityDtoOfInt64 {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new EntityDtoOfInt64();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IEntityDtoOfInt64 {
-    id?: number;
-}
-
-export class UpdateUserPermissionsInput implements IUpdateUserPermissionsInput {
+export class UpdateUserPermissionsInput {
     id?: number;
     grantedPermissionNames: string[];
-
-    constructor(data?: IUpdateUserPermissionsInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.grantedPermissionNames = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15244,39 +10773,14 @@ export class UpdateUserPermissionsInput implements IUpdateUserPermissionsInput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UpdateUserPermissionsInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUpdateUserPermissionsInput {
-    id?: number;
-    grantedPermissionNames: string[];
-}
-
-export class CreateOrUpdateUserInput implements ICreateOrUpdateUserInput {
+export class CreateOrUpdateUserInput {
     user: UserEditDto;
     assignedRoleNames: string[];
     sendActivationEmail?: boolean;
     setRandomPassword?: boolean;
     organizationUnits?: number[];
-
-    constructor(data?: ICreateOrUpdateUserInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.user = new UserEditDto();
-            this.assignedRoleNames = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15320,36 +10824,12 @@ export class CreateOrUpdateUserInput implements ICreateOrUpdateUserInput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new CreateOrUpdateUserInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ICreateOrUpdateUserInput {
-    user: UserEditDto;
-    assignedRoleNames: string[];
-    sendActivationEmail?: boolean;
-    setRandomPassword?: boolean;
-    organizationUnits?: number[];
-}
-
-export class LinkToUserInput implements ILinkToUserInput {
+export class LinkToUserInput {
     tenancyName?: string;
     usernameOrEmailAddress: string;
     password: string;
-
-    constructor(data?: ILinkToUserInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15373,33 +10853,11 @@ export class LinkToUserInput implements ILinkToUserInput {
         data["password"] = this.password;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LinkToUserInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILinkToUserInput {
-    tenancyName?: string;
-    usernameOrEmailAddress: string;
-    password: string;
-}
-
-export class PagedResultDtoOfLinkedUserDto implements IPagedResultDtoOfLinkedUserDto {
+export class PagedResultDtoOfLinkedUserDto {
     totalCount?: number;
     items?: LinkedUserDto[];
-
-    constructor(data?: IPagedResultDtoOfLinkedUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15429,35 +10887,14 @@ export class PagedResultDtoOfLinkedUserDto implements IPagedResultDtoOfLinkedUse
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new PagedResultDtoOfLinkedUserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IPagedResultDtoOfLinkedUserDto {
-    totalCount?: number;
-    items?: LinkedUserDto[];
-}
-
-export class LinkedUserDto implements ILinkedUserDto {
+export class LinkedUserDto {
     tenantId?: number;
     tenancyName?: string;
     username?: string;
     lastLoginTime?: Date;
     id?: number;
-
-    constructor(data?: ILinkedUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15485,34 +10922,10 @@ export class LinkedUserDto implements ILinkedUserDto {
         data["id"] = this.id;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new LinkedUserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface ILinkedUserDto {
-    tenantId?: number;
-    tenancyName?: string;
-    username?: string;
-    lastLoginTime?: Date;
-    id?: number;
-}
-
-export class ListResultDtoOfLinkedUserDto implements IListResultDtoOfLinkedUserDto {
+export class ListResultDtoOfLinkedUserDto {
     items?: LinkedUserDto[];
-
-    constructor(data?: IListResultDtoOfLinkedUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15540,31 +10953,11 @@ export class ListResultDtoOfLinkedUserDto implements IListResultDtoOfLinkedUserD
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfLinkedUserDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfLinkedUserDto {
-    items?: LinkedUserDto[];
-}
-
-export class UnlinkUserInput implements IUnlinkUserInput {
+export class UnlinkUserInput {
     tenantId?: number;
     userId?: number;
-
-    constructor(data?: IUnlinkUserInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15586,31 +10979,10 @@ export class UnlinkUserInput implements IUnlinkUserInput {
         data["userId"] = this.userId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UnlinkUserInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUnlinkUserInput {
-    tenantId?: number;
-    userId?: number;
-}
-
-export class ListResultDtoOfUserLoginAttemptDto implements IListResultDtoOfUserLoginAttemptDto {
+export class ListResultDtoOfUserLoginAttemptDto {
     items?: UserLoginAttemptDto[];
-
-    constructor(data?: IListResultDtoOfUserLoginAttemptDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15638,20 +11010,9 @@ export class ListResultDtoOfUserLoginAttemptDto implements IListResultDtoOfUserL
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new ListResultDtoOfUserLoginAttemptDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IListResultDtoOfUserLoginAttemptDto {
-    items?: UserLoginAttemptDto[];
-}
-
-export class UserLoginAttemptDto implements IUserLoginAttemptDto {
+export class UserLoginAttemptDto {
     tenancyName?: string;
     userNameOrEmail?: string;
     clientIpAddress?: string;
@@ -15659,15 +11020,6 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
     browserInfo?: string;
     result?: string;
     creationTime?: Date;
-
-    constructor(data?: IUserLoginAttemptDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15699,36 +11051,10 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new UserLoginAttemptDto();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IUserLoginAttemptDto {
-    tenancyName?: string;
-    userNameOrEmail?: string;
-    clientIpAddress?: string;
-    clientName?: string;
-    browserInfo?: string;
-    result?: string;
-    creationTime?: Date;
-}
-
-export class GetLatestWebLogsOutput implements IGetLatestWebLogsOutput {
+export class GetLatestWebLogsOutput {
     latestWebLogLines?: string[];
-
-    constructor(data?: IGetLatestWebLogsOutput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15756,20 +11082,9 @@ export class GetLatestWebLogsOutput implements IGetLatestWebLogsOutput {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new GetLatestWebLogsOutput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IGetLatestWebLogsOutput {
-    latestWebLogLines?: string[];
-}
-
-export class WorkCreateInput implements IWorkCreateInput {
+export class WorkCreateInput {
     subject: string;
     body: string;
     urgency?: WorkCreateInputUrgency;
@@ -15779,15 +11094,6 @@ export class WorkCreateInput implements IWorkCreateInput {
     timeLimit?: number;
     receiverId?: number;
     organizationUnitId?: number;
-
-    constructor(data?: IWorkCreateInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15823,41 +11129,13 @@ export class WorkCreateInput implements IWorkCreateInput {
         data["organizationUnitId"] = this.organizationUnitId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new WorkCreateInput();
-        result.init(json);
-        return result;
-    }
 }
 
-export interface IWorkCreateInput {
-    subject: string;
-    body: string;
-    urgency?: WorkCreateInputUrgency;
-    relatedWorkId?: number;
-    tagId?: number;
-    customerId?: number;
-    timeLimit?: number;
-    receiverId?: number;
-    organizationUnitId?: number;
-}
-
-export class FinishStepInput implements IFinishStepInput {
+export class FinishStepInput {
     workId?: number;
     stepId?: number;
     result: string;
     receiverId: number;
-
-    constructor(data?: IFinishStepInput) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -15883,20 +11161,6 @@ export class FinishStepInput implements IFinishStepInput {
         data["receiverId"] = this.receiverId;
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new FinishStepInput();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IFinishStepInput {
-    workId?: number;
-    stepId?: number;
-    result: string;
-    receiverId: number;
 }
 
 export enum IncomeStatisticsDateInterval {
@@ -15974,17 +11238,8 @@ export enum TenantNotificationSeverity {
     _4 = 4, 
 }
 
-export class AdditionalData implements IAdditionalData {
+export class AdditionalData {
     paypal?: { [key: string] : string; };
-
-    constructor(data?: IAdditionalData) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -16016,17 +11271,6 @@ export class AdditionalData implements IAdditionalData {
         }
         return data; 
     }
-
-    clone() {
-        const json = this.toJSON();
-        let result = new AdditionalData();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IAdditionalData {
-    paypal?: { [key: string] : string; };
 }
 
 export enum CreatePaymentDtoEditionPaymentType {

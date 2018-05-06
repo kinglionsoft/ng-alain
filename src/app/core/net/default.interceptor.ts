@@ -1,8 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse,
-         HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent,
-       } from '@angular/common/http';
+import {
+    HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse,
+    HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent,
+} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -10,7 +11,6 @@ import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
-import { DelonAuthConfig } from '@delon/auth';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
@@ -18,10 +18,7 @@ import { DelonAuthConfig } from '@delon/auth';
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
-    private _allow_anonymous_key: string;
-    
     constructor(private injector: Injector) {
-        this._allow_anonymous_key = injector.get(DelonAuthConfig).allow_anonymous_key;
     }
 
     get msg(): NzMessageService {
@@ -32,6 +29,10 @@ export class DefaultInterceptor implements HttpInterceptor {
         setTimeout(() => this.injector.get(Router).navigateByUrl(url));
     }
 
+    private isAsset(url: string) {
+        return url.indexOf('/assets/') >= 0;
+    }
+
     private handleData(event: HttpResponse<any> | HttpErrorResponse): Observable<any> {
         // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
         this.injector.get(_HttpClient).end();
@@ -40,6 +41,9 @@ export class DefaultInterceptor implements HttpInterceptor {
             case 200:
                 // 业务层级错误处理
                 if (event instanceof HttpResponse) {
+                    if (this.isAsset(event.url)) {
+                        return of(event);
+                    }
                     const body: any = event.body;
                     if (body && !body.success) {
                         this.msg.error(body.error);
@@ -48,7 +52,7 @@ export class DefaultInterceptor implements HttpInterceptor {
                         return ErrorObservable.throw(event);
                     } else {
                         // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
-                        return of(new HttpResponse(Object.assign(event, { body: body.response }))); 
+                        return of(new HttpResponse(Object.assign(event, { body: body })));
                     }
                 }
                 break;
@@ -79,20 +83,20 @@ export class DefaultInterceptor implements HttpInterceptor {
             url = environment.SERVER_URL + url;
         }
 
-         // allow_anonymous_key仅用于JWTInterceptor判断是否要添加token，实际请求前去掉请求参数中的allow_anonymous_key
-        req.params && req.params.delete(this._allow_anonymous_key);
         const newReq = req.clone({
             url: url
         });
         return next.handle(newReq).pipe(
-                    mergeMap((event: any) => {
-                        // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
-                        if (event instanceof HttpResponse && event.status === 200)
-                            return this.handleData(event);
-                        // 若一切都正常，则后续操作
-                        return of(event);
-                    }),
-                    catchError((err: HttpErrorResponse) => this.handleData(err))
-                );
+            mergeMap((event: any) => {
+                // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
+                if (event instanceof HttpResponse && event.status === 200)
+                    return this.handleData(event);
+                // 若一切都正常，则后续操作
+                return of(event);
+            }),
+            catchError((err: HttpErrorResponse) => {
+                return this.handleData(err);
+            })
+        );
     }
 }

@@ -7,12 +7,14 @@ import { SocialService, SocialOpenType, TokenService, DA_SERVICE_TOKEN } from '@
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import { StartupService } from '@core/startup/startup.service';
+import { TokenAuthClient, AuthenticateModel } from '@abp';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'passport-login',
     templateUrl: './login.component.html',
-    styleUrls: [ './login.component.less' ],
-    providers: [ SocialService ]
+    styleUrls: ['./login.component.less'],
+    providers: [SocialService]
 })
 export class UserLoginComponent implements OnDestroy {
 
@@ -30,7 +32,8 @@ export class UserLoginComponent implements OnDestroy {
         private socialService: SocialService,
         @Optional() @Inject(ReuseTabService) private reuseTabService: ReuseTabService,
         @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
-        private startupSrv: StartupService
+        private startupSrv: StartupService,
+        private tokenClient: TokenAuthClient
     ) {
         this.form = fb.group({
             userName: [null, [Validators.required, Validators.minLength(5)]],
@@ -86,32 +89,34 @@ export class UserLoginComponent implements OnDestroy {
             this.captcha.updateValueAndValidity();
             if (this.mobile.invalid || this.captcha.invalid) return;
         }
-        // mock http
         this.loading = true;
-        setTimeout(() => {
-            this.loading = false;
-            if (this.type === 0) {
-                if (this.userName.value !== 'admin' || this.password.value !== '888888') {
+        this.tokenClient.authenticate(<AuthenticateModel>{
+            userNameOrEmailAddress: this.userName.value,
+            password: this.password.value,
+            rememberClient: true
+        })
+            .pipe(
+                finalize(() => this.loading = false)
+            )
+            .subscribe((response) => {
+                if (response.success !== true) {
                     this.error = `账户或密码错误`;
                     return;
                 }
-            }
-
-            // 清空路由复用信息
-            this.reuseTabService.clear();
-            // 设置Token信息
-            this.tokenService.set({
-                token: '123456789',
-                name: this.userName.value,
-                email: `cipchk@qq.com`,
-                id: 10000,
-                time: +new Date
+                // 清空路由复用信息
+                this.reuseTabService.clear();
+                // 设置Token信息
+                this.tokenService.set({
+                    token: response.result.accessToken,
+                    id: response.result.userId,
+                    time: +new Date
+                });
+                // 重新获取 StartupService 内容，若其包括 User 有关的信息的话
+                this.startupSrv.load().then(() => {
+                    this.router.navigateByUrl('/')
+                        .catch(err => console.error(err));
+                });
             });
-            // 重新获取 StartupService 内容，若其包括 User 有关的信息的话
-            // this.startupSrv.load().then(() => this.router.navigate(['/']));
-            // 否则直接跳转
-            this.router.navigate(['/']);
-        }, 1000);
     }
 
     // region: social

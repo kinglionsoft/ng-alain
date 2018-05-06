@@ -15,7 +15,7 @@ import { DelonCacheModule } from '@delon/cache';
 import { DelonMockModule } from '@delon/mock';
 import * as MOCKDATA from '../../_mock';
 import { environment } from '@env/environment';
-const MOCKMODULE = !environment.production ? [ DelonMockModule.forRoot({ data: MOCKDATA }) ] : [];
+const MOCKMODULE = !environment.production ? [DelonMockModule.forRoot({ data: MOCKDATA })] : [];
 
 // region: global config functions
 
@@ -27,7 +27,9 @@ export function pageHeaderConfig(): AdPageHeaderConfig {
 import { DelonAuthConfig } from '@delon/auth';
 export function delonAuthConfig(): DelonAuthConfig {
     return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
-        login_url: '/passport/login'
+        login_url: '/passport/login',
+        allow_anonymous_key: null,
+        token_invalid_redirect: true
     });
 }
 
@@ -52,7 +54,7 @@ export function delonAclConfig(): DelonACLConfig {
     ]
 })
 export class DelonModule {
-    constructor( @Optional() @SkipSelf() parentModule: DelonModule) {
+    constructor(@Optional() @SkipSelf() parentModule: DelonModule) {
         throwIfAlreadyLoaded(parentModule, 'DelonModule');
     }
 
@@ -63,7 +65,7 @@ export class DelonModule {
                 // TIPS：@delon/abc 有大量的全局配置信息，例如设置所有 `simple-table` 的页码默认为 `20` 行
                 // { provide: SimpleTableConfig, useFactory: simpleTableConfig }
                 { provide: AdPageHeaderConfig, useFactory: pageHeaderConfig },
-                { provide: DelonAuthConfig, useFactory: delonAuthConfig},
+                { provide: DelonAuthConfig, useFactory: delonAuthConfig },
                 { provide: DelonACLConfig, useFactory: delonAclConfig }
             ]
         };
