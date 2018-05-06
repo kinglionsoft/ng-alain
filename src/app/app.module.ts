@@ -26,6 +26,7 @@ import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 // @delon/form: JSON Schema form
 import { JsonSchemaModule } from '@shared/json-schema/json-schema.module';
+import { AbpServiceModule } from '@abp';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -49,6 +50,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         SharedModule,
         LayoutModule,
         RoutesModule,
+        AbpServiceModule,
         // i18n
         TranslateModule.forRoot({
             loader: {
@@ -75,8 +77,8 @@ export function StartupServiceFactory(startupService: StartupService): Function 
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'zh-Hans' },
-        { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true},
-        { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true},
+        { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
         // { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false },
         StartupService,
         {
