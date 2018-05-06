@@ -49,8 +49,7 @@ export class StartupService {
                     const res: any = appData;
                     // 应用信息：包括站点名、描述、年份
                     this.settingService.setApp(res.app);
-                    // 初始化菜单
-                    this.menuService.add(res.menu);
+
                     // 设置页面标题的后缀
                     this.titleService.suffix = res.app.name;
 
@@ -60,9 +59,21 @@ export class StartupService {
                         return;
                     }
                     if (session.result.user) {
+                        // 初始化菜单
+                        this.menuService.add(res.menu);
+                        this.menuService.resume();
+                        // 角色
                         const roles = Object.getOwnPropertyNames(abpConfig.result.auth.grantedPermissions).concat('__user');
                         this.aclService.setRole(roles);
+                        // 
+                        this.settingService.setUser({
+                            name: session.result.user.name,
+                            email: session.result.user.emailAddress,
+                            id: session.result.user.id,
+                            avatar: session.result.user.profilePictureId || './assets/img/avatar.jpg'
+                        });
                     }
+                    resolve(null);
                 },
                 () => { },
                 () => {

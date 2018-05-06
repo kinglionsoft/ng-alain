@@ -8,42 +8,53 @@
     "avatar": "./assets/img/avatar.jpg",
     "email": "cipchk@qq.com"
   },
-  "menu": [{
-    "text": "工作台",
-    "group": false,
-    "icon": "icon-speedometer",
-    "hideInBreadcrumb": true,
-    "link": "/dashboard/workplace"
-  }, {
-    "text": "快捷菜单",
-    "icon": "icon-rocket",
-    "shortcut_root": true,
-    "children": []
-  }, {
-    "text": "管理",
-    "group": true,
-    "icon": "icon-grid",
-    "hideInBreadcrumb": true,
-    "children": [{
-      "text": "组织机构",
-      "icon": "icon-anchor",
-      "link": "/admin/organization-unit"
-    }, {
-      "text": "角色",
-      "icon": "icon-credit-card",
-      "link": "/admin/role"
-    }, {
-      "text": "用户",
-      "icon": "icon-user",
-      "link": "/admin/user"
-    }, {
-      "text": "审计日志",
-      "icon": "icon-book-open",
-      "link": "/admin/audit-log"
-    }, {
-      "text": "设置",
-      "icon": "/admin/tenant-setting",
-      "link": "icon-settings"
-    }]
-  }]
+  "menu": [
+    {
+      "text": "工作台",
+      "group": false,
+      "hideInBreadcrumb": true,
+      "link": "/dashboard/workplace",
+      "children": [
+        {
+          "text": "快捷菜单",
+          "icon": "icon-rocket",
+          "shortcut_root": true,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "管理",
+      "group": false,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "组织机构",
+          "icon": "icon-anchor",
+          "link": "/admin/organization-unit"
+        },
+        {
+          "text": "角色",
+          "icon": "icon-credit-card",
+          "link": "/admin/role"
+        },
+        {
+          "text": "用户",
+          "icon": "icon-user",
+          "link": "/admin/user",
+          "shortcut": true
+        },
+        {
+          "text": "审计日志",
+          "icon": "icon-book-open",
+          "link": "/admin/audit-log"
+        },
+        {
+          "text": "设置",
+          "icon": "icon-settings",
+          "link": "/admin/tenant-setting"
+        }
+      ]
+    }
+  ]
 }
