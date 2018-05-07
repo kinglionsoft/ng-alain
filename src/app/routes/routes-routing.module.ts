@@ -41,7 +41,8 @@ const routes: Routes = [
             { path: 'style', loadChildren: './style/style.module#StyleModule' },
             { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
             { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
-            { path: 'pro', loadChildren: './pro/pro.module#ProModule' }
+            { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
+            { path: 'organization', loadChildren: './organization/organization.module#OrganizationModule'}
         ]
     },
     // 全屏布局

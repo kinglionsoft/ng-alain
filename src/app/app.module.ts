@@ -1,3 +1,4 @@
+
 import { NgModule, LOCALE_ID, APP_INITIALIZER, Injector } from '@angular/core';
 import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +13,8 @@ import { LayoutModule } from './layout/layout.module';
 import { StartupService } from '@core/startup/startup.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 import { AbpJWTInterceptor } from '@core/net/jwt.interceptor';
+import { AbpModule } from './abp/abp.module';
+
 // angular i18n
 import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
@@ -42,6 +45,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         LayoutModule,
         RoutesModule,
         AbpServiceModule,
+        AbpModule,
         // thirds
         UEditorModule.forRoot({
             // **注：** 建议使用本地路径；以下为了减少 ng-alain 脚手架的包体大小引用了CDN，可能会有部分功能受影响

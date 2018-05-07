@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import {
     HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse,
-    HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent,
+    HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent, HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -11,6 +11,7 @@ import { mergeMap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
+import { UtilsService } from '@abp';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
@@ -18,7 +19,10 @@ import { environment } from '@env/environment';
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
+    private utilsService: UtilsService;
+
     constructor(private injector: Injector) {
+        this.utilsService = this.injector.get(UtilsService);
     }
 
     get msg(): NzMessageService {
@@ -79,10 +83,14 @@ export class DefaultInterceptor implements HttpInterceptor {
 
         // 统一加上服务端前缀
         let url = req.url;
-        if (!url.startsWith('https://') && !url.startsWith('http://') && !url.startsWith('/assets/')) {
-            url = environment.SERVER_URL + url;
+        if (!url.startsWith('/assets/')) {
+            if (!url.startsWith('https://') && !url.startsWith('http://')) {
+                url = environment.SERVER_URL + url;
+                this.addAspNetCoreCultureHeader(req.headers);
+                this.addAcceptLanguageHeader(req.headers);
+                this.addTenantIdHeader(req.headers);
+            }            
         }
-
         const newReq = req.clone({
             url: url
         });
@@ -98,5 +106,26 @@ export class DefaultInterceptor implements HttpInterceptor {
                 return this.handleData(err);
             })
         );
+    }
+
+    protected addAspNetCoreCultureHeader(headers: HttpHeaders) {
+        let cookieLangValue = this.utilsService.getCookieValue("Abp.Localization.CultureName");
+        if (cookieLangValue && !headers.has('.AspNetCore.Culture')) {
+            headers.append('.AspNetCore.Culture', cookieLangValue);
+        }
+    }
+
+    protected addAcceptLanguageHeader(headers: HttpHeaders) {
+        let cookieLangValue = this.utilsService.getCookieValue("Abp.Localization.CultureName");
+        if (cookieLangValue && !headers.has('Accept-Language')) {
+            headers.append('Accept-Language', cookieLangValue);
+        }
+    }
+
+    protected addTenantIdHeader(headers: HttpHeaders) {
+        let cookieTenantIdValue = this.utilsService.getCookieValue('Abp.TenantId');
+        if (cookieTenantIdValue && !headers.has('Abp.TenantId')) {
+            headers.append('Abp.TenantId', cookieTenantIdValue);
+        }
     }
 }

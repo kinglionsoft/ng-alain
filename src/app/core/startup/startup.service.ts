@@ -6,7 +6,7 @@ import { concat } from 'rxjs/observable/concat';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { MenuService, SettingsService, TitleService } from '@delon/theme';
 import { ACLService } from '@delon/acl';
-import { SessionClient, AbpResult, GetCurrentLoginInformationsOutput } from '@abp';
+import { SessionClient, AbpResult, GetCurrentLoginInformationsOutput, UtilsService } from '@abp';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -55,7 +55,7 @@ export class StartupService {
 
                     const session = sessionData as AbpResult<GetCurrentLoginInformationsOutput>;
                     if (!session.success || !abpConfig.success) {
-                        console.error(`获取初始化数据失败`);
+                        console.error('获取初始化数据失败');
                         return;
                     }
                     if (session.result.user) {
@@ -65,13 +65,16 @@ export class StartupService {
                         // 角色
                         const roles = Object.getOwnPropertyNames(abpConfig.result.auth.grantedPermissions).concat('__user');
                         this.aclService.setRole(roles);
-                        // 
+                        // 当前用户
                         this.settingService.setUser({
                             name: session.result.user.name,
                             email: session.result.user.emailAddress,
                             id: session.result.user.id,
                             avatar: session.result.user.profilePictureId || './assets/img/avatar.jpg'
                         });
+                        // 初始化ABP
+                        const abpUtil = this.injector.get(UtilsService);
+                        abpUtil.initAbpGlobal(abpConfig.result);
                     }
                     resolve(null);
                 },
