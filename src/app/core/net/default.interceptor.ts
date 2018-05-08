@@ -89,7 +89,7 @@ export class DefaultInterceptor implements HttpInterceptor {
                 this.addAspNetCoreCultureHeader(req.headers);
                 this.addAcceptLanguageHeader(req.headers);
                 this.addTenantIdHeader(req.headers);
-            }            
+            }
         }
         const newReq = req.clone({
             url: url
@@ -109,21 +109,21 @@ export class DefaultInterceptor implements HttpInterceptor {
     }
 
     protected addAspNetCoreCultureHeader(headers: HttpHeaders) {
-        let cookieLangValue = this.utilsService.getCookieValue("Abp.Localization.CultureName");
+        const cookieLangValue = this.utilsService.getCookieValue('Abp.Localization.CultureName');
         if (cookieLangValue && !headers.has('.AspNetCore.Culture')) {
             headers.append('.AspNetCore.Culture', cookieLangValue);
         }
     }
 
     protected addAcceptLanguageHeader(headers: HttpHeaders) {
-        let cookieLangValue = this.utilsService.getCookieValue("Abp.Localization.CultureName");
+        const cookieLangValue = this.utilsService.getCookieValue('Abp.Localization.CultureName');
         if (cookieLangValue && !headers.has('Accept-Language')) {
             headers.append('Accept-Language', cookieLangValue);
         }
     }
 
     protected addTenantIdHeader(headers: HttpHeaders) {
-        let cookieTenantIdValue = this.utilsService.getCookieValue('Abp.TenantId');
+        const cookieTenantIdValue = this.utilsService.getCookieValue('Abp.TenantId');
         if (cookieTenantIdValue && !headers.has('Abp.TenantId')) {
             headers.append('Abp.TenantId', cookieTenantIdValue);
         }

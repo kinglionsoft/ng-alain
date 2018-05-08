@@ -1,6 +1,8 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd';
+import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto } from '@abp';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'page-organization',
@@ -9,79 +11,76 @@ import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd';
 
 export class OrganizationComponent extends AppComponentBase implements OnInit {
 
-    expandKeys = ['1001', '10001'];
-    checkedKeys = ['100011', '1002'];
-    selectedKeys = ['10001', '100011'];
     expandDefault = false;
-    nodes = [
-        new NzTreeNode({
-            title: 'root1',
-            key: '1001',
-            children: [
-                {
-                    title: 'child1',
-                    key: '10001',
-                    children: [
-                        {
-                            title: 'child1.1',
-                            key: '100011',
-                            children: []
-                        },
-                        {
-                            title: 'child1.2',
-                            key: '100012',
-                            children: [
-                                {
-                                    title: 'grandchild1.2.1',
-                                    key: '1000121',
-                                    isLeaf: true,
-                                    disabled: true
-                                },
-                                {
-                                    title: 'grandchild1.2.2',
-                                    key: '1000122',
-                                    isLeaf: true
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }),
-        new NzTreeNode({
-            title: 'root2',
-            key: '1002',
-            children: [
-                {
-                    title: 'child2.1',
-                    key: '10021',
-                    children: [],
-                    disableCheckbox: true
-                },
-                {
-                    title: 'child2.2',
-                    key: '10022',
-                    children: [
-                        {
-                            title: 'grandchild2.2.1',
-                            key: '100221',
-                            isLeaf: true
-                        }
-                    ]
-                }
-            ]
-        })
-    ];
+    nodes = [];
+    organizations: OrganizationUnitDto[] = [];
 
-    mouseAction(name: string, event: NzFormatEmitEvent): void {
-        console.log(name, event);
-    }
-
-    constructor(injector: Injector) {
+    constructor(injector: Injector,
+        private client: OrganizationUnitClient
+    ) {
         super(injector);
     }
 
-    ngOnInit() { 
-        console.log('ssdfasf');
+    ngOnInit() {
+        this.client.getOrganizationUnits()
+            .subscribe(response => {
+                if (response.success) {
+                    this.organizations = response.result.items;
+                    this.makeTree(response.result.items);
+                } else {
+                    this.msgBox.error(response.error);
+                }
+            }, err => this.msgBox.error(err || '初始化组织机构失败'));
+    }
+
+    mouseAction(name: string, event: NzFormatEmitEvent): void {
+        if (name === 'expand') {
+            this.loadChildren(event.node);
+        }
+    }
+
+    onNodeClick(event: NzFormatEmitEvent) {
+        console.dir(event);
+    }
+
+    private makeTree(organizations: OrganizationUnitDto[]) {
+        this.nodes = [];
+        for (const ou of organizations) {
+            if (ou.parentId === null) {
+                const node = this.makeNode(ou);
+                this.loadChildren(node);
+                this.nodes.push(node);
+            }
+        }
+    }
+
+    private loadChildren(node: NzTreeNode) {
+        if (node.children.length > 0) {
+            return;
+        }
+        const children = [];
+        for (const ou of this.organizations) {
+            if (this.isChild(node.origin.code, ou.code)) {
+                children.push(this.makeNode(ou));
+            }
+        }
+        if (children.length > 0) {
+            node.addChildren(children);
+        }
+    }
+
+    private makeNode(ou: OrganizationUnitDto): NzTreeNode {
+        const node = new NzTreeNode({
+            title: ou.displayName,
+            key: ou.id.toString(),
+            expanded: ou.parentId === null,
+            children: [],
+        });
+        node.origin = ou;
+        return node;
+    }
+
+    private isChild(parentCode: string, childCode: string): boolean {
+        return parentCode === childCode.substr(0, childCode.lastIndexOf('.'));
     }
 }
