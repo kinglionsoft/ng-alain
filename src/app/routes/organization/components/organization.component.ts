@@ -1,8 +1,8 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd';
-import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto } from '@abp';
-import { forEach } from '@angular/router/src/utils/collection';
+import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto, CreateOrganizationUnitInput } from '@abp';
+import { runInThisContext } from 'vm';
 
 @Component({
     selector: 'page-organization',
@@ -11,9 +11,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 
 export class OrganizationComponent extends AppComponentBase implements OnInit {
 
-    expandDefault = false;
     nodes = [];
-    organizations: OrganizationUnitDto[] = [];
 
     constructor(injector: Injector,
         private client: OrganizationUnitClient
@@ -25,8 +23,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
         this.client.getOrganizationUnits()
             .subscribe(response => {
                 if (response.success) {
-                    this.organizations = response.result.items;
-                    this.makeTree(response.result.items);
+                    this.makeTree(response.result.items, null, 0);
                 } else {
                     this.msgBox.error(response.error);
                 }
@@ -34,8 +31,9 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
     }
 
     mouseAction(name: string, event: NzFormatEmitEvent): void {
+        console.log(name, event);
         if (name === 'expand') {
-            this.loadChildren(event.node);
+
         }
     }
 
@@ -43,30 +41,40 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
         console.dir(event);
     }
 
-    private makeTree(organizations: OrganizationUnitDto[]) {
-        this.nodes = [];
-        for (const ou of organizations) {
-            if (ou.parentId === null) {
-                const node = this.makeNode(ou);
-                this.loadChildren(node);
-                this.nodes.push(node);
-            }
-        }
+    addRoot() {
+        this.prompt('请输入组织名称')
+            .then((value) => {
+                if (!this.validate(value)) {
+                    this.msgBox.error('仅支持中文、英文、数字');
+                    return;
+                }
+                this.client.createOrganizationUnit(
+                    <CreateOrganizationUnitInput>
+                    {
+                        parentId: null,
+                        displayName: value
+                    })
+                    .subscribe(response => {
+                        this.nodes.push(this.makeNode(response.result));
+                    });
+            });
     }
 
-    private loadChildren(node: NzTreeNode) {
-        if (node.children.length > 0) {
-            return;
+    private makeTree(organizations: OrganizationUnitDto[], node: NzTreeNode, next: number) {
+        if (next >= organizations.length) return;
+        const nextNode = this.makeNode(organizations[next]);
+        const nextNodePcode = this.getParentCode(organizations[next].code);
+        if (next === 0) {
+            this.nodes.push(nextNode);
+        } else if (nextNodePcode === '') {
+            this.nodes.push(nextNode);
+        } else if (nextNodePcode === node.origin.code) {
+
+            node.addChildren([nextNode]);
+        } else if (nextNodePcode === node.parentNode.origin.code) {
+            node.parentNode.addChildren([nextNode]);
         }
-        const children = [];
-        for (const ou of this.organizations) {
-            if (this.isChild(node.origin.code, ou.code)) {
-                children.push(this.makeNode(ou));
-            }
-        }
-        if (children.length > 0) {
-            node.addChildren(children);
-        }
+        this.makeTree(organizations, nextNode, next + 1);
     }
 
     private makeNode(ou: OrganizationUnitDto): NzTreeNode {
@@ -80,7 +88,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
         return node;
     }
 
-    private isChild(parentCode: string, childCode: string): boolean {
-        return parentCode === childCode.substr(0, childCode.lastIndexOf('.'));
+    private getParentCode(code: string) {
+        return code.substr(0, code.lastIndexOf('.'));
     }
 }

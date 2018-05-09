@@ -15,6 +15,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CountdownModule } from 'ngx-countdown';
 import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
 
 const THIRDMODULES = [
     NgZorroAntdModule,
@@ -25,7 +26,9 @@ const THIRDMODULES = [
 // endregion
 
 // region: your componets & directives
-const COMPONENTS = [];
+const COMPONENTS = [
+    NzModalPromptComponent
+];
 const DIRECTIVES = [];
 // endregion
 
@@ -63,6 +66,9 @@ const DIRECTIVES = [];
         // your components
         ...COMPONENTS,
         ...DIRECTIVES
+    ],
+    entryComponents: [
+        ...COMPONENTS,
     ]
 })
 export class SharedModule { }

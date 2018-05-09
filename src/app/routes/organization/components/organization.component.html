@@ -6,10 +6,18 @@
 </div>
 <nz-row nzGutter="10">
   <nz-col nzLg="6" nzMd="12" nzSm="24">
-
-    <nz-card nzTitle="组织机构树">
-      <nz-tree [(ngModel)]="nodes" (nzExpandChange)="mouseAction('expand',$event)" [nzShowLine]="true" (nzClick)="onNodeClick($event)"
-        [nzDraggable]="false"></nz-tree>
+    <nz-card nzTitle="组织机构树" [nzExtra]="extraTemplate">
+      <ng-template #extraTemplate>
+        <a (click)="addRoot()">添加根组织</a>
+      </ng-template>
+      <nz-input-group [nzSuffix]="suffixIcon">
+        <input type="text" nz-input placeholder="搜索···" [(ngModel)]="searchValue">
+      </nz-input-group>
+      <ng-template #suffixIcon>
+        <i class="anticon anticon-search"></i>
+      </ng-template>
+      <nz-tree [(ngModel)]="nodes" [nzSearchValue]="searchValue" (nzExpandChange)="mouseAction('expand',$event)" [nzShowLine]="true"
+        (nzClick)="onNodeClick($event)" [nzDraggable]="false" (nzContextMenu)="mouseAction('expand',$event)"></nz-tree>
     </nz-card>
 
   </nz-col>
