@@ -16,6 +16,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
+import { NzModalUserSearchComponent } from './user/nz-modal-user-search.component';
 
 const THIRDMODULES = [
     NgZorroAntdModule,
@@ -27,7 +28,8 @@ const THIRDMODULES = [
 
 // region: your componets & directives
 const COMPONENTS = [
-    NzModalPromptComponent
+    NzModalPromptComponent,
+    NzModalUserSearchComponent
 ];
 const DIRECTIVES = [];
 // endregion

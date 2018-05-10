@@ -32,7 +32,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
     private _selectedNode: NzTreeNode;
 
     userNameSearchValue = '';
-    nodes = [];
+    nodes: NzTreeNode[] = [];
     users: OrganizationUnitUserListDto[] = [];
     displayUsers = [...this.users];
 
@@ -53,7 +53,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
             }, err => this.msgBox.error(err || '初始化组织机构失败'));
     }
 
-    //region  OU Tree
+    // region  OU Tree
     get selectedTitle(): string {
         return this.selectedNode && this.selectedNode.title || '未选择组织';
     }
@@ -93,7 +93,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
 
     addOrganization(parent: NzTreeNode) {
         this.prompt('新增组织', '', '请输入组织名称')
-            .then((value) => {
+            .subscribe((value) => {
                 this.client.createOrganizationUnit(
                     <CreateOrganizationUnitInput>{
                         parentId: parent && parent.origin.id,
@@ -142,12 +142,18 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
         return code.substr(0, code.lastIndexOf('.'));
     }
 
-    private removeNode(code: string) {
-
+    private removeNode(node: NzTreeNode) {
+        const upperNodes = node.parentNode && node.parentNode.children || this.nodes;
+        for (let index = 0; index < upperNodes.length; index++) {
+            const element = upperNodes[index];
+            if (element.key === node.key) {
+                upperNodes.splice(index, 1);
+            }
+        }
     }
-    //endregion
+    // endregion
 
-    //region Organization
+    // region Organization
 
     search(): void {
         const filterFunc = (item) => {
@@ -157,29 +163,32 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
     }
 
     addUser(): void {
-        this.confirm('移除用户', `是否将中移除？`)
-            .subscribe(() => {
-                alert("ok");
+        this.searchUser()
+            .subscribe(user => {
+                console.log(user);
             });
     }
 
     deleteOrg(): void {
         if (!this.selectedNode) return;
-        this.client.deleteOrganizationUnit(this.selectedNode.origin.id)
-            .subscribe(res => {
-                if (res.success) {
-                    this.removeNode(this.selectedNode.origin.code);
-                    this.selectedNode = null;
-                }
+        this.warning('删除组织', `是否删除【${this.selectedNode.title}】`)
+            .subscribe(() => {
+                this.client.deleteOrganizationUnit(this.selectedNode.origin.id)
+                    .subscribe(res => {
+                        if (res.success) {
+                            this.removeNode(this.selectedNode);
+                            this.selectedNode = null;
+                        }
+                    });
             });
     }
 
     removeUser(user: OrganizationUnitUserListDto, index: number): void {
-        this.confirm('移除用户', `是否将【${user.name}】从【${this.selectedNode.title}】中移除？`)
+        this.warning('移除用户', `是否将【${user.name}】从【${this.selectedNode.title}】中移除？`)
             .subscribe(() => {
-                this.displayUsers.splice(index, 1)
+                this.displayUsers.splice(index, 1);
             });
     }
 
-    //endregion
+    // endregion
 }

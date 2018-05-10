@@ -1,11 +1,12 @@
-import { concat } from 'rxjs/observable/concat';
-import { inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { Injector } from '@angular/core';
-import { AbpSettingService, LogService } from '@abp';
+import { Observer } from 'rxjs/Observer';
+import { AbpSettingService, LogService, UserListDto } from '@abp';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
+
 import { ModalHelper } from '@delon/theme';
+import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
+import { NzModalUserSearchComponent } from './user/nz-modal-user-search.component';
 
 export abstract class AppComponentBase {
 
@@ -27,9 +28,9 @@ export abstract class AppComponentBase {
         return this.injector.get(ModalHelper);
     }
 
-    prompt(title?: string, value?: string, placeholder?: string): Promise<string> {
-        return new Promise((resolve, reject) => {
-            const modal = this.injector.get(NzModalService).create({
+    prompt(title?: string, value?: string, placeholder?: string): Observable<string> {
+        return Observable.create((observer: Observer<string>) => {
+            const subject = this.injector.get(NzModalService).create({
                 nzTitle: title || '请输入',
                 nzContent: NzModalPromptComponent,
                 nzComponentParams: {
@@ -37,38 +38,64 @@ export abstract class AppComponentBase {
                 },
                 nzOnOk: (componentInstance) => {
                     if (this.validate(componentInstance.value)) {
-                        resolve(componentInstance.value);
+                        observer.next(componentInstance.value);
                     } else {
-                        reject();
                         this.msgBox.error('仅支持中文、英文、数字、-、_');
                     }
                 },
-                nzOnCancel: () => reject()
+                nzOnCancel: () => { }
+            });
+            subject.open();
+            const afterClose$ = subject.afterClose.subscribe((res: any) => {
+                observer.complete();
+                afterClose$.unsubscribe();
             });
         });
     }
 
-    confirm(title: string, content: string) {
-        // return this.modalHelper.open(null, null, 'sm', {  nzTitle: title,
-        //     nzContent: content,
-        //  });
-        return this.modalHelper.static(null, null, 'sm', {
-            nzTitle: title,
-            nzContent: content,
-            nzFooter: [{
-                label: '确定', 
-                type: 'primary',
-                onClick: ()=>{
-                    this.injector.get(NzModalRef).close();
-                }
-            }, {
-                label: '取消', type: 'default'
-            }
-            ]
+    warning(title: string, content: string) {
+        return Observable.create((observer: Observer<any>) => {
+            const subject = this.injector.get(NzModalService)
+                .warning({
+                    nzTitle: title,
+                    nzContent: content,
+                    nzCancelText: '取消',
+                    nzOnCancel: () => {
+                    },
+                    nzOkText: '确定',
+                    nzOnOk: () => observer.next('ok')
+                });
+            subject.open();
+            const afterClose$ = subject.afterClose.subscribe((res: any) => {
+                observer.complete();
+                afterClose$.unsubscribe();
+            });
         });
     }
 
     validate(value: string): boolean {
         return /^[\u4E00-\u9FA5A-Za-z0-9_-]+$/.test(value);
+    }
+
+    searchUser(): Observable<UserListDto> {
+        return Observable.create((observer: Observer<UserListDto>) => {
+            const subject = this.injector.get(NzModalService).create({
+                nzTitle: '选择用户',
+                nzContent: NzModalUserSearchComponent,
+                nzOnOk: (componentInstance) => {
+                    if (componentInstance.value) {
+                        observer.next(componentInstance.value);
+                    } else {
+                        observer.complete();
+                    }
+                },
+                nzOnCancel: () => { }
+            });
+            subject.open();
+            const afterClose$ = subject.afterClose.subscribe((res: any) => {
+                observer.complete();
+                afterClose$.unsubscribe();
+            });
+        });
     }
 }
