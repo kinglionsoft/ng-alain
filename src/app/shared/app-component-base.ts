@@ -77,8 +77,8 @@ export abstract class AppComponentBase {
         return /^[\u4E00-\u9FA5A-Za-z0-9_-]+$/.test(value);
     }
 
-    searchUser(): Observable<UserListDto> {
-        return Observable.create((observer: Observer<UserListDto>) => {
+    searchUser(): Observable<UserListDto[]> {
+        return Observable.create((observer: Observer<UserListDto[]>) => {
             const subject = this.injector.get(NzModalService).create({
                 nzTitle: '选择用户',
                 nzContent: NzModalUserSearchComponent,

@@ -1,19 +1,22 @@
 import { Component, EventEmitter } from '@angular/core';
-import { SimpleTableColumn } from '@delon/abc';
+import { SimpleTableColumn, SimpleTableData } from '@delon/abc';
 import { UserClient, UserListDto } from '@abp';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'nz-modal-user-search-component',
     template: `
+    <p>
+        <input nz-input placeholder="请输入要查找的姓名" [(ngModel)]="searchValue" style="max-width: 200px; margin-right: 20px" />
+        <button nz-button nzType="primary" (click)="load()"><i class="anticon anticon-search"></i> 查询</button>
+    </p>
     <simple-table #st 
         [data]="data" 
         [total]="total" 
         [ps]="ps" 
         [pi]="pi"
         [columns]="columns"
-        (change)="change"
-        (radioChange)="radioChange"
+        (checkboxChange)="checkboxChange($event)"
         >
     </simple-table>
   `
@@ -23,7 +26,9 @@ export class NzModalUserSearchComponent {
     pi = 1;
     ps = 10;
     total = 0;
+    searchValue = '';
     columns: SimpleTableColumn[] = [
+        { title: '编号', index: 'id', type: 'checkbox' },
         { title: '姓名', index: 'name' },
         { title: '部门', index: 'department' },
         {
@@ -35,27 +40,20 @@ export class NzModalUserSearchComponent {
             ynNo: '未激活'
         }
     ];
-    value: UserListDto;
-    change = new EventEmitter<any>();
-    radioChange = new EventEmitter<any>();
+    value: UserListDto[];
 
-    constructor(private client: UserClient) {
-        this.change
-            .subscribe((res) => {
-                console.dir(res);
-            });
-        this.radioChange.subscribe(res => {
-            console.log(res);
-        });
-
-        this.load();
+    constructor(private client: UserClient) {      
     }
 
-    private load() {
-        this.client.getUsers('', '', null, '', this.ps, (this.pi - 1) * this.ps)
+    load() {
+        this.client.getUsers(this.searchValue, '', undefined, '', this.ps, (this.pi - 1) * this.ps)
             .subscribe(res => {
                 this.total = res.result.totalCount;
                 this.data = res.result.items;
             });
+    }
+
+    checkboxChange(list: any[]) {
+        this.value = list;
     }
 }

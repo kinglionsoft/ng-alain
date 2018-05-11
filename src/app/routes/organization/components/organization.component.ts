@@ -1,8 +1,9 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared';
 import { NzFormatEmitEvent, NzTreeNode, NzModalService } from 'ng-zorro-antd';
-import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto, CreateOrganizationUnitInput, OrganizationUnitUserListDto } from '@abp';
+import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto, CreateOrganizationUnitInput, OrganizationUnitUserListDto, UsersToOrganizationUnitInput } from '@abp';
 import { runInThisContext } from 'vm';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'page-organization',
@@ -73,11 +74,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
             return;
         }
         this._selectedNode = node;
-        this.users = [];
-        this.client.getOrganizationUnitUsers(this._selectedNode.origin.id, '', 100, 0)
-            .subscribe(res => {
-                this.users = res.result.items;
-            });
+        this.getOrganizationUser();
     }
 
     mouseAction(name: string, event: NzFormatEmitEvent): void {
@@ -164,8 +161,17 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
 
     addUser(): void {
         this.searchUser()
-            .subscribe(user => {
-                console.log(user);
+            .subscribe(res => {
+                if (res && res.length > 0) {
+                    this.client.addUsersToOrganizationUnit(<UsersToOrganizationUnitInput>{
+                        organizationUnitId: this.selectedNode.origin.id,
+                        userIds: res.map(x => x.id)
+                    }).subscribe(response => {
+                        if (response.success) {
+                            this.getOrganizationUser();
+                        }
+                    })
+                }
             });
     }
 
@@ -184,9 +190,34 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
     }
 
     removeUser(user: OrganizationUnitUserListDto, index: number): void {
+
         this.warning('移除用户', `是否将【${user.name}】从【${this.selectedNode.title}】中移除？`)
-            .subscribe(() => {
-                this.displayUsers.splice(index, 1);
+            .pipe(
+                switchMap(() => this.client.removeUserFromOrganizationUnit(user.id, this.selectedNode.origin.id))
+            )
+            .subscribe(res => {
+                if (res.success) {
+                    setTimeout(() => {
+                        this.displayUsers.splice(index, 1);
+                        this.displayUsers = [...this.displayUsers];
+                    }, 0);
+                    for (let index = 0; index < this.users.length; index++) {
+                        const element = this.users[index];
+                        if (element.id == user.id) {
+                            this.users.splice(index, 1);
+                            break;
+                        }
+                    }
+                }
+            });
+    }
+
+    private getOrganizationUser() {
+        this.users = [];
+        this.client.getOrganizationUnitUsers(this._selectedNode.origin.id, '', 999, 0)
+            .subscribe(res => {
+                this.users = res.result.items;
+                this.displayUsers = [... this.users];
             });
     }
 
