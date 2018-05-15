@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared';
 import { NzFormatEmitEvent, NzTreeNode, NzModalService } from 'ng-zorro-antd';
-import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto, CreateOrganizationUnitInput, OrganizationUnitUserListDto, UsersToOrganizationUnitInput } from '@abp';
+import { OrganizationUnitClient, ListResultDtoOfOrganizationUnitDto, OrganizationUnitDto, CreateOrganizationUnitInput, OrganizationUnitUserListDto, UsersToOrganizationUnitInput, UpdateOrganizationUnitInput } from '@abp';
 import { runInThisContext } from 'vm';
 import { switchMap } from 'rxjs/operators';
 
@@ -208,6 +208,21 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
                             break;
                         }
                     }
+                }
+            });
+    }
+
+    editOrg() {
+        this.prompt('修改组织', this.selectedNode.title)
+            .pipe(
+                switchMap((value) => this.client.updateOrganizationUnit(<UpdateOrganizationUnitInput>{
+                    id: this.selectedNode.origin.id,
+                    displayName: value
+                }))
+            )
+            .subscribe(res => {
+                if (res.success) {
+                    this.selectedNode.title = res.result.displayName;
                 }
             });
     }
