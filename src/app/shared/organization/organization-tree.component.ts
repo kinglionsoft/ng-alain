@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd';
 import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
 
@@ -16,24 +16,25 @@ import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
     <nz-tree 
         [(ngModel)]="nodes" 
         [nzSearchValue]="searchValue" 
-        (nzExpandChange)="mouseAction('expand', $event)" 
-        [nzShowLine]="true"
-        (nzClick)="mouseAction('click', $event)" 
-        [nzDraggable]="false">
+        (nzExpandChange)="mouseAction($event)" 
+        nzShowLine="true"
+        (nzClick)="mouseAction($event)" 
+        nzDraggable="false">
+        <ng-template #nzTreeTemplate let-node>
+            <span>                    
+                <i class="text-orange anticon" [ngClass]="{'anticon-folder-open': node.isExpanded, 'anticon-folder': !node.isExpanded}"></i>
+                <span [ngClass]="{'text-primary': node.isSelected}"> {{node.title}}</span>
+            </span>
+      </ng-template>
     </nz-tree>`
 })
 
 export class OrganizationTreeComponent implements OnInit {
 
-    @Input()
     nodes: NzTreeNode[] = [];
 
     @Output()
-    selectedNode: NzTreeNode;
-    @Output()
-    onNodeClick: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
-    @Output()
-    onExpandChange: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
+    eventCallback: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
 
     constructor(private client: OrganizationUnitClient) { }
 
@@ -46,12 +47,8 @@ export class OrganizationTreeComponent implements OnInit {
             });
     }
 
-    mouseAction(name: string, event: NzFormatEmitEvent): void {
-        if (name === 'expand') {
-            this.onExpandChange.next(event);
-        } else if (name === 'click') {
-            this.onNodeClick.next(event);
-        }
+    mouseAction(event: NzFormatEmitEvent): void {
+        this.eventCallback.next(event);
     }
 
     private makeTree(organizations: OrganizationUnitDto[], node: NzTreeNode, next: number) {
@@ -63,10 +60,20 @@ export class OrganizationTreeComponent implements OnInit {
         } else if (nextNodePcode === '') {
             this.nodes.push(nextNode);
         } else if (nextNodePcode === node.origin.code) {
-
             node.addChildren([nextNode]);
-        } else if (nextNodePcode === node.parentNode.origin.code) {
-            node.parentNode.addChildren([nextNode]);
+        } else {
+            let parent = node.parentNode;
+            while (parent) {
+                if (parent.origin.code === nextNodePcode) {
+                    parent.addChildren([nextNode]);
+                    break;
+                }
+                parent = parent.parentNode;
+            }
+                        
+            if (!parent) { // no ancestor, but a root
+                this.nodes.push(nextNode);
+            }
         }
         this.makeTree(organizations, nextNode, next + 1);
     }

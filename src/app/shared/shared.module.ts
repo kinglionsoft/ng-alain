@@ -17,6 +17,8 @@ import { UEditorModule } from 'ngx-ueditor';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
 import { NzModalUserSearchComponent } from './user/nz-modal-user-search.component';
+import { OrganizationTreeComponent } from './organization/organization-tree.component';
+import { PermissionTreeComponent } from './permission/permission-tree.component';
 
 const THIRDMODULES = [
     NgZorroAntdModule,
@@ -29,7 +31,9 @@ const THIRDMODULES = [
 // region: your componets & directives
 const COMPONENTS = [
     NzModalPromptComponent,
-    NzModalUserSearchComponent
+    NzModalUserSearchComponent,
+    OrganizationTreeComponent,
+    PermissionTreeComponent
 ];
 const DIRECTIVES = [];
 // endregion

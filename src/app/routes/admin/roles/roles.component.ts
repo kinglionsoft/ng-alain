@@ -5,6 +5,7 @@ import { AbpResult, RoleClient, RoleListDto, PermissionDto } from '@abp';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'page-roles',
@@ -17,8 +18,16 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     permissions: PermissionDto[] = [];
     selectedRole: RoleListDto;
 
-    constructor(private injctor: Injector, private client: RoleClient) {
+    form: FormGroup;
+
+    constructor(private injctor: Injector, private client: RoleClient, private fb: FormBuilder) {
         super(injctor);
+
+        this.form = this.fb.group({
+            name: [ null, [ Validators.required ] ],
+            displayName: [ null, [ Validators.required ] ],
+            isDefault: [ null, [ Validators.required ] ]
+        });
     }
 
     ngOnInit() {
@@ -36,7 +45,13 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     }
 
     radioChange(item: RoleListDto) {
-
+        if(this.selectedRole && this.selectedRole.id === item.id){
+            return;
+        }
+        this.selectedRole = item;
+        this.form.controls['name'].setValue(this.selectedRole.name);
+        this.form.controls['displayName'].setValue(this.selectedRole.displayName);
+        this.form.controls['isDefault'].setValue(this.selectedRole.isDefault);
     }
 
     private showPermissionOption(data: PermissionDto[]) {

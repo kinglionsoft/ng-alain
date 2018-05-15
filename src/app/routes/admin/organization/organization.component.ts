@@ -116,9 +116,8 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
         } else if (nextNodePcode === '') {
             this.nodes.push(nextNode);
         } else if (nextNodePcode === node.origin.code) {
-
             node.addChildren([nextNode]);
-        } else if (nextNodePcode === node.parentNode.origin.code) {
+        } else if (node.parentNode && nextNodePcode === node.parentNode.origin.code) {
             node.parentNode.addChildren([nextNode]);
         }
         this.makeTree(organizations, nextNode, next + 1);

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OrganizationComponent } from './organization/organization.component';
 import { RolesComponent } from './roles/roles.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
@@ -9,7 +10,9 @@ const routes: Routes = [
         path: '',
         children: [
             { path: 'organization', component: OrganizationComponent },
-            { path: 'roles', component: RolesComponent }]
+            { path: 'role', component: RolesComponent },
+            { path: 'user', component: UserComponent }
+        ]
     }
 ];
 
@@ -21,5 +24,6 @@ export class AdminRoutingModule { }
 
 export const routedComponents = [
     OrganizationComponent,
-    RolesComponent
+    RolesComponent,
+    UserComponent
 ];

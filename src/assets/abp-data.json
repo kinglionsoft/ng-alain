@@ -36,7 +36,7 @@
         {
           "text": "角色",
           "icon": "icon-credit-card",
-          "link": "/admin/roles"
+          "link": "/admin/role"
         },
         {
           "text": "用户",
