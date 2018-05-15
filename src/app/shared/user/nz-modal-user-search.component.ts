@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
     selector: 'nz-modal-user-search-component',
     template: `
     <p>
-        <input nz-input placeholder="请输入要查找的姓名" [(ngModel)]="searchValue" style="max-width: 200px; margin-right: 20px" />
+        <input nz-input placeholder="请输入要查找的姓名" [(ngModel)]="searchValue" class="width-md mr-md" />
         <button nz-button nzType="primary" (click)="load()"><i class="anticon anticon-search"></i> 查询</button>
     </p>
     <simple-table #st 
@@ -42,7 +42,7 @@ export class NzModalUserSearchComponent {
     ];
     value: UserListDto[];
 
-    constructor(private client: UserClient) {      
+    constructor(private client: UserClient) {
     }
 
     load() {
