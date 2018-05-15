@@ -170,7 +170,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
                         if (response.success) {
                             this.getOrganizationUser();
                         }
-                    })
+                    });
                 }
             });
     }
@@ -203,7 +203,7 @@ export class OrganizationComponent extends AppComponentBase implements OnInit {
                     }, 0);
                     for (let index = 0; index < this.users.length; index++) {
                         const element = this.users[index];
-                        if (element.id == user.id) {
+                        if (element.id === user.id) {
                             this.users.splice(index, 1);
                             break;
                         }

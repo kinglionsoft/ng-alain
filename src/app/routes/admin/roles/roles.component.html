@@ -1,0 +1,40 @@
+<div class="content__title">
+    <h1>
+        <span class="sub-title">角色管理</span>
+        <nz-divider nzType="vertical"></nz-divider>
+        <small class="sub-title-desc">使用角色进行权限分组</small>
+    </h1>
+    <button nz-button nzType="primary" (click)="create()">
+        <i class="anticon anticon-plus"></i> 新建角色</button>
+</div>
+
+<nz-row nzGutter="10">
+    <nz-col nzLg="10" nzMd="12" nzSm="24">
+        <nz-card nzTitle="角色列表">
+            <nz-select [(ngModel)]="searchPermisson" nzAllowClear nzPlaceHolder="按权限查找角色" style="width: 100%" (ngModelChange)="getRoles()">
+                <nz-option *ngFor="let p of permissions" [nzValue]="p.name" [nzLabel]="p.displayName"></nz-option>
+            </nz-select>
+
+            <simple-table #st [data]="pager.data" [columns]="pager.columns" [pi]="pager.pageIndex" [ps]="pager.pageSize" [total]="pager.totalItems"
+                (radioChange)="radioChange($event)" isPageIndexReset>
+                <ng-template st-row="property" let-item>
+                    <span class="badge badge-success">{{item.isStatic ? '系统':''}}</span>
+                    <span class="badge badge-error">{{item.isDefault ?'默认':''}}</span>
+                </ng-template>
+            </simple-table>
+        </nz-card>
+    </nz-col>
+
+    <nz-col nzLg="14" nzMd="12" nzSm="24">
+        <nz-card [nzTitle]="selectedRoleName">
+            <nz-button-group *ngIf="selectedRole">
+                <button nz-button nzType="primary" (click)="editRole()">
+                    <i class="icon icon-edit"></i> 修改名称</button>
+                <button nz-button nzType="info" (click)="setDefault()" [disable]="selectedRole && !selectedRole.isDefault">
+                    <i class="icon icon-share"></i> 设为默认</button>
+                <button nz-button nzType="danger" (click)="deleteRole()">
+                    <i class="anticon anticon-delete"></i> 删除角色</button>
+            </nz-button-group>
+        </nz-card>
+    </nz-col>
+</nz-row>

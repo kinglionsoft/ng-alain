@@ -31,12 +31,12 @@
         {
           "text": "组织机构",
           "icon": "icon-anchor",
-          "link": "/organization/manage"
+          "link": "/admin/organization"
         },
         {
           "text": "角色",
           "icon": "icon-credit-card",
-          "link": "/admin/role"
+          "link": "/admin/roles"
         },
         {
           "text": "用户",
