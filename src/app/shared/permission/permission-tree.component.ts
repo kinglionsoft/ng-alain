@@ -41,13 +41,10 @@ export class PermissionTreeComponent implements OnInit {
 
     @Input()
     set role(value: number) {
-        if (value > 0 && value !== this._role) {
-            this._role = value;
-            this.client.getRoleForEdit(value)
-                .subscribe(res => {
-                    this.bindingGranted(res.result.grantedPermissionNames);
-                });
-        }
+        if (this._role === value || value < 1) return;
+        this._role = value || 0;
+        this.nodes = []; // always rebuild tree. to be optimized
+        this.load();
     }
 
     get role() {
@@ -58,11 +55,18 @@ export class PermissionTreeComponent implements OnInit {
 
     constructor(private client: RoleClient) { }
 
-    ngOnInit() {
-        this.client.getAllPermissions()
-            .subscribe(res => {
-                this.makeTree(res.result.items, null, 0, null);
-            });
+    load() {
+        if (this._role <= 0) {
+            this.client.getAllPermissions()
+                .subscribe(res => {
+                    this.makeTree(res.result.items, null, 0, null);
+                });
+        } else {
+            this.client.getRoleForEdit(this._role)
+                .subscribe(res => {
+                    this.makeTree(res.result.permissions, null, 0, res.result.grantedPermissionNames);
+                });
+        }
     }
 
     mouseAction(event: NzFormatEmitEvent): void {
@@ -70,7 +74,7 @@ export class PermissionTreeComponent implements OnInit {
     }
 
     private bindingGranted(grantedPermissionNames: string[]) {
-        if (!grantedPermissionNames) return
+        if (!grantedPermissionNames) return;
         this.permissionTree.getCheckedNodeList().forEach(n => {
             n.isChecked = false;
         });
@@ -125,7 +129,7 @@ export class PermissionTreeComponent implements OnInit {
         const node = new NzTreeNode({
             title: ou.displayName,
             key: ou.name,
-            expanded: true,
+            expanded: false,
             checked: grantedPermissionNames && grantedPermissionNames.some(x => x === ou.name),
             children: [],
         });

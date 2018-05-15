@@ -24,9 +24,9 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
         super(injctor);
 
         this.form = this.fb.group({
-            name: [ null, [ Validators.required ] ],
-            displayName: [ null, [ Validators.required ] ],
-            isDefault: [ null, [ Validators.required ] ]
+            name: [null, [Validators.required]],
+            displayName: [null, [Validators.required]],
+            isDefault: [null, [Validators.required]]
         });
     }
 
@@ -45,7 +45,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     }
 
     radioChange(item: RoleListDto) {
-        if(this.selectedRole && this.selectedRole.id === item.id){
+        if (this.selectedRole && this.selectedRole.id === item.id) {
             return;
         }
         this.selectedRole = item;
@@ -95,15 +95,41 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
         return this.selectedRole && this.selectedRole.displayName || '未选择角色';
     }
 
-    editRole() {
-
+    create() {
+        this.selectedRole = null;
+        this.form.controls['name'].reset('');
+        this.form.controls['displayName'].reset('');
+        this.form.controls['isDefault'].reset('');
     }
 
-    setDefault() {
+    save() {
+        const data: any = {
+            id: this.selectedRole && this.selectedRole.id,
+            name: this.form.controls['name'].value,
+            displayName: this.form.controls['displayName'].value,
+            isDefault: this.form.controls['isDefault'].value
+        };
 
+        this.warning('保存修改', '是否保存当前修改')
+            .pipe(
+                mergeMap(() => this.client.createOrUpdateRole(<any>{
+                    grantedPermissionNames: [],
+                    role: data
+                }))
+            )
+            .subscribe(res => {
+                if (!this.selectedRole) {
+                    const role: RoleListDto = Object.assign({ creationTime: new Date(), id: res.result }, data);
+                    this.pager.data.splice(0, 0, role);
+                } else {
+                    this.selectedRole.name = data.name;
+                    this.selectedRole.displayName = data.displayName;
+                    this.selectedRole.isDefault = data.isDefault;
+                }
+            });
     }
 
-    deleteRole() {
+    delete() {
         this.client.delete(this.selectedRole.id)
             .subscribe(res => {
                 this.getRoles();
