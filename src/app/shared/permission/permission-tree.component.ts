@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ViewChild, OnInit } from '@angular/core';
 import { NzFormatEmitEvent, NzTreeNode, NzTreeComponent } from 'ng-zorro-antd';
 import { RoleClient } from '@abp';
 
@@ -20,6 +20,7 @@ import { RoleClient } from '@abp';
         nzShowLine="true"        
         nzMultiple="true"
         nzCheckable="true"
+        nzCheckStrictly="true"
         nzDraggable="false">
         <ng-template #nzTreeTemplate let-node>
             <span>                    
@@ -39,9 +40,13 @@ export class PermissionTreeComponent implements OnInit {
     @Output()
     eventCallback: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
 
+    /** Usage: (checkedNodes)="checkedPermissions=$event" */
+    @Output('checkedNodes')
+    checkedNodesChange = new EventEmitter<string[]>();
+
     @Input()
     set role(value: number) {
-        if (this._role === value || value < 1) return;
+        if (this._role === value) return;
         this._role = value || 0;
         this.nodes = []; // always rebuild tree. to be optimized
         this.load();
@@ -54,6 +59,10 @@ export class PermissionTreeComponent implements OnInit {
     @ViewChild('permissionTree') permissionTree: NzTreeComponent;
 
     constructor(private client: RoleClient) { }
+
+    ngOnInit(): void {
+        this.load();
+    }
 
     load() {
         if (this._role <= 0) {
@@ -70,6 +79,7 @@ export class PermissionTreeComponent implements OnInit {
     }
 
     mouseAction(event: NzFormatEmitEvent): void {
+        this.checkedNodesChange.next(event.checkedKeys.map(x => x.key).sort()); // order
         this.eventCallback.next(event);
     }
 

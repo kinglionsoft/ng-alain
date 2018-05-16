@@ -59,7 +59,7 @@
         </nz-form-item>
       </form>
       <nz-divider nzText="权限" nzOrientation=""></nz-divider>
-      <sf-permission-tree [role]="selectedRole && selectedRole.id"></sf-permission-tree>
+      <sf-permission-tree [role]="selectedRole && selectedRole.id || 0" (checkedNodes)="checkedPermissions=$event"></sf-permission-tree>
     </nz-card>
   </nz-col>
 </nz-row>

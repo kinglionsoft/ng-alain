@@ -48,6 +48,23 @@ export class SimpleTablePager {
                 this.showPaging(response.result, page);
             });
     }
+
+    /** remove the first row which matches the filter */
+    remove(filter: (rowData: any) => boolean) {
+        for (let index = 0; index < this.data.length; index++) {
+            const element = this.data[index];
+            if (filter(element)) {
+                this.data.splice(index, 1);
+                this.data = [...this.data];
+                break;
+            }
+        }
+    }
+
+    insert(row: any, index = 0) {
+        this.data.splice(index, 0, row);
+        this.data = [...this.data];
+    }
 }
 
 /**
