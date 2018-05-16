@@ -104,9 +104,6 @@ export class PermissionTreeComponent implements OnInit {
                 element.isChecked = false;
                 this.checkNode(element);
             }
-            if (element.children && element.children.length > 0) {
-              //  this.uncheck(element.children);
-            }
         });
     }
 

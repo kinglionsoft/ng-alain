@@ -13,6 +13,9 @@ import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
             <i class="anticon anticon-search"></i>
         </ng-template>
     </p>
+    <p *ngIf="selectedOrganization">
+        已选择：<nz-tag nzColor='#108ee9'>{{selectedOrganization}}</nz-tag>
+    </p>
     <nz-tree 
         [(ngModel)]="nodes" 
         [nzSearchValue]="searchValue" 
@@ -31,10 +34,15 @@ import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
 
 export class OrganizationTreeComponent implements OnInit {
 
+    selectedOrganization: string;
     nodes: NzTreeNode[] = [];
 
     @Output()
     eventCallback: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
+
+     /** Usage: (selected)="selectedOrganization=$event" */
+     @Output('selected')
+     selectedChange = new EventEmitter<number>();
 
     constructor(private client: OrganizationUnitClient) { }
 
@@ -48,6 +56,10 @@ export class OrganizationTreeComponent implements OnInit {
     }
 
     mouseAction(event: NzFormatEmitEvent): void {
+        if (event.eventName === 'click') {
+            this.selectedOrganization = event.node.title;
+            this.selectedChange.next(event.node.origin.id)
+        }
         this.eventCallback.next(event);
     }
 
@@ -70,7 +82,7 @@ export class OrganizationTreeComponent implements OnInit {
                 }
                 parent = parent.parentNode;
             }
-                        
+
             if (!parent) { // no ancestor, but a root
                 this.nodes.push(nextNode);
             }
