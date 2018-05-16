@@ -33,14 +33,13 @@
           Content of Tab Pane 1
         </nz-tab>
         <nz-tab nzTitle="角色">
-          Content of Tab Pane 2
-        </nz-tab>
-        <nz-tab nzTitle="权限">
-          <sf-permission-tree (checkedNodes)="checkedPermissions=$event"></sf-permission-tree>
-        </nz-tab>
-        <nz-tab nzTitle="归属组织">
-          <sf-org-tree (eventCallback)="onOrgCallback($event)"></sf-org-tree>
-        </nz-tab>
+          <sf-role-select ([selected])="selectedRoles"></sf-role-select>
+          <nz-tab nzTitle="权限">
+            <sf-permission-tree (checkedNodes)="checkedPermissions=$event"></sf-permission-tree>
+          </nz-tab>
+          <nz-tab nzTitle="归属组织">
+            <sf-org-tree [(selected)]="selectedOrganization"></sf-org-tree>
+          </nz-tab>
       </nz-tabset>
     </nz-card>
   </nz-col>

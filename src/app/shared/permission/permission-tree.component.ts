@@ -99,10 +99,10 @@ export class PermissionTreeComponent implements OnInit {
     }
 
     private uncheck(list: NzTreeNode[]) {
-        list.forEach(element => {
-            if (element.isChecked) {
-                element.isChecked = false;
-                this.checkNode(element);
+        list.forEach((n: NzTreeNode) => {
+            if (n.isChecked) {
+                n.isChecked = false;
+                this.checkNode(n);
             }
         });
     }

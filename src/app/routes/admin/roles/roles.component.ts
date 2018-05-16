@@ -17,7 +17,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     searchPermisson: string;
     permissions: PermissionDto[] = [];
     selectedRole: RoleListDto;
-    checkedPermissions: string [];
+    checkedPermissions: string[];
     form: FormGroup;
     @ViewChild('stRole') stRole: SimpleTableComponent;
 
@@ -106,7 +106,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     }
 
     save() {
-        if(this.form.invalid) {
+        if (this.form.invalid) {
             this.msgBox.warning('请完善必填信息');
             return;
         }
@@ -143,7 +143,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
                 mergeMap(() => this.client.delete(this.selectedRole.id))
             )
             .subscribe(res => {
-                this.pager.remove(role => role.id === this.selectedRole.id);                
+                this.pager.remove(role => role.id === this.selectedRole.id);
                 this.selectedRole = null;
             });
     }

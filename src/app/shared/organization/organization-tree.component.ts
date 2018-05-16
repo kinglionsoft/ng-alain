@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import { NzFormatEmitEvent, NzTreeNode, NzTreeComponent } from 'ng-zorro-antd';
 import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
 
 @Component({
@@ -16,7 +16,7 @@ import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
     <p *ngIf="selectedOrganization">
         已选择：<nz-tag nzColor='#108ee9'>{{selectedOrganization}}</nz-tag>
     </p>
-    <nz-tree 
+    <nz-tree #orgTree
         [(ngModel)]="nodes" 
         [nzSearchValue]="searchValue" 
         (nzExpandChange)="mouseAction($event)" 
@@ -40,9 +40,29 @@ export class OrganizationTreeComponent implements OnInit {
     @Output()
     eventCallback: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
 
-     /** Usage: (selected)="selectedOrganization=$event" */
-     @Output('selected')
-     selectedChange = new EventEmitter<number>();
+    @Input('selected')
+    set selected(value: number) {
+        if (value < 1 || value === undefined || value === null || isNaN) {
+            this.selectedOrganization = null;
+            this.orgTree.nzTreeService.setSelectedNode(null);
+        }
+        const findNode = (treeNodes: NzTreeNode[], id: number): NzTreeNode => {
+            for (const n of treeNodes) {
+                if (n.origin.id === id) return n;
+                if (n.children && n.children.length > 0) {
+                    return findNode(n.children, id);
+                }
+            }
+            return null;
+        };
+        this.orgTree.nzTreeService.setSelectedNode(findNode(this.nodes, value));
+    }
+
+    /** Usage: [(selected)]="selectedOrganization" */
+    @Output('selected')
+    selectedChange = new EventEmitter<number>();
+
+    @ViewChild('orgTree') orgTree: NzTreeComponent;
 
     constructor(private client: OrganizationUnitClient) { }
 
