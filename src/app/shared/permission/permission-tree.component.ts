@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, Input, ViewChild, OnInit } from '@angular/core';
 import { NzFormatEmitEvent, NzTreeNode, NzTreeComponent } from 'ng-zorro-antd';
 import { RoleClient } from '@abp';
+import { element } from 'protractor';
 
 @Component({
     selector: 'sf-permission-tree',
@@ -46,9 +47,13 @@ export class PermissionTreeComponent implements OnInit {
 
     @Input()
     set role(value: number) {
+        if (!value || value < 0 || isNaN(value)) {
+            this._role = 0;
+            this.bindingGranted([]);
+            return;
+        }
         if (this._role === value) return;
-        this._role = value || 0;
-        this.nodes = []; // always rebuild tree. to be optimized
+        this._role = value;
         this.load();
     }
 
@@ -61,21 +66,21 @@ export class PermissionTreeComponent implements OnInit {
     constructor(private client: RoleClient) { }
 
     ngOnInit(): void {
-        this.load();
+        this.client.getAllPermissions()
+            .subscribe(res => {
+                this.makeTree(res.result.items, null, 0, null);
+            });
     }
 
     load() {
-        if (this._role <= 0) {
-            this.client.getAllPermissions()
-                .subscribe(res => {
-                    this.makeTree(res.result.items, null, 0, null);
-                });
-        } else {
-            this.client.getRoleForEdit(this._role)
-                .subscribe(res => {
-                    this.makeTree(res.result.permissions, null, 0, res.result.grantedPermissionNames);
-                });
+        if (this._role <= 0) { // clear checked
+            this.bindingGranted([]);
+            return;
         }
+        this.client.getRoleForEdit(this._role)
+            .subscribe(res => {
+                this.bindingGranted(res.result.grantedPermissionNames);
+            });
     }
 
     mouseAction(event: NzFormatEmitEvent): void {
@@ -85,20 +90,31 @@ export class PermissionTreeComponent implements OnInit {
 
     private bindingGranted(grantedPermissionNames: string[]) {
         if (!grantedPermissionNames) return;
-        this.permissionTree.getCheckedNodeList().forEach(n => {
-            n.isChecked = false;
-        });
+        this.uncheck(Object.assign([], this.permissionTree.getCheckedNodeList()));
+
         for (const p of grantedPermissionNames) {
             this.bindingNodes(this.nodes, p);
         }
+        this.checkedNodesChange.next(this.permissionTree.getCheckedNodeList().map(x => x.key).sort());
+    }
 
-        this.nodes = [...this.nodes];
+    private uncheck(list: NzTreeNode[]) {
+        list.forEach(element => {
+            if (element.isChecked) {
+                element.isChecked = false;
+                this.checkNode(element);
+            }
+            if (element.children && element.children.length > 0) {
+              //  this.uncheck(element.children);
+            }
+        });
     }
 
     private bindingNodes(nodeList: NzTreeNode[], permission: string): boolean {
         for (const n of nodeList) {
             if (n.key === permission) {
                 n.isChecked = true;
+                this.checkNode(n);
                 return true;
             }
 
@@ -109,6 +125,11 @@ export class PermissionTreeComponent implements OnInit {
             }
         }
         return false;
+    }
+
+    private checkNode(n: NzTreeNode) {
+        this.permissionTree.nzTreeService.checkTreeNode(n);
+        this.permissionTree.nzTreeService.setCheckedNodeList(n);
     }
 
     private makeTree(permisstons: any[], node: NzTreeNode, next: number, grantedPermissionNames: string[]) {

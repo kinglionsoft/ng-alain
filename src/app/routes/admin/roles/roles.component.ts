@@ -1,6 +1,6 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto, PagedResponseDto } from '@shared';
-import { SimpleTableColumn } from '@delon/abc';
+import { SimpleTableColumn, SimpleTableComponent } from '@delon/abc';
 import { AbpResult, RoleClient, RoleListDto, PermissionDto } from '@abp';
 import { Observable } from 'rxjs/Observable';
 import { mergeMap } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
     selectedRole: RoleListDto;
     checkedPermissions: string [];
     form: FormGroup;
+    @ViewChild('stRole') stRole: SimpleTableComponent;
 
     constructor(private injctor: Injector, private client: RoleClient, private fb: FormBuilder) {
         super(injctor);
@@ -26,7 +27,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
         this.form = this.fb.group({
             name: [null, [Validators.required]],
             displayName: [null, [Validators.required]],
-            isDefault: [null, [Validators.required]]
+            isDefault: [null, []]
         });
     }
 
@@ -96,9 +97,9 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
         return this.selectedRole && this.selectedRole.displayName || '未选择角色';
     }
 
-
     create() {
         this.selectedRole = null;
+        this.stRole.clearCheck();
         this.form.controls['name'].reset('');
         this.form.controls['displayName'].reset('');
         this.form.controls['isDefault'].reset('');
