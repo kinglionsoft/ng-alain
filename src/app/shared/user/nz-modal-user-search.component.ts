@@ -30,7 +30,6 @@ export class NzModalUserSearchComponent {
     columns: SimpleTableColumn[] = [
         { title: '编号', index: 'id', type: 'checkbox' },
         { title: '姓名', index: 'name' },
-        { title: '部门', index: 'department' },
         {
             title: '状态',
             index: 'isActive',

@@ -7,7 +7,7 @@ import { RoleSelectComponent } from './roles/role-select.component';
 @NgModule({
     imports: [SharedModule, AdminRoutingModule],
     exports: [],
-    declarations: [...routedComponents],
+    declarations: [...routedComponents, RoleSelectComponent],
     entryComponents: [RoleSelectComponent],
     providers: [],
 })

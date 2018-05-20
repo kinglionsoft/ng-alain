@@ -1,12 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { Injector } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
-import { AbpSettingService, LogService, UserListDto } from '@abp';
+import { AbpSettingService, LogService, UserListDto, AbpResult } from '@abp';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 import { ModalHelper } from '@delon/theme';
 import { NzModalPromptComponent } from './prompt/nz-modal-prompt.component';
 import { NzModalUserSearchComponent } from './user/nz-modal-user-search.component';
+import { mergeMap } from 'rxjs/operators';
 
 export abstract class AppComponentBase {
 
@@ -53,7 +54,7 @@ export abstract class AppComponentBase {
         });
     }
 
-    warning(title: string, content: string) {
+    warning(title: string, content: string): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
             const subject = this.injector.get(NzModalService)
                 .warning({
@@ -71,6 +72,17 @@ export abstract class AppComponentBase {
                 afterClose$.unsubscribe();
             });
         });
+    }
+
+    doAfterWarning(title: string, content: string, onOk: () => Observable<AbpResult<any>>, success = '操作成功') {
+        this.warning(title, content)
+            .pipe(
+                mergeMap(() => onOk())
+            ).subscribe(response => {
+                if (response.success) {
+                    this.msgBox.success(success);
+                }
+            });
     }
 
     validate(value: string): boolean {

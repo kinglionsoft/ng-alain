@@ -114,7 +114,7 @@ export class RolesComponent extends PagedListingComponentBase implements OnInit 
             id: this.selectedRole && this.selectedRole.id,
             name: this.form.controls['name'].value,
             displayName: this.form.controls['displayName'].value,
-            isDefault: this.form.controls['isDefault'].value == true
+            isDefault: this.form.controls['isDefault'].value === true
         };
 
         this.warning('保存修改', '是否保存当前修改')

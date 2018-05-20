@@ -13,7 +13,9 @@ import { of } from 'rxjs/observable/of';
         <input nz-input placeholder="请输入要查找的姓名" #search class="width-md mr-md" />
         <button nz-button nzType="primary" (click)="pager.search()"><i class="anticon anticon-search"></i> 查询</button>
     </p>
-    <p *ngIf="selectedRoleNames">已选择：<nz-tag *ngFor="let r of selectedRoleNames; let even=even;" [class.even]="even">{{r}</nz-tag></p>
+    <p *ngIf="selectedRoleNames">
+        已选择：<nz-tag *ngFor="let r of selectedRoleNames; let even=even;" [class.even]="even">{{r}}</nz-tag>
+    </p>
     <simple-table #st 
         [data]="pager.data"
         [columns]="pager.columns"
@@ -41,7 +43,7 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
         if (!value) {
             this.selectedRoleNames = undefined;
             for (const role of this.pager.data) {
-                role.isChecked && (role.isChecked = false);
+                if (role.isChecked) role.isChecked = false;
             }
             return;
         }
@@ -53,7 +55,7 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
     }
 
     @Output('selected')
-    selectedChange = new EventEmitter<number[]>();
+    selectedChange = new EventEmitter<string[]>();
 
     constructor(injector: Injector, private client: RoleClient) {
         super(injector);
@@ -65,6 +67,7 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
 
     checkboxChange(list: RoleListDto[]) {
         this.selectedRoleNames = list.map(x => x.displayName);
+        this.selectedChange.next(list.map(x => x.name));
     }
 
     // region pagination

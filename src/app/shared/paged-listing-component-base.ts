@@ -4,13 +4,16 @@ import { Injector, OnInit } from '@angular/core';
 import { SimpleTableColumn } from '@delon/abc';
 import { Observable } from 'rxjs/Observable';
 import { AbpResult } from '@abp';
+import { mergeMap } from 'rxjs/operators';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { of } from 'rxjs/observable/of';
 
-export class PagedResponseDto {
+export interface PagedResponseDto {
     items: any[];
     totalCount: number;
 }
 
-export class PagedRequestDto {
+export interface PagedRequestDto {
     skipCount: number;
     maxResultCount: number;
 }
@@ -39,9 +42,10 @@ export class SimpleTablePager {
     }
 
     goToPage(page: number): void {
-        const req = new PagedRequestDto();
-        req.maxResultCount = this.pageSize;
-        req.skipCount = (page - 1) * this.pageSize;
+        const req = {
+            maxResultCount: this.pageSize,
+            skipCount: (page - 1) * this.pageSize
+        };
 
         this.dataAccessor(req)
             .subscribe((response) => {
@@ -85,10 +89,18 @@ export abstract class PagedListingComponentBase extends AppComponentBase {
         super(injector);
         this.pager = new SimpleTablePager(
             this.generateColumns(),
-            req => this.getTableData(req));
+            req => this.getTableData(req)
+                .pipe(
+                    mergeMap((res) => {
+                        if (!res.result.hasOwnProperty('totalCount') || !res.result.hasOwnProperty('items')) {
+                            console.error('请手动将分页请求结果转换为PagedResponseDto');
+                            return ErrorObservable.throw('请手动将分页请求结果转换为PagedResponseDto');
+                        }
+                        return of(res);
+                    })));
     }
 
-    protected abstract getTableData(req: PagedRequestDto): Observable<AbpResult<PagedResponseDto>>;
+    protected abstract getTableData(req: PagedRequestDto): Observable<AbpResult<any>>;
 
     protected abstract generateColumns(): SimpleTableColumn[];
 }

@@ -8,38 +8,144 @@
     <button nz-button nzType="primary" (click)="create()">
       <i class="anticon anticon-plus"></i> 新建用户</button>
     <button nz-button nzType="default" (click)="export()">
-      <i class="anticon anticon-plus"></i> 导出用户</button>
+      <i class="anticon anticon-download"></i> 导出用户</button>
   </nz-button-group>
 </div>
 
 <nz-row nzGutter="10">
   <nz-col nzLg="10" nzMd="12" nzSm="24">
-
+    <p>
+      <input nz-input placeholder="请输入要查找的姓名" [(ngModel)]="searchValue" class="width-md mr-md" />
+      <button nz-button nzType="primary" (click)="pager.goToPage(1)">
+        <i class="anticon anticon-search"></i> 查询</button>
+    </p>
+    <simple-table [data]="pager.data" [columns]="pager.columns" [pi]="pager.pageIndex" [ps]="pager.pageSize" [total]="pager.totalItems"
+      (radioChange)="onSelectedChange($event)">
+      <ng-template #expand let-item let-index="index" let-column="column">
+        <p>邮箱：{{ item.emailAddress }}
+          <nz-tag [nzColor]="item.isEmailConfirme ? '#87d068' : '#f50' "> {{item.isEmailConfirme ? '已激活':'未激活'}}</nz-tag>
+        </p>
+        <p>创建时间：{{item.lastLoginTime | _date}}
+          <span style="float: right">上次登录时间：{{item.creationTime | _date}}</span>
+        </p>
+      </ng-template>
+    </simple-table>
   </nz-col>
 
   <nz-col nzLg="14" nzMd="12" nzSm="24">
-    <nz-card [nzTitle]="selectedUserName">
-      <nz-button-group *ngIf="selectedUser">
-        <button nz-button nzType="primary" (click)="unlock()">
-          <i class="icon icon-edit"></i> 解锁</button>
-        <button nz-button nzType="primary" (click)="lock()">
-          <i class="icon icon-edit"></i> 锁定</button>
-        <button nz-button nzType="danger" (click)="deleteRole()">
-          <i class="anticon anticon-delete"></i> 删除</button>
-      </nz-button-group>
+    <nz-card [nzTitle]="selectedUserName" [nzExtra]="userTemplate">
+      <ng-template #userTemplate>
+        <nz-button-group *ngIf="selectedUser">
+          <button nz-button nzType="primary" (click)="unlock()">
+            <i class="anticon anticon-unlock"></i> 解锁</button>
+
+          <button nz-button nzType="primary" (click)="active()" *ngIf="!selectedUser.isActive">
+            <i class="anticon anticon-play-circle-o"></i> 激话</button>
+
+          <button nz-button nzType="danger" (click)="delete()">
+            <i class="anticon anticon-delete"></i> 删除</button>
+        </nz-button-group>
+      </ng-template>
 
       <nz-tabset>
         <nz-tab nzTitle="基本信息">
-          Content of Tab Pane 1
+          <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
+            <nz-row nzGutter="16">
+              <nz-col nzSpan="6">
+                <img [_src]="src" size="96">
+              </nz-col>
+              <nz-col nzSpan="18">
+                <nz-form-item>
+                  <nz-form-label nzSpan="4" nzRequired nzFor="name">姓名</nz-form-label>
+                  <nz-form-control nzSpan="14">
+                    <input nz-input formControlName="name" id="name" placeholder="仅支持中文、英文、数字、-、_">
+                    <nz-form-explain *ngIf="form.get('name').dirty && form.get('name').errors">请输入姓名</nz-form-explain>
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label nzSpan="4" nzRequired nzFor="userName">用户名</nz-form-label>
+                  <nz-form-control nzSpan="14">
+                    <input nz-input formControlName="userName" id="userName" placeholder="仅支持英文、数字">
+                    <nz-form-explain *ngIf="form.get('userName').dirty && form.get('userName').errors">请正确输入用户名</nz-form-explain>
+                  </nz-form-control>
+                </nz-form-item>
+              </nz-col>
+            </nz-row>
+
+            <nz-form-item>
+              <nz-form-label nzXs="8" nzLg="4" nzRequired nzFor="emailAddress">邮箱</nz-form-label>
+              <nz-form-control nzXs="16" nzLg="20">
+                <input nz-input formControlName="emailAddress" id="emailAddress" placeholder="请输入邮箱地址">
+                <nz-form-explain *ngIf="form.get('emailAddress').dirty && form.get('emailAddress').errors">请正确输入邮箱</nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzXs="8" nzLg="4" nzRequired nzFor="phoneNumber">手机号</nz-form-label>
+              <nz-form-control nzXs="16" nzLg="20">
+                <input nz-input formControlName="phoneNumber" id="phoneNumber" placeholder="请输入手机号">
+                <nz-form-explain *ngIf="form.get('phoneNumber').dirty && form.get('phoneNumber').errors">请正确输入手机号</nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <label nz-checkbox formControlName="setRandomPassword">
+                <span>使用随机密码</span>
+              </label>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="!form.get('setRandomPassword').value">
+              <nz-form-label nzXs="8" nzMd="8" nzLg="4" nzRequired nzFor="password">密码</nz-form-label>
+              <nz-form-control nzXs="16" nzMd="16" nzLg="20">
+                <input nz-input formControlName="password" id="password" placeholder="请输入密码" maxlength="20" type="password">
+                <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').errors">请正确输入密码</nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="!form.get('setRandomPassword').value">
+              <nz-form-label nzXs="8" nzMd="8" nzLg="4" nzFor="checkPassword" nzRequired>密码确认</nz-form-label>
+              <nz-form-control nzXs="8" nzMd="8" nzLg="20">
+                <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="请再次输入密码" type="password">
+                <nz-form-explain *ngIf="form.get('checkPassword').dirty && form.get('checkPassword').errors">
+                  <ng-container *ngIf="form.get('checkPassword').hasError('required')">
+                    请再次输入密码
+                  </ng-container>
+                  <ng-container *ngIf="form.get('checkPassword').hasError('confirm')">
+                    两次输入的密码不一致
+                  </ng-container>
+                </nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <label nz-checkbox formControlName="shouldChangePasswordOnNextLogin">
+                <span>下次登录需要修改密码</span>
+              </label>
+            </nz-form-item>sendActivationEmail
+
+            <nz-form-item>
+              <label nz-checkbox formControlName="isLockoutEnabled">
+                <span>多次登录失败时锁定账户</span>
+              </label>
+            </nz-form-item>
+
+            <nz-form-item nz-row style="margin-bottom:8px;">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary">
+                  <i class="anticon anticon-save"></i> 保存</button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
         </nz-tab>
         <nz-tab nzTitle="角色">
           <sf-role-select ([selected])="selectedRoles"></sf-role-select>
-          <nz-tab nzTitle="权限">
-            <sf-permission-tree (checkedNodes)="checkedPermissions=$event"></sf-permission-tree>
-          </nz-tab>
-          <nz-tab nzTitle="归属组织">
-            <sf-org-tree [(selected)]="selectedOrganization"></sf-org-tree>
-          </nz-tab>
+        </nz-tab>
+        <nz-tab nzTitle="权限">
+          <sf-permission-tree (checkedNodes)="checkedPermissions=$event"></sf-permission-tree>
+        </nz-tab>
+        <nz-tab nzTitle="归属组织">
+          <sf-org-tree [(selected)]="selectedOrganization"></sf-org-tree>
+        </nz-tab>
       </nz-tabset>
     </nz-card>
   </nz-col>
