@@ -15,7 +15,7 @@
         <nz-option *ngFor="let p of permissions" [nzValue]="p.name" [nzLabel]="p.displayName"></nz-option>
       </nz-select>
 
-      <simple-table #stRole [data]="pager.data" [columns]="pager.columns" [pi]="pager.pageIndex" [ps]="pager.pageSize" [total]="pager.totalItems"
+      <simple-table #st [data]="pager.data" [columns]="pager.columns" [pi]="pager.pageIndex" [ps]="pager.pageSize" [total]="pager.totalItems"
         (radioChange)="radioChange($event)" isPageIndexReset>
         <ng-template st-row="property" let-item>
           <span class="badge badge-success">{{item.isStatic ? '系统':''}}</span>

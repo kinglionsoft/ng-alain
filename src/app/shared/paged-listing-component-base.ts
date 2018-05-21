@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { AppComponentBase } from './app-component-base';
-import { Injector, OnInit } from '@angular/core';
-import { SimpleTableColumn } from '@delon/abc';
+import { Injector, ViewChildren, QueryList, ViewChild } from '@angular/core';
+import { SimpleTableColumn, SimpleTableComponent, SimpleTableData } from '@delon/abc';
 import { Observable } from 'rxjs/Observable';
 import { AbpResult } from '@abp';
 import { mergeMap } from 'rxjs/operators';
@@ -73,7 +73,7 @@ export class SimpleTablePager {
 
 /**
  * tempate:
-  <simple-table
+  <simple-table #st
    [data]="pager.data"
    [columns]="pager.columns"
    [pi]="pager.pageIndex"
@@ -84,6 +84,15 @@ export class SimpleTablePager {
 export abstract class PagedListingComponentBase extends AppComponentBase {
 
     pager: SimpleTablePager;
+
+    @ViewChildren(SimpleTableComponent)
+    _simpleTables: QueryList<SimpleTableComponent>;
+
+    // get simpleTable(): SimpleTableComponent {
+    //     return this._simpleTables.first;
+    // }
+    @ViewChild('st')
+    simpleTable: SimpleTableComponent;
 
     constructor(injector: Injector) {
         super(injector);
@@ -103,4 +112,19 @@ export abstract class PagedListingComponentBase extends AppComponentBase {
     protected abstract getTableData(req: PagedRequestDto): Observable<AbpResult<any>>;
 
     protected abstract generateColumns(): SimpleTableColumn[];
+
+    protected _clearCheck() {
+        this.simpleTable.clearCheck();
+    }
+
+    protected _checkTableRows(filter: (row: SimpleTableData) => boolean, clearFirst = true) {
+        if (clearFirst) {
+            this.simpleTable.clearCheck();
+        }
+        for (const row of this.simpleTable._data) {
+            if (filter(row)) {
+                this.simpleTable._checkSelection(row, true);
+            }
+        }
+    }
 }

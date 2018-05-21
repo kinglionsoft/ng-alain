@@ -21,7 +21,6 @@ const _CLIENTS = [
     clients.OrganizationUnitClient,
     clients.PaymentClient,
     clients.PermissionClient,
-    clients.ProductServiceClient,
     clients.ProfileClient,
     clients.RoleClient,
     clients.SessionClient,

@@ -1978,141 +1978,6 @@ export class PermissionClient {
 }
 
 @Injectable()
-export class ProductServiceClient {
-    private http: HttpClient;
-
-    constructor(@Inject(HttpClient) http: HttpClient) {
-        this.http = http;
-    }
-
-    /**
-     * @id (optional) 
-     * @return Success
-     */
-    get(id: number): Observable<AbpResult<ProductSummaryDto>> {
-        let url_ = '/api/services/ProductDemo/ProductService/Get?';
-        if (id !== undefined)
-            url_ += 'Id=' + encodeURIComponent('' + id) + '&'; 
-        
-        url_ = url_.replace(/[?&]$/, '');
-
-        let options_ = {
-            observe: 'body' as HttpObserve,
-            responseType: 'json' as any,
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json'
-            }),
-            reportProgress: false,
-            withCredentials: false
-        };
-        return this.http.request('get', url_, options_);
-    }
-
-    /**
-     * @name (optional) 
-     * @sorting (optional) 
-     * @skipCount (optional) 
-     * @maxResultCount (optional) 
-     * @return Success
-     */
-    getAll(name: string, sorting: string, skipCount: number, maxResultCount: number): Observable<AbpResult<PagedResultDtoOfProductSummaryDto>> {
-        let url_ = '/api/services/ProductDemo/ProductService/GetAll?';
-        if (name !== undefined)
-            url_ += 'Name=' + encodeURIComponent('' + name) + '&'; 
-        if (sorting !== undefined)
-            url_ += 'Sorting=' + encodeURIComponent('' + sorting) + '&'; 
-        if (skipCount !== undefined)
-            url_ += 'SkipCount=' + encodeURIComponent('' + skipCount) + '&'; 
-        if (maxResultCount !== undefined)
-            url_ += 'MaxResultCount=' + encodeURIComponent('' + maxResultCount) + '&'; 
-        
-        url_ = url_.replace(/[?&]$/, '');
-
-        let options_ = {
-            observe: 'body' as HttpObserve,
-            responseType: 'json' as any,
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json'
-            }),
-            reportProgress: false,
-            withCredentials: false
-        };
-        return this.http.request('get', url_, options_);
-    }
-
-    /**
-     * @input (optional) 
-     * @return Success
-     */
-    create(input: ProductCreateDto): Observable<AbpResult<ProductSummaryDto>> {
-        let url_ = '/api/services/ProductDemo/ProductService/Create';
-
-        const content_ = input;
-
-        let options_ = {
-            body: content_ as any,
-            observe: 'body' as HttpObserve,
-            responseType: 'json' as any,
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json'
-            }),
-            reportProgress: false,
-            withCredentials: false
-        };
-        return this.http.request('post', url_, options_);
-    }
-
-    /**
-     * @input (optional) 
-     * @return Success
-     */
-    update(input: ProductCreateDto): Observable<AbpResult<ProductSummaryDto>> {
-        let url_ = '/api/services/ProductDemo/ProductService/Update';
-
-        const content_ = input;
-
-        let options_ = {
-            body: content_ as any,
-            observe: 'body' as HttpObserve,
-            responseType: 'json' as any,
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json'
-            }),
-            reportProgress: false,
-            withCredentials: false
-        };
-        return this.http.request('put', url_, options_);
-    }
-
-    /**
-     * @id (optional) 
-     * @return Success
-     */
-    delete(id: number): Observable<AbpResult<void>> {
-        let url_ = '/api/services/ProductDemo/ProductService/Delete?';
-        if (id !== undefined)
-            url_ += 'Id=' + encodeURIComponent('' + id) + '&'; 
-        
-        url_ = url_.replace(/[?&]$/, '');
-
-        let options_ = {
-            observe: 'body' as HttpObserve,
-            responseType: 'json' as any,
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json', 
-            }),
-            reportProgress: false,
-            withCredentials: false
-        };
-        return this.http.request('delete', url_, options_);
-    }
-}
-
-@Injectable()
 export class ProfileClient {
     private http: HttpClient;
 
@@ -2559,7 +2424,7 @@ export class RoleClient {
      * @input (optional) 
      * @return Success
      */
-    createOrUpdateRole(input: CreateOrUpdateRoleInput): Observable<AbpResult<void>> {
+    createOrUpdateRole(input: CreateOrUpdateRoleInput): Observable<AbpResult<number>> {
         let url_ = '/api/services/app/Role/CreateOrUpdateRole';
 
         const content_ = input;
@@ -2570,6 +2435,7 @@ export class RoleClient {
             responseType: 'json' as any,
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
+                'Accept': 'application/json'
             }),
             reportProgress: false,
             withCredentials: false
@@ -3868,7 +3734,7 @@ export class UserClient {
      * @input (optional) 
      * @return Success
      */
-    createOrUpdateUser(input: CreateOrUpdateUserInput): Observable<AbpResult<void>> {
+    createOrUpdateUser(input: CreateOrUpdateUserInput): Observable<AbpResult<number>> {
         let url_ = '/api/services/app/User/CreateOrUpdateUser';
 
         const content_ = input;
@@ -3879,6 +3745,7 @@ export class UserClient {
             responseType: 'json' as any,
             headers: new HttpHeaders({
                 'Content-Type': 'application/json', 
+                'Accept': 'application/json'
             }),
             reportProgress: false,
             withCredentials: false
@@ -3915,6 +3782,28 @@ export class UserClient {
      */
     unlockUser(input: EntityDtoOfInt64): Observable<AbpResult<void>> {
         let url_ = '/api/services/app/User/UnlockUser';
+
+        const content_ = input;
+
+        let options_ = {
+            body: content_ as any,
+            observe: 'body' as HttpObserve,
+            responseType: 'json' as any,
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json', 
+            }),
+            reportProgress: false,
+            withCredentials: false
+        };
+        return this.http.request('post', url_, options_);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    active(input: EntityDtoOfInt64): Observable<AbpResult<void>> {
+        let url_ = '/api/services/app/User/Active';
 
         const content_ = input;
 
@@ -7845,113 +7734,6 @@ export class FlatPermissionWithLevelDto {
     }
 }
 
-export class ProductSummaryDto {
-    name?: string;
-    creationTime?: Date;
-    creatorUserId?: number;
-    lastModificationTime?: Date;
-    lastModifierUserId?: number;
-    isDeleted?: boolean;
-    deletionTime?: Date;
-    deleterUserId?: number;
-    id?: number;
-
-    init(data?: any) {
-        if (data) {
-            this.name = data["name"];
-            this.creationTime = data["creationTime"] ? new Date(data["creationTime"].toString()) : <any>undefined;
-            this.creatorUserId = data["creatorUserId"];
-            this.lastModificationTime = data["lastModificationTime"] ? new Date(data["lastModificationTime"].toString()) : <any>undefined;
-            this.lastModifierUserId = data["lastModifierUserId"];
-            this.isDeleted = data["isDeleted"];
-            this.deletionTime = data["deletionTime"] ? new Date(data["deletionTime"].toString()) : <any>undefined;
-            this.deleterUserId = data["deleterUserId"];
-            this.id = data["id"];
-        }
-    }
-
-    static fromJS(data: any): ProductSummaryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ProductSummaryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
-        data["creatorUserId"] = this.creatorUserId;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
-        data["lastModifierUserId"] = this.lastModifierUserId;
-        data["isDeleted"] = this.isDeleted;
-        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
-        data["deleterUserId"] = this.deleterUserId;
-        data["id"] = this.id;
-        return data; 
-    }
-}
-
-export class PagedResultDtoOfProductSummaryDto {
-    totalCount?: number;
-    items?: ProductSummaryDto[];
-
-    init(data?: any) {
-        if (data) {
-            this.totalCount = data["totalCount"];
-            if (data["items"] && data["items"].constructor === Array) {
-                this.items = [];
-                for (let item of data["items"])
-                    this.items.push(ProductSummaryDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfProductSummaryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDtoOfProductSummaryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["totalCount"] = this.totalCount;
-        if (this.items && this.items.constructor === Array) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export class ProductCreateDto {
-    name?: string;
-    id?: number;
-
-    init(data?: any) {
-        if (data) {
-            this.name = data["name"];
-            this.id = data["id"];
-        }
-    }
-
-    static fromJS(data: any): ProductCreateDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ProductCreateDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["id"] = this.id;
-        return data; 
-    }
-}
-
 export class CurrentUserProfileEditDto {
     name: string;
     surname: string;
@@ -8457,12 +8239,14 @@ export class GetRoleForEditOutput {
 
 export class RoleEditDto {
     id?: number;
+    name: string;
     displayName: string;
     isDefault?: boolean;
 
     init(data?: any) {
         if (data) {
             this.id = data["id"];
+            this.name = data["name"];
             this.displayName = data["displayName"];
             this.isDefault = data["isDefault"];
         }
@@ -8478,6 +8262,7 @@ export class RoleEditDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
+        data["name"] = this.name;
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
         return data; 
@@ -10535,9 +10320,8 @@ export class UserListRoleDto {
 export class GetUserForEditOutput {
     profilePictureId?: string;
     user?: UserEditDto;
-    roles?: UserRoleDto[];
-    allOrganizationUnits?: OrganizationUnitDto[];
-    memberedOrganizationUnits?: string[];
+    roles?: string[];
+    memberedOrganizationUnits?: number[];
 
     init(data?: any) {
         if (data) {
@@ -10546,12 +10330,7 @@ export class GetUserForEditOutput {
             if (data["roles"] && data["roles"].constructor === Array) {
                 this.roles = [];
                 for (let item of data["roles"])
-                    this.roles.push(UserRoleDto.fromJS(item));
-            }
-            if (data["allOrganizationUnits"] && data["allOrganizationUnits"].constructor === Array) {
-                this.allOrganizationUnits = [];
-                for (let item of data["allOrganizationUnits"])
-                    this.allOrganizationUnits.push(OrganizationUnitDto.fromJS(item));
+                    this.roles.push(item);
             }
             if (data["memberedOrganizationUnits"] && data["memberedOrganizationUnits"].constructor === Array) {
                 this.memberedOrganizationUnits = [];
@@ -10575,12 +10354,7 @@ export class GetUserForEditOutput {
         if (this.roles && this.roles.constructor === Array) {
             data["roles"] = [];
             for (let item of this.roles)
-                data["roles"].push(item.toJSON());
-        }
-        if (this.allOrganizationUnits && this.allOrganizationUnits.constructor === Array) {
-            data["allOrganizationUnits"] = [];
-            for (let item of this.allOrganizationUnits)
-                data["allOrganizationUnits"].push(item.toJSON());
+                data["roles"].push(item);
         }
         if (this.memberedOrganizationUnits && this.memberedOrganizationUnits.constructor === Array) {
             data["memberedOrganizationUnits"] = [];
@@ -10640,38 +10414,6 @@ export class UserEditDto {
         data["shouldChangePasswordOnNextLogin"] = this.shouldChangePasswordOnNextLogin;
         data["isTwoFactorEnabled"] = this.isTwoFactorEnabled;
         data["isLockoutEnabled"] = this.isLockoutEnabled;
-        return data; 
-    }
-}
-
-export class UserRoleDto {
-    roleId?: number;
-    roleName?: string;
-    roleDisplayName?: string;
-    isAssigned?: boolean;
-
-    init(data?: any) {
-        if (data) {
-            this.roleId = data["roleId"];
-            this.roleName = data["roleName"];
-            this.roleDisplayName = data["roleDisplayName"];
-            this.isAssigned = data["isAssigned"];
-        }
-    }
-
-    static fromJS(data: any): UserRoleDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UserRoleDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["roleId"] = this.roleId;
-        data["roleName"] = this.roleName;
-        data["roleDisplayName"] = this.roleDisplayName;
-        data["isAssigned"] = this.isAssigned;
         return data; 
     }
 }

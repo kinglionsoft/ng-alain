@@ -74,7 +74,7 @@ export abstract class AppComponentBase {
         });
     }
 
-    doAfterWarning(title: string, content: string, onOk: () => Observable<AbpResult<any>>, success = '操作成功') {
+    requestAfterWarning(title: string, content: string, onOk: () => Observable<AbpResult<any>>, success = '操作成功') {
         this.warning(title, content)
             .pipe(
                 mergeMap(() => onOk())

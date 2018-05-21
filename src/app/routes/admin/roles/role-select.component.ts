@@ -13,7 +13,7 @@ import { of } from 'rxjs/observable/of';
         <input nz-input placeholder="请输入要查找的姓名" #search class="width-md mr-md" />
         <button nz-button nzType="primary" (click)="pager.search()"><i class="anticon anticon-search"></i> 查询</button>
     </p>
-    <p *ngIf="selectedRoleNames">
+    <p *ngIf="selectedRoleNames && selectedRoleNames.length>0">
         已选择：<nz-tag *ngFor="let r of selectedRoleNames; let even=even;" [class.even]="even">{{r}}</nz-tag>
     </p>
     <simple-table #st 
@@ -39,18 +39,13 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
     selectedRoleNames: string[];
 
     @Input('selected')
-    set selected(value: number[]) {
+    set selected(value: string[]) {
         if (!value) {
-            this.selectedRoleNames = undefined;
-            for (const role of this.pager.data) {
-                if (role.isChecked) role.isChecked = false;
-            }
+            this._clearCheck();
             return;
         }
-        value.forEach(id => {
-            for (const role of this.pager.data) {
-                role.isChecked = role.id === id;
-            }
+        this._checkTableRows(row => {
+            return value.indexOf(row.name) > -1;
         });
     }
 
