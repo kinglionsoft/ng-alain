@@ -6,6 +6,7 @@ import { SimpleTableColumn } from '@delon/abc';
 import { mergeMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { of } from 'rxjs/observable/of';
+import { AppConstants } from '../../../core';
 
 @Component({
     selector: 'page-admin-user',
@@ -30,7 +31,7 @@ export class UserComponent extends PagedListingComponentBase implements OnInit {
             userName: [null, [Validators.required]],
             emailAddress: [null, [Validators.required]],
             phoneNumber: [null, [Validators.required]],
-            password: [null, []],
+            password: [null],
             checkPassword: [null, [this.confirmationValidator]],
             shouldChangePasswordOnNextLogin: [null, []],
             isTwoFactorEnabled: [null, []],
@@ -111,9 +112,14 @@ export class UserComponent extends PagedListingComponentBase implements OnInit {
             this.msgBox.error('请完成填写信息');
             return;
         }
+        const formData = this.form.getRawValue();
+        if (formData.setRandomPassword !== true && !AppConstants.regex.password.test(formData.password)) {
+            this.msgBox.error('请输入6到20位的密码');
+            return;
+        }
+
         this.requestAfterWarning('保存', '是否保存当前信息？',
             () => {
-                const formData = this.form.getRawValue();
                 const user = new UserEditDto();
                 user.init(formData);
                 user.id = this.selectedUser && this.selectedUser.id;

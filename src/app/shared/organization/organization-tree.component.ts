@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild, forwardRef } from '@angular/core';
 import { NzFormatEmitEvent, NzTreeNode, NzTreeComponent } from 'ng-zorro-antd';
 import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'sf-org-tree',
@@ -29,18 +30,27 @@ import { OrganizationUnitDto, OrganizationUnitClient } from '@abp';
                 <span [ngClass]="{'text-primary': node.isSelected}"> {{node.title}}</span>
             </span>
       </ng-template>
-    </nz-tree>`
+    </nz-tree>` ,
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => OrganizationTreeComponent),
+        multi: true
+    }]
 })
 
-export class OrganizationTreeComponent implements OnInit {
+export class OrganizationTreeComponent implements OnInit, ControlValueAccessor {
 
     selectedOrganization: string;
     nodes: NzTreeNode[] = [];
 
+    public onModelChange: Function = () => { };
+    public onModelTouched: Function = () => { };
+
+    private _popChange = false;
+
     @Output()
     eventCallback: EventEmitter<NzFormatEmitEvent> = new EventEmitter<NzFormatEmitEvent>();
 
-    @Input('selected')
     set selected(value: number) {
         if (value < 1 || value === undefined || value === null || isNaN) {
             this.selectedOrganization = null;
@@ -55,12 +65,10 @@ export class OrganizationTreeComponent implements OnInit {
             }
             return null;
         };
-        this.orgTree.nzTreeService.setSelectedNode(findNode(this.nodes, value));
+        const node = findNode(this.nodes, value);
+        this.selectedOrganization = node.title;
+        this.orgTree.nzTreeService.setSelectedNode(node);
     }
-
-    /** Usage: [(selected)]="selectedOrganization" */
-    @Output('selected')
-    selectedChange = new EventEmitter<number>();
 
     @ViewChild('orgTree') orgTree: NzTreeComponent;
 
@@ -78,7 +86,7 @@ export class OrganizationTreeComponent implements OnInit {
     mouseAction(event: NzFormatEmitEvent): void {
         if (event.eventName === 'click') {
             this.selectedOrganization = event.node.title;
-            this.selectedChange.next(event.node.origin.id)
+            this.onModelChange([event.node.origin.id]);
         }
         this.eventCallback.next(event);
     }
@@ -134,4 +142,18 @@ export class OrganizationTreeComponent implements OnInit {
             }
         }
     }
+
+    // region two-way binding
+
+    writeValue(obj: any): void {
+        this.selected = obj;
+    }
+    registerOnChange(fn: Function): void {
+        this.onModelChange = fn;
+    }
+    registerOnTouched(fn: Function): void {
+        this.onModelTouched = fn;
+    }
+
+    // endregion
 }

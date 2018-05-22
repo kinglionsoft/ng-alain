@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, Input, Injector } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Injector, forwardRef } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto, PagedResponseDto } from '@shared';
 import { Observable } from 'rxjs/Observable';
 import { AbpResult, RoleClient, RoleListDto } from '@abp';
 import { SimpleTableColumn } from '@delon/abc';
 import { mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'sf-role-select',
@@ -14,7 +15,7 @@ import { of } from 'rxjs/observable/of';
         <button nz-button nzType="primary" (click)="pager.search()"><i class="anticon anticon-search"></i> 查询</button>
     </p>
     <p *ngIf="selectedRoleNames && selectedRoleNames.length>0">
-        已选择：<nz-tag *ngFor="let r of selectedRoleNames; let even=even;" [class.even]="even">{{r}}</nz-tag>
+        已选择：<nz-tag *ngFor="let r of selectedRoleNames; let even=even;" [nzColor]="even?'#108ee9':''">{{r}}</nz-tag>
     </p>
     <simple-table #st 
         [data]="pager.data"
@@ -29,16 +30,24 @@ import { of } from 'rxjs/observable/of';
           <span class="badge badge-error">{{item.isDefault ? '默认':''}}</span>
         </ng-template>
     </simple-table>`,
-    styles: [
-        `nz-tag.even { color: red }`
-    ]
+    providers: [{
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => RoleSelectComponent),
+        multi: true
+    }]
 })
 
-export class RoleSelectComponent extends PagedListingComponentBase implements OnInit {
+export class RoleSelectComponent
+    extends PagedListingComponentBase
+    implements OnInit, ControlValueAccessor {
 
     selectedRoleNames: string[];
 
-    @Input('selected')
+    public onModelChange: Function = () => { };
+    public onModelTouched: Function = () => { };
+
+    private _popChange = false;
+
     set selected(value: string[]) {
         if (!value) {
             this._clearCheck();
@@ -47,10 +56,8 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
         this._checkTableRows(row => {
             return value.indexOf(row.name) > -1;
         });
+        this._popChange = false;
     }
-
-    @Output('selected')
-    selectedChange = new EventEmitter<string[]>();
 
     constructor(injector: Injector, private client: RoleClient) {
         super(injector);
@@ -62,7 +69,11 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
 
     checkboxChange(list: RoleListDto[]) {
         this.selectedRoleNames = list.map(x => x.displayName);
-        this.selectedChange.next(list.map(x => x.name));
+        if (!this._popChange) {
+            this._popChange = true;
+            return;
+        }
+        this.onModelChange(list.map(x => x.name));
     }
 
     // region pagination
@@ -88,5 +99,19 @@ export class RoleSelectComponent extends PagedListingComponentBase implements On
             { title: '属性', render: 'property', width: '50px' }
         ];
     }
+    // endregion
+
+    // region two-way binding
+
+    writeValue(obj: any): void {
+        this.selected = obj;
+    }
+    registerOnChange(fn: Function): void {
+        this.onModelChange = fn;
+    }
+    registerOnTouched(fn: Function): void {
+        this.onModelTouched = fn;
+    }
+
     // endregion
 }

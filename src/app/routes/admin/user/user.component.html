@@ -33,12 +33,13 @@
   </nz-col>
 
   <nz-col nzLg="14" nzMd="12" nzSm="24">
+
     <nz-card [nzTitle]="selectedUserName" [nzExtra]="userTemplate">
       <ng-template #userTemplate>
         <nz-button-group *ngIf="selectedUser">
-          <button nz-button nzType="primary">
-            <i class="anticon anticon-save" (click)="_submitForm()"></i> 保存</button>
-          <button nz-button nzType="primary" (click)="unlock()">
+          <button nz-button nzType="primary" (click)="_submitForm()">
+            <i class="anticon anticon-save"></i> 保存</button>
+          <button nz-button nzType="default" (click)="unlock()">
             <i class="anticon anticon-unlock"></i> 解锁</button>
           <button nz-button nzType="dashed" (click)="active()" *ngIf="!selectedUser.isActive">
             <i class="anticon anticon-play-circle-o"></i> 激话</button>
@@ -128,15 +129,17 @@
                 <span>多次登录失败时锁定账户</span>
               </label>
             </nz-form-item>
+
           </form>
         </nz-tab>
         <nz-tab nzTitle="角色">
-          <sf-role-select [(selected)]="selectedRoles"></sf-role-select>
+          <sf-role-select [(ngModel)]="selectedRoles"></sf-role-select>
         </nz-tab>>
         <nz-tab nzTitle="归属组织">
-          <sf-org-tree [(selected)]="selectedOrganization"></sf-org-tree>
+          <sf-org-tree [(ngModel)]="selectedOrganization"></sf-org-tree>
         </nz-tab>
       </nz-tabset>
+
     </nz-card>
   </nz-col>
 </nz-row>
